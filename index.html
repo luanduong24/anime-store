@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cửa Hàng Mô Hình</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="shop-header">
+    <div class="logo">
+        <i></i> <span>Anime Store</span>
+        <small>Mô hình Anime cực chất</small>
+    </div>
+
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Tìm kiếm...">
+        <button id="searchButton"><i class="fa fa-search"></i></button>
+    </div>
+
+    <nav>
+        <ul class="menu">
+            <li><a href="#">Trang Chủ</a></li>
+            <li class="dropdown">
+                <a href="#">Danh Mục <i class="fa-solid fa-angle-down"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Naruto</a></li>
+                    <li><a href="#">One Piece</a></li>
+                    <li><a href="#">Dragon Ball</a></li>
+                    <li><a href="#">Khác</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Khuyến Mãi</a></li>
+            <li><a href="#">Bộ Sưu Tập</a></li>
+            <li><a href="#">Liên Hệ</a></li>
+        </ul>
+    </nav>
+
+    <div class="header-actions">
+    <div id="userInfo" style="margin-right: 10px;"></div>
+    <button class="cart-btn">
+        <i class="fa-solid fa-cart-shopping"></i> Giỏ Hàng (<span id="cartCount">0</span>)
+    </button>
+    <button class="member-btn" id="loginBtn">
+        <i class="fa-solid fa-user"></i> Thành Viên
+    </button>
+</div>
+</header>
+
+
+
+    <!-- banner -->
+    <section class="banner">
+    <div class="slides">
+        <div class="slide active">
+            <img src="hinhnen" alt="Naruto">
+            <div class="banner-content">
+                <h1>Bộ Sưu Tập Naruto HOT 2025</h1>
+                <p>Sở hữu ngay những mô hình Naruto cực chất.</p>
+                <a href="#" class="btn"><i class="fa-solid fa-bolt"></i> Mua Ngay</a>
+            </div>
+        </div>
+
+        <div class="slide">
+            <img src="onepie" alt="One Piece">
+            <div class="banner-content">
+                <h1>Bộ Sưu Tập One Piece</h1>
+                <p>Khám phá những mô hình Luffy, Zoro, Sanji độc đáo.</p>
+                <a href="#" class="btn"><i class="fa-solid fa-bolt"></i> Mua Ngay</a>
+            </div>
+        </div>
+
+        <div class="slide">
+            <img src="hinh-nen-Goku.jpg" alt="Dragon Ball">
+            <div class="banner-content">
+                <h1>Dragon Ball Heroes</h1>
+                <p>Trọn bộ Goku, Vegeta và các nhân vật huyền thoại.</p>
+                <a href="#" class="btn"><i class="fa-solid fa-bolt"></i> Mua Ngay</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Nút điều khiển -->
+    <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+    <button class="next" onclick="changeSlide(1)">&#10095;</button>
+    </section>
+
+    <main class="product-section">
+    <h2><i class="fa-solid fa-star"></i> Sản phẩm nổi bật</h2>
+    <div class="movie-grid">
+
+        <div class="movie-card" onclick="openModal('Naruto','Mô hình Naruto cao 25cm, chất liệu PVC cao cấp, cực kỳ chi tiết.','assets/images/chia-se-bo-30-hinh-nen-naruto-doc-la-cho-dien-thoai-may-tinh-5.jpg','380.000₫')">
+            <img src="mohinhnaruto" alt="Naruto">
+            <span class="tag">Mới</span>
+            <h3>Mô hình Naruto</h3>
+            <p class="subtitle">380.000₫</p>
+        </div>
+
+        <div class="movie-card" onclick="openModal('Luffy','Mô hình Luffy One Piece cực chất, cao 28cm.','assets/images/1-5 (1).jpg','420.000₫')">
+            <img src="mohinhonepie" alt="Luffy">
+            <span class="tag hot">Hot</span>
+            <h3>Mô hình Luffy</h3>
+            <p class="subtitle">420.000₫</p>
+        </div>
+
+        <div class="movie-card" onclick="openModal('Goku','Mô hình Goku Dragon Ball cao 30cm, chi tiết siêu đẹp.','assets/images/hinh-nen-Goku.jpg','450.000₫')">
+            <img src="mohinhgoku" alt="Goku">
+            <span class="tag sale">Sale</span>
+            <h3>Mô hình Goku</h3>
+            <p class="subtitle">450.000₫</p>
+        </div>
+
+        <div class="movie-card" onclick="openModal('Zoro','Mô hình Zoro One Piece cực chất, cao 28cm.','assets/images/mohinhluffy.jpg','430.000₫')">
+            <img src="mohinhzoro" alt="Zoro">
+            <span class="tag">New</span>
+            <h3>Mô hình Zoro</h3>
+            <p class="subtitle">430.000₫</p>
+        </div>
+
+    </div>
+</main>
+<div class="rank-grid">
+    <div class="rank-card tilt-right">
+        <img src="mohinh1.jpg" alt="Luffy">
+        <span class="tag hot">Hot</span>
+        <div class="info-overlay">
+            <h3>Mô hình Luffy</h3>
+            <p>Mô hình Luffy cao 28cm, chất liệu PVC cao cấp.</p>
+            <p class="price">420.000₫</p>
+            <button><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</button>
+        </div>
+    </div>
+
+    <div class="rank-card tilt-left">
+        <img src="mohinh2" alt="Naruto">
+        <span class="tag">Mới</span>
+        <div class="info-overlay">
+            <h3>Mô hình Naruto</h3>
+            <p>Naruto Sage Mode cao 25cm, cực kỳ chi tiết.</p>
+            <p class="price">380.000₫</p>
+            <button><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</button>
+        </div>
+    </div>
+    <div class="rank-card tilt-right">
+        <img src="mohinh3" alt="Luffy">
+        <span class="tag hot">Hot</span>
+        <div class="info-overlay">
+            <h3>Mô hình Luffy</h3>
+            <p>Mô hình Zoro Tam Long Haki 35cm.</p>
+            <p class="price">420.000₫</p>
+            <button><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</button>
+        </div>
+    </div>
+    <div class="rank-card tilt-left">
+        <img src="mohinh4" alt="Naruto">
+        <span class="tag">Mới</span>
+        <div class="info-overlay">
+            <h3>Mô hình Goku</h3>
+            <p>Mô hình DragonBall SonGoku SSJ3.</p>
+            <p class="price">380.000₫</p>
+            <button><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</button>
+        </div>
+    </div>
+    <div class="rank-card tilt-right">
+        <img src="mohinh5" alt="Sasuke">
+        <span class="tag hot">Hot</span>
+        <div class="info-overlay">
+            <h3>Mô hình Sasuke</h3>
+            <p>Mô Hình Uchiha Sasuke.</p>
+            <p class="price">420.000₫</p>
+            <button><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</button>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+    <!-- Modal chi tiết sản phẩm -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img id="modalImg" src="" alt="Ảnh sản phẩm">
+            <h2 id="modalTitle"></h2>
+            <p id="modalDesc"></p>
+            <p class="modalPrice" id="modalPrice"></p>
+            <button class="btn-buy"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="anime-footer">
+    <div class="footer-top">
+        <div class="logo">
+            <i></i> AnimeStore
+            <span>Mô hình Anime cực chất</span>
+        </div>
+        <div class="social-icons">
+            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-discord"></i></a>
+        </div>
+    </div>
+
+    <div class="footer-links">
+        <a href="#">Hỏi-Đáp</a>
+        <a href="#">Chính sách bảo mật</a>
+        <a href="#">Điều khoản sử dụng</a>
+        <a href="#">Giới thiệu</a>
+        <a href="#">Liên hệ</a>
+    </div>
+
+    <p class="footer-desc">
+        AnimeStore – Thế giới mô hình Anime: từ Naruto, One Piece, Dragon Ball đến Demon Slayer, Attack on Titan và nhiều bộ sưu tập hot khác. 
+        Sản phẩm chất lượng cao, chi tiết sắc nét, phục vụ fan anime khắp Việt Nam.
+    </p>
+
+    <p class="footer-copy">&copy; 2025 AnimeStore | Liên hệ: support@animestore.vn</p>
+</footer>
+
+    <script>
+    document.querySelector('.member-btn').addEventListener('click', function() {
+        window.location.href = "login.html"; // Điều hướng sang trang đăng nhập
+    });
+    </script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+        const userInfo = document.getElementById("userInfo");
+        const loginBtn = document.getElementById("loginBtn");
+
+        if (currentUser) {
+            // Ẩn nút Thành Viên
+            loginBtn.style.display = "none";
+
+            // Hiển thị tên và nút đăng xuất
+            const greeting = document.createElement("span");
+            greeting.textContent = `Xin chào! ${currentUser.fullname}`;
+            greeting.style.marginRight = "10px";
+
+            const logoutBtn = document.createElement("button");
+            logoutBtn.textContent = "Đăng xuất";
+            logoutBtn.style.marginLeft = "10px";
+
+            logoutBtn.addEventListener("click", function () {
+                localStorage.removeItem("currentUser");
+                window.location.reload(); // Reload lại trang để cập nhật giao diện
+            });
+
+            userInfo.appendChild(greeting);
+            userInfo.appendChild(logoutBtn);
+        }
+    });
+</script>
+
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Quên mật khẩu</title>
+    <link rel="stylesheet" href="forgot.css">
+</head>
+<body>
+    <form id="forgotForm">
+    <h2>Quên mật khẩu</h2>
+    <input type="email" id="forgotEmail" placeholder="Nhập email"><br>
+    <button type="submit">Đặt lại mật khẩu</button>
+</form>
+
+    <script>
+        document.getElementById("forgotForm").addEventListener("submit", function(e){
+            e.preventDefault();
+            const email = document.getElementById("forgotEmail").value.trim();
+            let users = JSON.parse(localStorage.getItem("users") || "[]");
+            const userIndex = users.findIndex(u => u.email === email);
+            if(userIndex === -1){
+                alert("Không tìm thấy email!");
+                return;
+            }
+            const newPass = prompt("Nhập mật khẩu mới:");
+            if(newPass && newPass.length >= 6){
+                users[userIndex].password = newPass;
+                localStorage.setItem("users", JSON.stringify(users));
+                alert("Đặt lại mật khẩu thành công!");
+                window.location.href = "login.html";
+            } else {
+                alert("Mật khẩu phải ít nhất 6 ký tự.");
+            }
+        });
+    </script>
+</body>
+</html>
