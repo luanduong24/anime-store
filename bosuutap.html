@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bộ Sưu Tập | Anime Store</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="bosuutap.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="shop-header">
+    <div class="header-container">
+      <div class="logo">
+        <span class="logo-title">Anime Store</span>
+        <small class="logo-tagline">Mô hình Anime cực chất</small>
+      </div>
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Tìm kiếm...">
+        <button id="searchButton"><i class="fa fa-search"></i></button>
+      </div>
+      <nav class="main-nav">
+        <ul class="menu">
+          <li><a href="index.html">Trang Chủ</a></li>
+          <li class="dropdown">
+            <a href="danhmuc.html">Danh Mục <i class="fa-solid fa-angle-down"></i></a>
+            <ul class="dropdown-menu">
+              <li><a href="danhmuc.html" onclick="localStorage.setItem('tab','naruto')">Naruto</a></li>
+              <li><a href="danhmuc.html" onclick="localStorage.setItem('tab','onepiece')">One Piece</a></li>
+              <li><a href="danhmuc.html" onclick="localStorage.setItem('tab','dragonball')">Dragon Ball</a></li>
+              <li><a href="danhmuc.html" onclick="localStorage.setItem('tab','khac')">Khác</a></li>
+            </ul>
+          </li>
+          <li><a href="khuyenmai.html">Khuyến Mãi</a></li>
+          <li><a href="bosuutap.html">Bộ Sưu Tập</a></li>
+          <li><a href="lienhe.html">Liên Hệ</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <div id="userInfo"></div>
+        <button class="cart-btn" id="openCartBtn">
+          <i class="fa-solid fa-cart-shopping"></i> Giỏ Hàng (<span id="cartCount">0</span>)
+        </button>
+        <button class="member-btn" id="loginBtn">
+          <i class="fa-solid fa-user"></i> Thành Viên
+        </button>
+      </div>
+    </div>
+  </header>
+
+    <!-- Main -->
+  <main class="collection-main" aria-label="Bộ sưu tập anime">
+    <h2>✨ Bộ Sưu Tập Anime Đặc Sắc ✨</h2>
+    <p class="collection-intro">
+      Khám phá các bộ sưu tập mô hình chất lượng cao từ những bộ anime nổi tiếng nhất thế giới.
+      Tất cả nhân vật yêu thích của bạn đều có mặt tại Anime Store!
+    </p>
+
+    <section class="collection-list">
+      <!-- 1. Naruto -->
+      <article class="collection-row reveal" id="naruto">
+      <div class="col-image">
+        <!-- Ảnh lớn (hero) -->
+        <img class="hero" loading="lazy" src="nami.jpg" alt="Naruto – ảnh mô hình chính" />
+
+        <!-- Thumbnails overlay -->
+        <div class="thumbs" role="tablist" aria-label="Ảnh Naruto">
+          <!-- LƯU Ý: data-src trùng file thật -->
+          <button class="thumb is-active" role="tab" aria-selected="true" data-src="nami.jpg" title="Ảnh 1">
+            <img src="nami.jpg" alt="Naruto ảnh 1">
+          </button>
+          <button class="thumb" role="tab" aria-selected="false" data-src="sanji.jpg" title="Ảnh 2">
+            <img src="sanji.jpg" alt="Naruto ảnh 2">
+          </button>
+          <button class="thumb" role="tab" aria-selected="false" data-src="franky.jpg" title="Ảnh 3">
+            <img src="franky.jpg" alt="Naruto ảnh 3">
+          </button>
+        </div>
+      </div>
+
+      <div class="col-content">
+        <h3>Naruto Ultimate</h3>
+        <ul class="meta">
+          <li><strong>Thể loại:</strong> Hành động, Phiêu lưu, Ninja</li>
+          <li><strong>Năm phát sóng:</strong> 2002</li>
+          <li><strong>Thời lượng:</strong> Nhiều season</li>
+        </ul>
+        <p class="desc">Câu chuyện về Uzumaki Naruto…</p>
+      </div>
+</article>
+
+
+
+      <!-- 2. One Piece -->
+      <article class="collection-row reveal" id="naruto">
+      <div class="col-image">
+        <!-- Ảnh lớn (hero) -->
+        <img class="hero" loading="lazy" src="nami.jpg" alt="Naruto – ảnh mô hình chính" />
+
+        <!-- Thumbnails overlay -->
+        <div class="thumbs" role="tablist" aria-label="Ảnh Naruto">
+          <!-- LƯU Ý: data-src trùng file thật -->
+          <button class="thumb is-active" role="tab" aria-selected="true" data-src="nami.jpg" title="Ảnh 1">
+            <img src="nami.jpg" alt="Naruto ảnh 1">
+          </button>
+          <button class="thumb" role="tab" aria-selected="false" data-src="sanji.jpg" title="Ảnh 2">
+            <img src="sanji.jpg" alt="Naruto ảnh 2">
+          </button>
+          <button class="thumb" role="tab" aria-selected="false" data-src="franky.jpg" title="Ảnh 3">
+            <img src="franky.jpg" alt="Naruto ảnh 3">
+          </button>
+        </div>
+      </div>
+
+      <div class="col-content">
+        <h3>Naruto Ultimate</h3>
+        <ul class="meta">
+          <li><strong>Thể loại:</strong> Hành động, Phiêu lưu, Ninja</li>
+          <li><strong>Năm phát sóng:</strong> 2002</li>
+          <li><strong>Thời lượng:</strong> Nhiều season</li>
+        </ul>
+        <p class="desc">Câu chuyện về Uzumaki Naruto…</p>
+      </div>
+</article>
+
+      <!-- 3. Dragon Ball -->
+      <article class="collection-row reveal" id="naruto">
+      <div class="col-image">
+        <!-- Ảnh lớn (hero) -->
+        <img class="hero" loading="lazy" src="nami.jpg" alt="Naruto – ảnh mô hình chính" />
+
+        <!-- Thumbnails overlay -->
+        <div class="thumbs" role="tablist" aria-label="Ảnh Naruto">
+          <!-- LƯU Ý: data-src trùng file thật -->
+          <button class="thumb is-active" role="tab" aria-selected="true" data-src="nami.jpg" title="Ảnh 1">
+            <img src="nami.jpg" alt="Naruto ảnh 1">
+          </button>
+          <button class="thumb" role="tab" aria-selected="false" data-src="sanji.jpg" title="Ảnh 2">
+            <img src="sanji.jpg" alt="Naruto ảnh 2">
+          </button>
+          <button class="thumb" role="tab" aria-selected="false" data-src="franky.jpg" title="Ảnh 3">
+            <img src="franky.jpg" alt="Naruto ảnh 3">
+          </button>
+        </div>
+      </div>
+
+      <div class="col-content">
+        <h3>Naruto Ultimate</h3>
+        <ul class="meta">
+          <li><strong>Thể loại:</strong> Hành động, Phiêu lưu, Ninja</li>
+          <li><strong>Năm phát sóng:</strong> 2002</li>
+          <li><strong>Thời lượng:</strong> Nhiều season</li>
+        </ul>
+        <p class="desc">Câu chuyện về Uzumaki Naruto…</p>
+      </div>
+</article>
+
+      <!-- 4. Kimetsu no Yaiba -->
+      <article class="collection-row reveal" id="naruto">
+      <div class="col-image">
+        <!-- Ảnh lớn (hero) -->
+        <img class="hero" loading="lazy" src="nami.jpg" alt="Naruto – ảnh mô hình chính" />
+
+        <!-- Thumbnails overlay -->
+        <div class="thumbs" role="tablist" aria-label="Ảnh Naruto">
+          <!-- LƯU Ý: data-src trùng file thật -->
+          <button class="thumb is-active" role="tab" aria-selected="true" data-src="nami.jpg" title="Ảnh 1">
+            <img src="nami.jpg" alt="Naruto ảnh 1">
+          </button>
+          <button class="thumb" role="tab" aria-selected="false" data-src="sanji.jpg" title="Ảnh 2">
+            <img src="sanji.jpg" alt="Naruto ảnh 2">
+          </button>
+          <button class="thumb" role="tab" aria-selected="false" data-src="franky.jpg" title="Ảnh 3">
+            <img src="franky.jpg" alt="Naruto ảnh 3">
+          </button>
+        </div>
+      </div>
+
+      <div class="col-content">
+        <h3>Naruto Ultimate</h3>
+        <ul class="meta">
+          <li><strong>Thể loại:</strong> Hành động, Phiêu lưu, Ninja</li>
+          <li><strong>Năm phát sóng:</strong> 2002</li>
+          <li><strong>Thời lượng:</strong> Nhiều season</li>
+        </ul>
+        <p class="desc">Câu chuyện về Uzumaki Naruto…</p>
+      </div>
+</article>
+
+      <!-- 5. Jujutsu Kaisen -->
+      <article class="collection-row reveal" id="naruto">
+      <div class="col-image">
+        <!-- Ảnh lớn (hero) -->
+        <img class="hero" loading="lazy" src="nami.jpg" alt="Naruto – ảnh mô hình chính" />
+
+        <!-- Thumbnails overlay -->
+        <div class="thumbs" role="tablist" aria-label="Ảnh Naruto">
+          <!-- LƯU Ý: data-src trùng file thật -->
+          <button class="thumb is-active" role="tab" aria-selected="true" data-src="nami.jpg" title="Ảnh 1">
+            <img src="nami.jpg" alt="Naruto ảnh 1">
+          </button>
+          <button class="thumb" role="tab" aria-selected="false" data-src="sanji.jpg" title="Ảnh 2">
+            <img src="sanji.jpg" alt="Naruto ảnh 2">
+          </button>
+          <button class="thumb" role="tab" aria-selected="false" data-src="franky.jpg" title="Ảnh 3">
+            <img src="franky.jpg" alt="Naruto ảnh 3">
+          </button>
+        </div>
+      </div>
+
+      <div class="col-content">
+        <h3>Naruto Ultimate</h3>
+        <ul class="meta">
+          <li><strong>Thể loại:</strong> Hành động, Phiêu lưu, Ninja</li>
+          <li><strong>Năm phát sóng:</strong> 2002</li>
+          <li><strong>Thời lượng:</strong> Nhiều season</li>
+        </ul>
+        <p class="desc">Câu chuyện về Uzumaki Naruto…</p>
+      </div>
+</article>
+
+      <!-- 6. Attack on Titan -->
+      <article class="collection-row reveal" id="naruto">
+      <div class="col-image">
+        <!-- Ảnh lớn (hero) -->
+        <img class="hero" loading="lazy" src="nami.jpg" alt="Naruto – ảnh mô hình chính" />
+
+        <!-- Thumbnails overlay -->
+        <div class="thumbs" role="tablist" aria-label="Ảnh Naruto">
+          <!-- LƯU Ý: data-src trùng file thật -->
+          <button class="thumb is-active" role="tab" aria-selected="true" data-src="nami.jpg" title="Ảnh 1">
+            <img src="nami.jpg" alt="Naruto ảnh 1">
+          </button>
+          <button class="thumb" role="tab" aria-selected="false" data-src="sanji.jpg" title="Ảnh 2">
+            <img src="sanji.jpg" alt="Naruto ảnh 2">
+          </button>
+          <button class="thumb" role="tab" aria-selected="false" data-src="franky.jpg" title="Ảnh 3">
+            <img src="franky.jpg" alt="Naruto ảnh 3">
+          </button>
+        </div>
+      </div>
+
+      <div class="col-content">
+        <h3>Naruto Ultimate</h3>
+        <ul class="meta">
+          <li><strong>Thể loại:</strong> Hành động, Phiêu lưu, Ninja</li>
+          <li><strong>Năm phát sóng:</strong> 2002</li>
+          <li><strong>Thời lượng:</strong> Nhiều season</li>
+        </ul>
+        <p class="desc">Câu chuyện về Uzumaki Naruto…</p>
+      </div>
+</article>
+
+      <!-- 7. My Hero Academia -->
+      <article class="collection-row reveal" id="naruto">
+      <div class="col-image">
+        <!-- Ảnh lớn (hero) -->
+        <img class="hero" loading="lazy" src="nami.jpg" alt="Naruto – ảnh mô hình chính" />
+
+        <!-- Thumbnails overlay -->
+        <div class="thumbs" role="tablist" aria-label="Ảnh Naruto">
+          <!-- LƯU Ý: data-src trùng file thật -->
+          <button class="thumb is-active" role="tab" aria-selected="true" data-src="nami.jpg" title="Ảnh 1">
+            <img src="nami.jpg" alt="Naruto ảnh 1">
+          </button>
+          <button class="thumb" role="tab" aria-selected="false" data-src="sanji.jpg" title="Ảnh 2">
+            <img src="sanji.jpg" alt="Naruto ảnh 2">
+          </button>
+          <button class="thumb" role="tab" aria-selected="false" data-src="franky.jpg" title="Ảnh 3">
+            <img src="franky.jpg" alt="Naruto ảnh 3">
+          </button>
+        </div>
+      </div>
+
+      <div class="col-content">
+        <h3>Naruto Ultimate</h3>
+        <ul class="meta">
+          <li><strong>Thể loại:</strong> Hành động, Phiêu lưu, Ninja</li>
+          <li><strong>Năm phát sóng:</strong> 2002</li>
+          <li><strong>Thời lượng:</strong> Nhiều season</li>
+        </ul>
+        <p class="desc">Câu chuyện về Uzumaki Naruto…</p>
+      </div>
+</article>
+
+      <!-- 8. Bleach -->
+      <article class="collection-row reveal" id="naruto">
+      <div class="col-image">
+        <!-- Ảnh lớn (hero) -->
+        <img class="hero" loading="lazy" src="nami.jpg" alt="Naruto – ảnh mô hình chính" />
+
+        <!-- Thumbnails overlay -->
+        <div class="thumbs" role="tablist" aria-label="Ảnh Naruto">
+          <!-- LƯU Ý: data-src trùng file thật -->
+          <button class="thumb is-active" role="tab" aria-selected="true" data-src="nami.jpg" title="Ảnh 1">
+            <img src="nami.jpg" alt="Naruto ảnh 1">
+          </button>
+          <button class="thumb" role="tab" aria-selected="false" data-src="sanji.jpg" title="Ảnh 2">
+            <img src="sanji.jpg" alt="Naruto ảnh 2">
+          </button>
+          <button class="thumb" role="tab" aria-selected="false" data-src="franky.jpg" title="Ảnh 3">
+            <img src="franky.jpg" alt="Naruto ảnh 3">
+          </button>
+        </div>
+      </div>
+
+      <div class="col-content">
+        <h3>Naruto Ultimate</h3>
+        <ul class="meta">
+          <li><strong>Thể loại:</strong> Hành động, Phiêu lưu, Ninja</li>
+          <li><strong>Năm phát sóng:</strong> 2002</li>
+          <li><strong>Thời lượng:</strong> Nhiều season</li>
+        </ul>
+        <p class="desc">Câu chuyện về Uzumaki Naruto…</p>
+      </div>
+</article>
+
+      <!-- 9. Black Clover -->
+     <article class="collection-row reveal" id="naruto">
+      <div class="col-image">
+        <!-- Ảnh lớn (hero) -->
+        <img class="hero" loading="lazy" src="nami.jpg" alt="Naruto – ảnh mô hình chính" />
+
+        <!-- Thumbnails overlay -->
+        <div class="thumbs" role="tablist" aria-label="Ảnh Naruto">
+          <!-- LƯU Ý: data-src trùng file thật -->
+          <button class="thumb is-active" role="tab" aria-selected="true" data-src="nami.jpg" title="Ảnh 1">
+            <img src="nami.jpg" alt="Naruto ảnh 1">
+          </button>
+          <button class="thumb" role="tab" aria-selected="false" data-src="sanji.jpg" title="Ảnh 2">
+            <img src="sanji.jpg" alt="Naruto ảnh 2">
+          </button>
+          <button class="thumb" role="tab" aria-selected="false" data-src="franky.jpg" title="Ảnh 3">
+            <img src="franky.jpg" alt="Naruto ảnh 3">
+          </button>
+        </div>
+      </div>
+
+      <div class="col-content">
+        <h3>Naruto Ultimate</h3>
+        <ul class="meta">
+          <li><strong>Thể loại:</strong> Hành động, Phiêu lưu, Ninja</li>
+          <li><strong>Năm phát sóng:</strong> 2002</li>
+          <li><strong>Thời lượng:</strong> Nhiều season</li>
+        </ul>
+        <p class="desc">Câu chuyện về Uzumaki Naruto…</p>
+      </div>
+</article>
+
+      <!-- 10. Tokyo Revengers -->
+      <article class="collection-row reveal" id="naruto">
+      <div class="col-image">
+        <!-- Ảnh lớn (hero) -->
+        <img class="hero" loading="lazy" src="nami.jpg" alt="Naruto – ảnh mô hình chính" />
+
+        <!-- Thumbnails overlay -->
+        <div class="thumbs" role="tablist" aria-label="Ảnh Naruto">
+          <!-- LƯU Ý: data-src trùng file thật -->
+          <button class="thumb is-active" role="tab" aria-selected="true" data-src="nami.jpg" title="Ảnh 1">
+            <img src="nami.jpg" alt="Naruto ảnh 1">
+          </button>
+          <button class="thumb" role="tab" aria-selected="false" data-src="sanji.jpg" title="Ảnh 2">
+            <img src="sanji.jpg" alt="Naruto ảnh 2">
+          </button>
+          <button class="thumb" role="tab" aria-selected="false" data-src="franky.jpg" title="Ảnh 3">
+            <img src="franky.jpg" alt="Naruto ảnh 3">
+          </button>
+        </div>
+      </div>
+
+      <div class="col-content">
+        <h3>Naruto Ultimate</h3>
+        <ul class="meta">
+          <li><strong>Thể loại:</strong> Hành động, Phiêu lưu, Ninja</li>
+          <li><strong>Năm phát sóng:</strong> 2002</li>
+          <li><strong>Thời lượng:</strong> Nhiều season</li>
+        </ul>
+        <p class="desc">Câu chuyện về Uzumaki Naruto…</p>
+      </div>
+</article>
+    </section>
+  </main>
+
+  <!-- JS: hiệu ứng lướt đến đâu hiện đến đó -->
+  <script>
+    (function() {
+      const items = document.querySelectorAll('.collection-row.reveal');
+      const io = new IntersectionObserver((entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Stagger nhẹ theo vị trí để nhìn đã mắt hơn
+            const idx = [...items].indexOf(entry.target);
+            entry.target.style.transitionDelay = (idx % 3) * 80 + 'ms';
+            entry.target.classList.add('visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+
+      items.forEach(el => io.observe(el));
+    })();
+  </script>
+
+  <script>
+  // Scroll reveal
+  (function() {
+    const items = document.querySelectorAll('.collection-row.reveal');
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+    items.forEach(el => io.observe(el));
+  })();
+
+  // Gallery: click thumbnail -> đổi ảnh hero
+  (function() {
+    document.querySelectorAll('.collection-row').forEach(row => {
+      const imageWrap = row.querySelector('.col-image');
+      const hero = row.querySelector('.col-image .hero');
+      const thumbs = row.querySelectorAll('.thumbs .thumb');
+      if (!hero || !thumbs.length) return;
+
+      thumbs.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const src = btn.getAttribute('data-src');
+          if (!src) return;
+
+          // đánh dấu active
+          thumbs.forEach(b => { b.classList.remove('is-active'); b.setAttribute('aria-selected','false'); });
+          btn.classList.add('is-active');
+          btn.setAttribute('aria-selected','true');
+
+          // chuyển ảnh mượt
+          imageWrap.classList.add('switching');
+          const img = new Image();
+          img.onload = () => {
+            hero.src = src;            // đổi ảnh
+            requestAnimationFrame(() => imageWrap.classList.remove('switching'));
+          };
+          img.src = src;
+        });
+      });
+    });
+  })();
+</script>
+
+
+
+  <!-- Footer -->
+  <footer class="anime-footer">
+    <div class="footer-top">
+      <div class="logo">AnimeStore <span>Mô hình Anime cực chất</span></div>
+      <div class="social-icons">
+        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+        <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#"><i class="fa-brands fa-discord"></i></a>
+      </div>
+    </div>
+    <div class="footer-links">
+      <a href="#">Hỏi-Đáp</a>
+      <a href="#">Chính sách bảo mật</a>
+      <a href="#">Điều khoản sử dụng</a>
+      <a href="#">Giới thiệu</a>
+      <a href="#">Liên hệ</a>
+    </div>
+    <p class="footer-desc">
+      AnimeStore – Thế giới mô hình Anime: từ Naruto, One Piece, Dragon Ball đến Demon Slayer, Jujutsu Kaisen và nhiều bộ sưu tập hot khác.
+      Sản phẩm chất lượng cao, chi tiết sắc nét, phục vụ fan anime khắp Việt Nam.
+    </p>
+    <p class="footer-copy">&copy; 2025 AnimeStore | Liên hệ: support@animestore.vn</p>
+  </footer>
+</body>
+</html>

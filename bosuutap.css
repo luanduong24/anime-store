@@ -1,0 +1,155 @@
+/* ============================
+   BỘ SƯU TẬP – CHỈ STYLE SECTION NÀY
+   (giữ nguyên header/footer và style.css)
+============================ */
+
+.collection-main {
+  /* Tương phản tốt: section nền sáng, card tối + chữ sáng */
+  --col-text: #ffffff;
+  --col-muted: #cbd5e1;
+  --col-border: rgba(255,255,255,0.20);
+  --col-card: #0e1117;
+  --col-grad-a: rgba(0,0,0,0.60);
+  --col-grad-b: rgba(0,0,0,0.40);
+
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: clamp(20px, 4vw, 40px) clamp(20px, 6vw, 90px) 90px;
+  background-color: #f3f4f6; /* nền tổng của khu vực */
+}
+
+.collection-main h2 {
+  text-align: center;
+  margin: 12px 0 12px;
+  font-size: clamp(26px, 3.4vw, 44px);
+  color: #111827; /* tiêu đề tối trên nền sáng */
+}
+
+.collection-intro {
+  max-width: 980px;
+  margin: 0 auto 40px;
+  text-align: center;
+  color: #374151;
+  font-size: clamp(15px, 1.8vw, 19px);
+  line-height: 1.7;
+}
+
+/* ===== Layout các dòng xen kẽ ===== */
+.collection-list { display: flex; flex-direction: column; gap: 40px; }
+
+.collection-row {
+  display: flex;
+  gap: 32px;
+  align-items: stretch;
+  border: 1px solid var(--col-border);
+  border-radius: 24px;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--col-grad-a), var(--col-grad-b)), var(--col-card);
+  box-shadow: 0 14px 40px rgba(0,0,0,.35);
+  min-height: 360px;
+  will-change: transform, opacity, filter;
+}
+.collection-row:nth-child(even) { flex-direction: row-reverse; }
+
+/* ===== Cột ảnh ===== */
+.col-image { flex: 1.1; position: relative; min-height: 660px; background: var(--col-card); }
+
+/* ẢNH LỚN (HERO) – quan trọng: chỉ select trực tiếp, không ảnh hưởng thumbnail */
+.col-image > .hero {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(1.05);
+  transition: opacity .35s ease, transform .35s ease;
+}
+.col-image.switching > .hero { opacity: .2; transform: scale(.98); }
+
+/* ===== Cột nội dung ===== */
+.col-content {
+  flex: 1.1;
+  padding: clamp(20px, 4vw, 40px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+  color: var(--col-text);
+}
+.col-content h3 { margin: 6px 0 6px; font-size: clamp(20px, 2.8vw, 28px); color: var(--col-text); }
+.meta {
+  list-style: none; padding: 0; margin: 0 0 8px 0;
+  display: flex; flex-wrap: wrap; gap: 12px 18px;
+  color: var(--col-muted); font-size: .98rem;
+}
+.meta li strong { color: var(--col-text); }
+.desc { color: var(--col-text); font-size: 1rem; line-height: 1.7; }
+
+/* Hover card */
+.collection-row:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 48px rgba(0,0,0,.5);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+/* ===== Scroll reveal ===== */
+.reveal { opacity: 0; transform: translateY(24px) scale(.985); filter: blur(6px); }
+.reveal.visible {
+  opacity: 1; transform: translateY(0) scale(1); filter: blur(0);
+  transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1), filter .7s ease;
+}
+
+/* Tôn trọng người dùng giảm chuyển động */
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal.visible, .collection-row:hover, .col-image > .hero { transition: none !important; }
+}
+
+/* ===== Thumbnails overlay (gallery) ===== */
+.thumbs {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  display: flex;
+  gap: 10px;
+  padding: 8px;
+  background: rgba(0,0,0,.35);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 14px;
+  overflow-x: auto;
+  max-width: min(60vw, 520px);
+}
+.thumbs::-webkit-scrollbar { height: 6px; }
+.thumbs::-webkit-scrollbar-thumb { background: rgba(255,255,255,.25); border-radius: 999px; }
+
+.thumb {
+  appearance: none;
+  border: 2px solid transparent;
+  background: transparent;
+  padding: 0;
+  border-radius: 12px;
+  width: 64px; height: 46px;
+  cursor: pointer;
+  outline: none;
+  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.thumb img {
+  position: static;                 /* ngăn bị rule khác đè thành absolute */
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  border-radius: 10px;
+}
+.thumb:hover { transform: translateY(-2px); }
+.thumb.is-active { border-color: #ffd166; box-shadow: 0 0 0 3px rgba(255,209,102,.25); }
+
+/* ===== Responsive ===== */
+@media (max-width: 1100px) {
+  .col-image { min-height: 520px; }
+}
+@media (max-width: 900px) {
+  .collection-row { flex-direction: column; }
+  .collection-row:nth-child(even) { flex-direction: column; }
+  .col-image { min-height: 240px; }
+  .thumb { width: 56px; height: 40px; }
+  .thumbs { right: 12px; bottom: 12px; padding: 6px; }
+}

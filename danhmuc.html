@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Danh Mục | Anime Store</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- CSS chung của site -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    /* ====== Chỉ style riêng phần danh mục (an toàn với header/footer) ====== */
+    .category-page{max-width:1200px;margin:24px auto 80px;padding:0 16px}
+    .category-page h1{margin:8px 0 12px}
+    .tab-buttons{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 16px}
+    .tab-buttons button{border:1px solid #111827;background:#fff;color:#111827;padding:8px 14px;border-radius:999px;cursor:pointer}
+    .tab-buttons button.active{background:#111827;color:#fff}
+
+    .tab-content{display:none}
+    .series-hero{display:grid;grid-template-columns:1fr 1.2fr;gap:16px;align-items:stretch;border:1px solid #e5e7eb;border-radius:14px;overflow:hidden;background:#fff}
+    .series-hero .cover{position:relative;min-height:240px;background:#0b1020}
+    .series-hero .cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.9}
+    .series-hero .info{padding:14px;display:grid;gap:8px}
+    .chips{display:flex;gap:8px;flex-wrap:wrap}
+    .chip{border:1px solid #e5e7eb;padding:4px 10px;border-radius:999px;background:#fff;font-size:12px}
+    .chip.primary{background:#111827;color:#fff;border-color:#111827}
+
+    .trailer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:10px}
+    @media (max-width:900px){.series-hero{grid-template-columns:1fr}.trailer-grid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:560px){.trailer-grid{grid-template-columns:1fr}}
+
+    .trailer-card{position:relative;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;background:#fff;cursor:pointer;transition:transform .2s,box-shadow .2s}
+    .trailer-card:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(0,0,0,.08)}
+    .thumb{position:relative;aspect-ratio:16/9;background:#0b1020}
+    .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+    .play-btn{position:absolute;inset:auto 0 0 0;display:flex;align-items:center;gap:8px;justify-content:center;background:linear-gradient(180deg,transparent,rgba(0,0,0,.6));color:#fff;font-weight:700;padding:10px}
+    .trailer-body{padding:10px}
+    .trailer-title{font-weight:800}
+    .trailer-meta{color:#6b7280;font-size:12px}
+
+    .chars{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+    .chars .chip{font-size:11px}
+
+    /* Modal trailer */
+    dialog.trailer-modal{border:none;border-radius:16px;max-width:920px;width:92vw;padding:0;overflow:hidden}
+    dialog::backdrop{background:rgba(0,0,0,.65)}
+    .tm-head{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-bottom:1px solid #e5e7eb;background:#fff}
+    .tm-body{background:#000}
+    .tm-body iframe{display:block;width:100%;height:56vw;max-height:520px;border:0}
+    .tm-foot{padding:10px 12px;background:#fff;border-top:1px solid #e5e7eb;display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+    .btn{border-radius:10px;padding:8px 12px;border:1px solid #111827;background:#111827;color:#fff;cursor:pointer}
+    .btn.ghost{background:#fff;color:#111827}
+    .muted{color:#6b7280;font-size:12px}
+  </style>
+</head>
+<body>
+
+<!-- ===== HEADER giữ nguyên ===== -->
+<header class="shop-header">
+  <div class="header-container">
+    <div class="logo">
+      <span class="logo-title">Anime Store</span>
+      <small class="logo-tagline">Mô hình Anime cực chất</small>
+    </div>
+
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Tìm kiếm...">
+      <button id="searchButton"><i class="fa fa-search"></i></button>
+    </div>
+
+    <nav class="main-nav">
+      <ul class="menu">
+        <li><a href="index.html">Trang Chủ</a></li>
+        <li class="dropdown">
+          <a href="danhmuc.html">Danh Mục <i class="fa-solid fa-angle-down"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="danhmuc.html" onclick="localStorage.setItem('tab','naruto')">Naruto</a></li>
+            <li><a href="danhmuc.html" onclick="localStorage.setItem('tab','onepiece')">One Piece</a></li>
+            <li><a href="danhmuc.html" onclick="localStorage.setItem('tab','dragonball')">Dragon Ball</a></li>
+            <li><a href="danhmuc.html" onclick="localStorage.setItem('tab','khac')">Khác</a></li>
+          </ul>
+        </li>
+        <li><a href="khuyenmai.html">Khuyến Mãi</a></li>
+        <li><a href="bosuutap.html">Bộ Sưu Tập</a></li>
+        <li><a href="lienhe.html">Liên Hệ</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <div id="userInfo"></div>
+      <button class="cart-btn" id="openCartBtn">
+        <i class="fa-solid fa-cart-shopping"></i> Giỏ Hàng (<span id="cartCount">0</span>)
+      </button>
+      <button class="member-btn" id="loginBtn">
+        <i class="fa-solid fa-user"></i> Thành Viên
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== MAIN: Danh mục có trailer ===== -->
+<main class="category-page">
+  <h1>Danh Mục + Trailer</h1>
+
+  <div class="tab-buttons" id="tabButtons">
+    <button data-tab="naruto">Naruto</button>
+    <button data-tab="onepiece">One Piece</button>
+    <button data-tab="dragonball">Dragon Ball</button>
+    <button data-tab="khac">Khác</button>
+  </div>
+
+  <!-- Naruto -->
+  <section id="naruto" class="tab-content">
+    <div class="series-hero">
+      <div class="cover"><img src="naruto.jpg" alt="Naruto cover"></div>
+      <div class="info">
+        <h2>Naruto</h2>
+        <p>Hành trình Uzumaki Naruto theo đuổi ước mơ trở thành Hokage, vượt qua định kiến với sức mạnh của tình bạn và ý chí.</p>
+        <div class="chips">
+          <span class="chip primary">Hành động</span>
+          <span class="chip">Phiêu lưu</span>
+          <span class="chip">Ninja</span>
+          <span class="chip">2002</span>
+        </div>
+        <div class="chars">
+          <span class="chip">Naruto</span><span class="chip">Sasuke</span><span class="chip">Sakura</span><span class="chip">Kakashi</span><span class="chip">Itachi</span>
+        </div>
+        <div class="trailer-grid">
+          <article class="trailer-card" data-yt="Jm0qv3XkQk0" data-title="Trailer Naruto Shippuden">
+            <div class="thumb"><img loading="lazy" src="https://img.youtube.com/vi/Jm0qv3XkQk0/hqdefault.jpg" alt=""></div>
+            <div class="play-btn"><i class="fa-solid fa-play"></i> Xem trailer</div>
+            <div class="trailer-body">
+              <div class="trailer-title">Naruto Shippuden – Trailer</div>
+              <div class="trailer-meta">TV Anime • Studio Pierrot</div>
+            </div>
+          </article>
+          <article class="trailer-card" data-yt="gZpYb6f-9lA" data-title="AMV Best Moments">
+            <div class="thumb"><img loading="lazy" src="https://img.youtube.com/vi/gZpYb6f-9lA/hqdefault.jpg" alt=""></div>
+            <div class="play-btn"><i class="fa-solid fa-play"></i> Xem trailer</div>
+            <div class="trailer-body">
+              <div class="trailer-title">Best Moments</div>
+              <div class="trailer-meta">Fan cut • 1080p</div>
+            </div>
+          </article>
+          <article class="trailer-card" data-yt="tAduG85bPqM" data-title="Boruto Preview">
+            <div class="thumb"><img loading="lazy" src="https://img.youtube.com/vi/tAduG85bPqM/hqdefault.jpg" alt=""></div>
+            <div class="play-btn"><i class="fa-solid fa-play"></i> Xem trailer</div>
+            <div class="trailer-body">
+              <div class="trailer-title">Boruto – Preview</div>
+              <div class="trailer-meta">Spinoff • PV</div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- One Piece -->
+  <section id="onepiece" class="tab-content">
+    <div class="series-hero">
+      <div class="cover"><img src="luffy-g5.jpg" alt="One Piece cover"></div>
+      <div class="info">
+        <h2>One Piece</h2>
+        <p>Luffy và băng Mũ Rơm lên đường tìm kho báu One Piece. Câu chuyện về tự do, lý tưởng và tình đồng đội giữa đại hải trình.</p>
+        <div class="chips">
+          <span class="chip primary">Phiêu lưu</span>
+          <span class="chip">Hài hước</span>
+          <span class="chip">Hành động</span>
+          <span class="chip">1999</span>
+        </div>
+        <div class="chars">
+          <span class="chip">Luffy</span><span class="chip">Zoro</span><span class="chip">Sanji</span><span class="chip">Nami</span><span class="chip">Robin</span>
+        </div>
+        <div class="trailer-grid">
+          <article class="trailer-card" data-yt="i1L5v2G9S3g" data-title="One Piece Official Trailer">
+            <div class="thumb"><img loading="lazy" src="https://img.youtube.com/vi/i1L5v2G9S3g/hqdefault.jpg" alt=""></div>
+            <div class="play-btn"><i class="fa-solid fa-play"></i> Xem trailer</div>
+            <div class="trailer-body">
+              <div class="trailer-title">One Piece – Official Trailer</div>
+              <div class="trailer-meta">TV Anime • Toei Animation</div>
+            </div>
+          </article>
+          <article class="trailer-card" data-yt="9cp3N0J4g0M" data-title="Wano Arc PV">
+            <div class="thumb"><img loading="lazy" src="https://img.youtube.com/vi/9cp3N0J4g0M/hqdefault.jpg" alt=""></div>
+            <div class="play-btn"><i class="fa-solid fa-play"></i> Xem trailer</div>
+            <div class="trailer-body">
+              <div class="trailer-title">Wano Arc – PV</div>
+              <div class="trailer-meta">Arc highlight</div>
+            </div>
+          </article>
+          <article class="trailer-card" data-yt="QqHkJgUjN0k" data-title="Gear 5 Showcase">
+            <div class="thumb"><img loading="lazy" src="https://img.youtube.com/vi/QqHkJgUjN0k/hqdefault.jpg" alt=""></div>
+            <div class="play-btn"><i class="fa-solid fa-play"></i> Xem trailer</div>
+            <div class="trailer-body">
+              <div class="trailer-title">Gear 5 Showcase</div>
+              <div class="trailer-meta">Highlight • 4K</div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dragon Ball -->
+  <section id="dragonball" class="tab-content">
+    <div class="series-hero">
+      <div class="cover"><img src="goku.jpg" alt="Dragon Ball cover"></div>
+      <div class="info">
+        <h2>Dragon Ball</h2>
+        <p>Son Goku và bạn bè bảo vệ Trái Đất trước những kẻ thù hùng mạnh, với những màn biến hình Saiyan kinh điển.</p>
+        <div class="chips">
+          <span class="chip primary">Hành động</span>
+          <span class="chip">Viễn tưởng</span>
+          <span class="chip">1986</span>
+        </div>
+        <div class="chars">
+          <span class="chip">Goku</span><span class="chip">Vegeta</span><span class="chip">Gohan</span><span class="chip">Trunks</span><span class="chip">Frieza</span>
+        </div>
+        <div class="trailer-grid">
+          <article class="trailer-card" data-yt="qDWl0pniS1Q" data-title="DB Super Hero Trailer">
+            <div class="thumb"><img loading="lazy" src="https://img.youtube.com/vi/qDWl0pniS1Q/hqdefault.jpg" alt=""></div>
+            <div class="play-btn"><i class="fa-solid fa-play"></i> Xem trailer</div>
+            <div class="trailer-body">
+              <div class="trailer-title">Dragon Ball Super: SUPER HERO</div>
+              <div class="trailer-meta">Movie Trailer</div>
+            </div>
+          </article>
+          <article class="trailer-card" data-yt="Bw-6mW3nJtg" data-title="Broly Movie PV">
+            <div class="thumb"><img loading="lazy" src="https://img.youtube.com/vi/Bw-6mW3nJtg/hqdefault.jpg" alt=""></div>
+            <div class="play-btn"><i class="fa-solid fa-play"></i> Xem trailer</div>
+            <div class="trailer-body">
+              <div class="trailer-title">Broly – Movie PV</div>
+              <div class="trailer-meta">Movie • Highlight</div>
+            </div>
+          </article>
+          <article class="trailer-card" data-yt="QwG3F3Zb9AE" data-title="Ultra Instinct Showcase">
+            <div class="thumb"><img loading="lazy" src="https://img.youtube.com/vi/QwG3F3Zb9AE/hqdefault.jpg" alt=""></div>
+            <div class="play-btn"><i class="fa-solid fa-play"></i> Xem trailer</div>
+            <div class="trailer-body">
+              <div class="trailer-title">Ultra Instinct – Showcase</div>
+              <div class="trailer-meta">Highlight • 4K</div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Khác -->
+  <section id="khac" class="tab-content">
+    <div class="series-hero">
+      <div class="cover"><img src="gojo.jpg" alt="JJK cover"></div>
+      <div class="info">
+        <h2>JJK / Demon Slayer & khác</h2>
+        <p>Tổng hợp các series hot như Jujutsu Kaisen, Demon Slayer, Attack on Titan… đa dạng phong cách và nhân vật.</p>
+        <div class="chips">
+          <span class="chip primary">Siêu nhiên</span>
+          <span class="chip">Hành động</span>
+          <span class="chip">2019+</span>
+        </div>
+        <div class="chars">
+          <span class="chip">Gojo</span><span class="chip">Itadori</span><span class="chip">Tanjiro</span><span class="chip">Nezuko</span><span class="chip">Levi</span>
+        </div>
+        <div class="trailer-grid">
+          <article class="trailer-card" data-yt="h4oQvY4W1rM" data-title="Jujutsu Kaisen Trailer">
+            <div class="thumb"><img loading="lazy" src="https://img.youtube.com/vi/h4oQvY4W1rM/hqdefault.jpg" alt=""></div>
+            <div class="play-btn"><i class="fa-solid fa-play"></i> Xem trailer</div>
+            <div class="trailer-body">
+              <div class="trailer-title">Jujutsu Kaisen – Trailer</div>
+              <div class="trailer-meta">TV Anime • MAPPA</div>
+            </div>
+          </article>
+          <article class="trailer-card" data-yt="VQGCKyvzIM4" data-title="Demon Slayer Trailer">
+            <div class="thumb"><img loading="lazy" src="https://img.youtube.com/vi/VQGCKyvzIM4/hqdefault.jpg" alt=""></div>
+            <div class="play-btn"><i class="fa-solid fa-play"></i> Xem trailer</div>
+            <div class="trailer-body">
+              <div class="trailer-title">Demon Slayer – Trailer</div>
+              <div class="trailer-meta">TV Anime • ufotable</div>
+            </div>
+          </article>
+          <article class="trailer-card" data-yt="MGRm4IzK1SQ" data-title="Attack on Titan Final">
+            <div class="thumb"><img loading="lazy" src="https://img.youtube.com/vi/MGRm4IzK1SQ/hqdefault.jpg" alt=""></div>
+            <div class="play-btn"><i class="fa-solid fa-play"></i> Xem trailer</div>
+            <div class="trailer-body">
+              <div class="trailer-title">Attack on Titan – Final</div>
+              <div class="trailer-meta">Final PV</div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Modal phát trailer YouTube -->
+<dialog id="ytModal" class="trailer-modal">
+  <div class="tm-head">
+    <strong id="ytTitle">Trailer</strong>
+    <button class="btn ghost" data-close><i class="fa-solid fa-xmark"></i> Đóng</button>
+  </div>
+  <div class="tm-body">
+    <iframe id="ytFrame" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  </div>
+  <div class="tm-foot">
+    <span class="muted">Ấn Esc để đóng</span>
+    <a id="ytOpen" class="btn" target="_blank" rel="noopener"><i class="fa-brands fa-youtube"></i> Mở trên YouTube</a>
+  </div>
+</dialog>
+
+<!-- ===== FOOTER giữ nguyên ===== -->
+<footer class="anime-footer">
+  <div class="footer-top">
+    <div class="logo">AnimeStore <span>Mô hình Anime cực chất</span></div>
+    <div class="social-icons">
+      <a href="#"><i class="fa-brands fa-facebook"></i></a>
+      <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+      <a href="#"><i class="fa-brands fa-youtube"></i></a>
+      <a href="#"><i class="fa-brands fa-instagram"></i></a>
+      <a href="#"><i class="fa-brands fa-discord"></i></a>
+    </div>
+  </div>
+  <div class="footer-links">
+    <a href="#">Hỏi-Đáp</a>
+    <a href="#">Chính sách bảo mật</a>
+    <a href="#">Điều khoản sử dụng</a>
+    <a href="#">Giới thiệu</a>
+    <a href="#">Liên hệ</a>
+  </div>
+  <p class="footer-desc">
+    AnimeStore – Thế giới mô hình Anime: từ Naruto, One Piece, Dragon Ball đến Demon Slayer, Attack on Titan và nhiều bộ sưu tập hot khác.
+    Sản phẩm chất lượng cao, chi tiết sắc nét, phục vụ fan anime khắp Việt Nam.
+  </p>
+  <p class="footer-copy">&copy; 2025 AnimeStore | Liên hệ: support@animestore.vn</p>
+</footer>
+
+<script>
+  // ===== Tabs (đọc từ localStorage nếu có) =====
+  const tabButtons = document.getElementById('tabButtons').querySelectorAll('button');
+  const tabs = document.querySelectorAll('.tab-content');
+  function showTab(tabId){
+    tabs.forEach(t => t.style.display = t.id === tabId ? 'block' : 'none');
+    tabButtons.forEach(b => b.classList.toggle('active', b.dataset.tab === tabId));
+    localStorage.setItem('tab', tabId);
+  }
+  document.addEventListener('DOMContentLoaded', ()=>{
+    const saved = localStorage.getItem('tab') || 'naruto';
+    showTab(saved);
+  });
+  tabButtons.forEach(btn => btn.addEventListener('click', ()=> showTab(btn.dataset.tab)));
+
+  // ===== Trailer modal (YouTube embed) =====
+  const ytModal = document.getElementById('ytModal');
+  const ytFrame = document.getElementById('ytFrame');
+  const ytTitle = document.getElementById('ytTitle');
+  const ytOpen  = document.getElementById('ytOpen');
+
+  document.addEventListener('click', (e)=>{
+    const card = e.target.closest('.trailer-card');
+    if(!card) return;
+    const id = card.dataset.yt;
+    const title = card.dataset.title || 'Trailer';
+    ytTitle.textContent = title;
+    ytOpen.href = `https://www.youtube.com/watch?v=${id}`;
+    ytFrame.src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
+    ytModal.showModal();
+  });
+
+  function closeModal(){
+    ytFrame.src = ''; // stop video
+    ytModal.close();
+  }
+  ytModal.addEventListener('click', (e)=>{ if(e.target.hasAttribute('data-close')) closeModal(); });
+  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && ytModal.open) closeModal(); });
+
+  // ===== Login/Cart nhỏ gọn giữ nguyên logic của bạn =====
+  document.querySelector('.member-btn')?.addEventListener('click', ()=>{ window.location.href="login.html"; });
+  document.addEventListener("DOMContentLoaded", function () {
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    const userInfo = document.getElementById("userInfo");
+    const loginBtn = document.getElementById("loginBtn");
+    if (currentUser) {
+      if (loginBtn) loginBtn.style.display="none";
+      const greeting = document.createElement("span");
+      greeting.textContent = `Xin chào! ${currentUser.fullname}`;
+      greeting.style.marginRight = "10px";
+      const logoutBtn = document.createElement("button");
+      logoutBtn.textContent = "Đăng xuất";
+      logoutBtn.style.marginLeft = "10px";
+      logoutBtn.addEventListener("click", function () {
+        localStorage.removeItem("currentUser"); window.location.reload();
+      });
+      userInfo?.appendChild(greeting); userInfo?.appendChild(logoutBtn);
+    }
+  });
+  function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const total = cart.reduce((s, i) => s + i.quantity, 0);
+    const el = document.getElementById("cartCount"); if (el) el.innerText = total;
+  }
+  document.addEventListener("DOMContentLoaded", updateCartCount);
+</script>
+</body>
+</html>

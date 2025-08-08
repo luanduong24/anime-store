@@ -9,257 +9,668 @@
 </head>
 <body>
     <!-- Header -->
-    <header class="shop-header">
+   <header class="shop-header">
+  <div class="header-container">
     <div class="logo">
-        <i></i> <span>Anime Store</span>
-        <small>Mô hình Anime cực chất</small>
+      <span class="logo-title">Anime Store</span>
+      <small class="logo-tagline">Mô hình Anime cực chất</small>
     </div>
 
     <div class="search-bar">
-        <input type="text" id="searchInput" placeholder="Tìm kiếm...">
-        <button id="searchButton"><i class="fa fa-search"></i></button>
+      <input type="text" id="searchInput" placeholder="Tìm kiếm...">
+      <button id="searchButton"><i class="fa fa-search"></i></button>
     </div>
 
-    <nav>
-        <ul class="menu">
-            <li><a href="#">Trang Chủ</a></li>
-            <li class="dropdown">
-                <a href="#">Danh Mục <i class="fa-solid fa-angle-down"></i></a>
-                <ul class="dropdown-menu">
-                    <li><a href="#">Naruto</a></li>
-                    <li><a href="#">One Piece</a></li>
-                    <li><a href="#">Dragon Ball</a></li>
-                    <li><a href="#">Khác</a></li>
-                </ul>
-            </li>
-            <li><a href="#">Khuyến Mãi</a></li>
-            <li><a href="#">Bộ Sưu Tập</a></li>
-            <li><a href="#">Liên Hệ</a></li>
-        </ul>
-    </nav>
+ <nav class="main-nav">
+  <ul class="menu">
+    <li><a href="index.html">Trang Chủ</a></li>
+    
+    <li class="dropdown">
+      <a href="danhmuc.html">Danh Mục <i class="fa-solid fa-angle-down"></i></a>
+      <ul class="dropdown-menu">
+        <li><a href="danhmuc.html" onclick="localStorage.setItem('tab','naruto')">Naruto</a></li>
+        <li><a href="danhmuc.html" onclick="localStorage.setItem('tab','onepiece')">One Piece</a></li>
+        <li><a href="danhmuc.html" onclick="localStorage.setItem('tab','dragonball')">Dragon Ball</a></li>
+        <li><a href="danhmuc.html" onclick="localStorage.setItem('tab','khac')">Khác</a></li>
+      </ul>
+    </li>
+
+    <li><a href="khuyenmai.html">Khuyến Mãi</a></li>
+    <li><a href="bosuutap.html">Bộ Sưu Tập</a></li>
+    <li><a href="lienhe.html">Liên Hệ</a></li>
+  </ul>
+</nav>
 
     <div class="header-actions">
-    <div id="userInfo" style="margin-right: 10px;"></div>
-    <button class="cart-btn">
-        <i class="fa-solid fa-cart-shopping"></i> Giỏ Hàng (<span id="cartCount">0</span>)
-    </button>
-    <button class="member-btn" id="loginBtn">
-        <i class="fa-solid fa-user"></i> Thành Viên
-    </button>
+  <div id="userInfo"></div>
+
+  <!-- Nút mở giỏ hàng -->
+<button class="cart-btn" id="openCartBtn">
+  <i class="fa-solid fa-cart-shopping"></i> Giỏ Hàng (<span id="cartCount">0</span>)
+</button>
+
+
+  <!-- Nút đăng nhập / thành viên -->
+  <button class="member-btn" id="loginBtn">
+    <i class="fa-solid fa-user"></i> Thành Viên
+  </button>
 </div>
+
 </header>
 
-
-
-    <!-- banner -->
+    <!-- Banner -->
     <section class="banner">
-    <div class="slides">
-        <div class="slide active">
-            <img src="hinhnen" alt="Naruto">
-            <div class="banner-content">
-                <h1>Bộ Sưu Tập Naruto HOT 2025</h1>
-                <p>Sở hữu ngay những mô hình Naruto cực chất.</p>
-                <a href="#" class="btn"><i class="fa-solid fa-bolt"></i> Mua Ngay</a>
+        <div class="slides">
+            <div class="slide active">
+                <img src="hinhnen" alt="Naruto">
+                <div class="banner-content">
+                    <h1>Bộ Sưu Tập Naruto HOT 2025</h1>
+                    <p>Sở hữu ngay những mô hình Naruto cực chất.</p>
+                    <a href="#" class="btn"><i class="fa-solid fa-bolt"></i> Mua Ngay</a>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="onepie" alt="One Piece">
+                <div class="banner-content">
+                    <h1>Bộ Sưu Tập One Piece</h1>
+                    <p>Khám phá những mô hình Luffy, Zoro, Sanji độc đáo.</p>
+                    <a href="#" class="btn"><i class="fa-solid fa-bolt"></i> Mua Ngay</a>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="hinh-nen-Goku.jpg" alt="Dragon Ball">
+                <div class="banner-content">
+                    <h1>Dragon Ball Heroes</h1>
+                    <p>Trọn bộ Goku, Vegeta và các nhân vật huyền thoại.</p>
+                    <a href="#" class="btn"><i class="fa-solid fa-bolt"></i> Mua Ngay</a>
+                </div>
             </div>
         </div>
-
-        <div class="slide">
-            <img src="onepie" alt="One Piece">
-            <div class="banner-content">
-                <h1>Bộ Sưu Tập One Piece</h1>
-                <p>Khám phá những mô hình Luffy, Zoro, Sanji độc đáo.</p>
-                <a href="#" class="btn"><i class="fa-solid fa-bolt"></i> Mua Ngay</a>
-            </div>
-        </div>
-
-        <div class="slide">
-            <img src="hinh-nen-Goku.jpg" alt="Dragon Ball">
-            <div class="banner-content">
-                <h1>Dragon Ball Heroes</h1>
-                <p>Trọn bộ Goku, Vegeta và các nhân vật huyền thoại.</p>
-                <a href="#" class="btn"><i class="fa-solid fa-bolt"></i> Mua Ngay</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Nút điều khiển -->
-    <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
-    <button class="next" onclick="changeSlide(1)">&#10095;</button>
+        <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+        <button class="next" onclick="changeSlide(1)">&#10095;</button>
     </section>
 
+    <!-- Sản phẩm nổi bật -->
     <main class="product-section">
-    <h2><i class="fa-solid fa-star"></i> Sản phẩm nổi bật</h2>
-    <div class="movie-grid">
+        <h2><i class="fa-solid fa-star"></i> Sản phẩm nổi bật</h2>
+        <div class="movie-grid">
+            <div class="movie-card" data-title="Naruto" onclick="openModal('Naruto','Mô hình Naruto cao 25cm, chất liệu PVC cao cấp, cực kỳ chi tiết.','mohinhnaruto','380.000₫')">
+                <img src="mohinhnaruto" alt="Naruto">
+                <span class="tag">Mới</span>
+                <h3>Mô hình Naruto</h3>
+                <p class="subtitle">380.000₫</p>
+            </div>
 
-        <div class="movie-card" onclick="openModal('Naruto','Mô hình Naruto cao 25cm, chất liệu PVC cao cấp, cực kỳ chi tiết.','assets/images/chia-se-bo-30-hinh-nen-naruto-doc-la-cho-dien-thoai-may-tinh-5.jpg','380.000₫')">
-            <img src="mohinhnaruto" alt="Naruto">
-            <span class="tag">Mới</span>
-            <h3>Mô hình Naruto</h3>
-            <p class="subtitle">380.000₫</p>
+            <div class="movie-card" data-title="Hinata" onclick="openModal('Hinata','Mô hình Hinata cao 25cm, chất liệu PVC cao cấp, cực kỳ chi tiết.','1-11 (1).jpg','380.000₫')">
+                <img src="1-11 (1).jpg" alt="Hinata">
+                <span class="tag">Mới</span>
+                <h3>Mô hình Hinata</h3>
+                <p class="subtitle">380.000₫</p>
+            </div>
+
+            <div class="movie-card" data-title="Roclee" onclick="openModal('Roclee','Mô hình Roclee cao 25cm, chất liệu PVC cao cấp, cực kỳ chi tiết.','roclee.jpg','380.000₫')">
+                <img src="roclee.jpg" alt="Roclee">
+                <span class="tag">Mới</span>
+                <h3>Mô hình Roclee</h3>
+                <p class="subtitle">380.000₫</p>
+            </div>
+
+            <div class="movie-card" data-title="Neji" onclick="openModal('Neji','Mô hình Neji cao 25cm, chất liệu PVC cao cấp, cực kỳ chi tiết.','neji.jpg','380.000₫')">
+                <img src="neji.jpg" alt="Neji">
+                <span class="tag">Mới</span>
+                <h3>Mô hình Neji</h3>
+                <p class="subtitle">380.000₫</p>
+            </div>
+
+            <div class="movie-card" data-title="Gai" onclick="openModal('Gai','Mô hình Gai cao 25cm, chất liệu PVC cao cấp, cực kỳ chi tiết.','gai.jpg','380.000₫')">
+                <img src="gai.jpg" alt="Gai">
+                <span class="tag">Mới</span>
+                <h3>Mô hình Gai</h3>
+                <p class="subtitle">380.000₫</p>
+            </div>
+
+            <div class="movie-card" data-title="Kakashi" onclick="openModal('Kakashi','Mô hình Kakashi cao 25cm, chất liệu PVC cao cấp, cực kỳ chi tiết.','kakashi.jpg','380.000₫')">
+                <img src="kakashi.jpg" alt="Kakashi">
+                <span class="tag">Mới</span>
+                <h3>Mô hình Kakashi</h3>
+                <p class="subtitle">380.000₫</p>
+            </div>
+
+            <div class="movie-card" data-title="Madara" onclick="openModal('Madara','Mô hình Madara cao 25cm, chất liệu PVC cao cấp, cực kỳ chi tiết.','madara.jpg','380.000₫')">
+                <img src="madara.jpg" alt="Madara">
+                <span class="tag">Mới</span>
+                <h3>Mô hình Madara</h3>
+                <p class="subtitle">380.000₫</p>
+            </div>
+
+            <div class="movie-card" data-title="Luffy" onclick="openModal('Luffy','Mô hình Luffy One Piece cực chất, cao 28cm.','mohinhonepie','420.000₫')">
+                <img src="mohinhonepie" alt="Luffy">
+                <span class="tag hot">Hot</span>
+                <h3>Mô hình Luffy</h3>
+                <p class="subtitle">420.000₫</p>
+            </div>
+
+            <div class="movie-card" data-title="Goku" onclick="openModal('Goku','Mô hình Goku Dragon Ball cao 30cm, chi tiết siêu đẹp.','mohinhgoku','450.000₫')">
+                <img src="mohinhgoku" alt="Goku">
+                <span class="tag sale">Sale</span>
+                <h3>Mô hình Goku</h3>
+                <p class="subtitle">450.000₫</p>
+            </div>
+
+            <div class="movie-card" data-title="Zoro" onclick="openModal('Zoro','Mô hình Zoro One Piece cực chất, cao 28cm.','mohinhzoro','430.000₫')">
+                <img src="mohinhzoro" alt="Zoro">
+                <span class="tag">New</span>
+                <h3>Mô hình Zoro</h3>
+                <p class="subtitle">430.000₫</p>
+            </div>
+
+             <div class="movie-card" data-title="Nami" onclick="openModal('Nami','Mô hình Nami One Piece cực chất, cao 28cm.','nami.jpg','430.000₫')">
+                <img src="nami.jpg" alt="Zoro">
+                <span class="tag">New</span>
+                <h3>Mô hình Nami</h3>
+                <p class="subtitle">430.000₫</p>
+            </div>
+
+             <div class="movie-card" data-title="Sanji" onclick="openModal('Sanji','Mô hình Sanji One Piece cực chất, cao 28cm.','sanji.jpg','430.000₫')">
+                <img src="sanji.jpg" alt="Sanji">
+                <span class="tag">New</span>
+                <h3>Mô hình Sanji</h3>
+                <p class="subtitle">430.000₫</p>
+            </div>
+
+            
+             <div class="movie-card" data-title="Robin" onclick="openModal('Robin','Mô hình Robin One Piece cực chất, cao 28cm.','robin.jpg','430.000₫')">
+                <img src="robin.jpg" alt="Robin">
+                <span class="tag">New</span>
+                <h3>Mô hình Robin</h3>
+                <p class="subtitle">430.000₫</p>
+            </div>
+            
+             <div class="movie-card" data-title="Franky" onclick="openModal('Franky','Mô hình Franky One Piece cực chất, cao 28cm.','franky.jpg','430.000₫')">
+                <img src="franky.jpg" alt="Franky">
+                <span class="tag">New</span>
+                <h3>Mô hình Franky</h3>
+                <p class="subtitle">430.000₫</p>
+            </div>
         </div>
+    </main>
 
-        <div class="movie-card" onclick="openModal('Luffy','Mô hình Luffy One Piece cực chất, cao 28cm.','assets/images/1-5 (1).jpg','420.000₫')">
-            <img src="mohinhonepie" alt="Luffy">
+    <!-- Rank Grid -->
+    <div class="rank-grid">
+        <div class="rank-card tilt-right" data-title="Luffy">
+            <img src="mohinh1.jpg" alt="Luffy">
             <span class="tag hot">Hot</span>
-            <h3>Mô hình Luffy</h3>
-            <p class="subtitle">420.000₫</p>
+            <div class="info-overlay">
+                <h3>Mô hình Luffy</h3>
+                <p>Mô hình Luffy cao 28cm, chất liệu PVC cao cấp.</p>
+                <p class="price">420.000₫</p>
+                <button 
+                    class="add-to-cart-btn"
+                    data-title="Mô hình Luffy"
+                    data-price="420000"
+                    data-image="mohinh1.jpg">
+                    <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                </button>
+            </div>
         </div>
 
-        <div class="movie-card" onclick="openModal('Goku','Mô hình Goku Dragon Ball cao 30cm, chi tiết siêu đẹp.','assets/images/hinh-nen-Goku.jpg','450.000₫')">
-            <img src="mohinhgoku" alt="Goku">
-            <span class="tag sale">Sale</span>
-            <h3>Mô hình Goku</h3>
-            <p class="subtitle">450.000₫</p>
+        <div class="rank-card tilt-left" data-title="Naruto">
+            <img src="mohinh2" alt="Naruto">
+            <span class="tag">Mới</span>
+            <div class="info-overlay">
+                <h3>Mô hình Naruto</h3>
+                <p>Naruto Sage Mode cao 25cm.</p>
+                <p class="price">380.000₫</p>
+                <button 
+                    class="add-to-cart-btn"
+                    data-title="Mô hình Luffy"
+                    data-price="420000"
+                    data-image="mohinh1.jpg">
+                    <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                </button>
+            </div>
         </div>
 
-        <div class="movie-card" onclick="openModal('Zoro','Mô hình Zoro One Piece cực chất, cao 28cm.','assets/images/mohinhluffy.jpg','430.000₫')">
-            <img src="mohinhzoro" alt="Zoro">
-            <span class="tag">New</span>
-            <h3>Mô hình Zoro</h3>
-            <p class="subtitle">430.000₫</p>
+        <div class="rank-card tilt-right" data-title="Zoro">
+            <img src="mohinh3" alt="Zoro">
+            <span class="tag hot">Hot</span>
+            <div class="info-overlay">
+                <h3>Mô hình Zoro</h3>
+                <p>Mô hình Zoro Tam Long Haki 35cm.</p>
+                <p class="price">420.000₫</p>
+                <button 
+                    class="add-to-cart-btn"
+                    data-title="Mô hình Luffy"
+                    data-price="420000"
+                    data-image="mohinh1.jpg">
+                    <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                </button>
+            </div>
         </div>
 
-    </div>
-</main>
-<div class="rank-grid">
-    <div class="rank-card tilt-right">
-        <img src="mohinh1.jpg" alt="Luffy">
-        <span class="tag hot">Hot</span>
-        <div class="info-overlay">
-            <h3>Mô hình Luffy</h3>
-            <p>Mô hình Luffy cao 28cm, chất liệu PVC cao cấp.</p>
-            <p class="price">420.000₫</p>
-            <button><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</button>
+        <div class="rank-card tilt-left" data-title="Goku">
+            <img src="mohinh4" alt="Goku">
+            <span class="tag">Mới</span>
+            <div class="info-overlay">
+                <h3>Mô hình Goku</h3>
+                <p>Mô hình DragonBall SonGoku SSJ3.</p>
+                <p class="price">380.000₫</p>
+                <button 
+                    class="add-to-cart-btn"
+                    data-title="Mô hình Luffy"
+                    data-price="420000"
+                    data-image="mohinh1.jpg">
+                    <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                </button>
+            </div>
+        </div>
+
+        <div class="rank-card tilt-right" data-title="Sasuke">
+            <img src="mohinh5" alt="Sasuke">
+            <span class="tag hot">Hot</span>
+            <div class="info-overlay">
+                <h3>Mô hình Sasuke</h3>
+                <p>Mô Hình Uchiha Sasuke.</p>
+                <p class="price">420.000₫</p>
+                <button 
+                    class="add-to-cart-btn"
+                    data-title="Mô hình Luffy"
+                    data-price="420000"
+                    data-image="mohinh1.jpg">
+                    <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                </button>
+
+            </div>
         </div>
     </div>
 
-    <div class="rank-card tilt-left">
-        <img src="mohinh2" alt="Naruto">
-        <span class="tag">Mới</span>
-        <div class="info-overlay">
-            <h3>Mô hình Naruto</h3>
-            <p>Naruto Sage Mode cao 25cm, cực kỳ chi tiết.</p>
-            <p class="price">380.000₫</p>
-            <button><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</button>
-        </div>
+ <!-- MODAL -->
+<!-- MODAL -->
+<div id="productModal" class="modal" style="display: none;">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+
+    <div class="modal-top">
+      <div class="modal-image">
+        <img id="modalImg" src="" alt="Ảnh sản phẩm" />
+      </div>
+
+      <div class="modal-info">
+        <h2 id="modalTitle"></h2>
+        <p id="modalDesc"></p>
+        <p class="modalPrice" id="modalPrice"></p>
+        <button class="btn-buy"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</button>
+      </div>
     </div>
-    <div class="rank-card tilt-right">
-        <img src="mohinh3" alt="Luffy">
-        <span class="tag hot">Hot</span>
-        <div class="info-overlay">
-            <h3>Mô hình Luffy</h3>
-            <p>Mô hình Zoro Tam Long Haki 35cm.</p>
-            <p class="price">420.000₫</p>
-            <button><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</button>
+
+    <!-- ĐÁNH GIÁ -->
+    <div class="review-section">
+      <h4>Đánh giá sản phẩm:</h4>
+      <div class="review-input-row">
+        <div class="stars" id="starRating">
+          <i class="fa-solid fa-star" data-star="1"></i>
+          <i class="fa-solid fa-star" data-star="2"></i>
+          <i class="fa-solid fa-star" data-star="3"></i>
+          <i class="fa-solid fa-star" data-star="4"></i>
+          <i class="fa-solid fa-star" data-star="5"></i>
         </div>
+        <textarea id="reviewComment" placeholder="Nhận xét của bạn..."></textarea>
+      </div>
+      <button class="btn-submit-review" onclick="submitReview()">Gửi Đánh Giá</button>
+      <div class="all-reviews">
+        <h4>Nhận xét:</h4>
+        <div id="reviewList">Chưa có đánh giá nào.</div>
+      </div>
     </div>
-    <div class="rank-card tilt-left">
-        <img src="mohinh4" alt="Naruto">
-        <span class="tag">Mới</span>
-        <div class="info-overlay">
-            <h3>Mô hình Goku</h3>
-            <p>Mô hình DragonBall SonGoku SSJ3.</p>
-            <p class="price">380.000₫</p>
-            <button><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</button>
-        </div>
-    </div>
-    <div class="rank-card tilt-right">
-        <img src="mohinh5" alt="Sasuke">
-        <span class="tag hot">Hot</span>
-        <div class="info-overlay">
-            <h3>Mô hình Sasuke</h3>
-            <p>Mô Hình Uchiha Sasuke.</p>
-            <p class="price">420.000₫</p>
-            <button><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</button>
-        </div>
-    </div>
+  </div>
 </div>
 
 
 
-
-
-    <!-- Modal chi tiết sản phẩm -->
-    <div id="productModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <img id="modalImg" src="" alt="Ảnh sản phẩm">
-            <h2 id="modalTitle"></h2>
-            <p id="modalDesc"></p>
-            <p class="modalPrice" id="modalPrice"></p>
-            <button class="btn-buy"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</button>
-        </div>
-    </div>
 
     <!-- Footer -->
     <footer class="anime-footer">
-    <div class="footer-top">
-        <div class="logo">
-            <i></i> AnimeStore
-            <span>Mô hình Anime cực chất</span>
+        <div class="footer-top">
+            <div class="logo">
+                <i></i> AnimeStore
+                <span>Mô hình Anime cực chất</span>
+            </div>
+            <div class="social-icons">
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-discord"></i></a>
+            </div>
         </div>
-        <div class="social-icons">
-            <a href="#"><i class="fa-brands fa-facebook"></i></a>
-            <a href="#"><i class="fa-brands fa-tiktok"></i></a>
-            <a href="#"><i class="fa-brands fa-youtube"></i></a>
-            <a href="#"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#"><i class="fa-brands fa-discord"></i></a>
+        <div class="footer-links">
+            <a href="#">Hỏi-Đáp</a>
+            <a href="#">Chính sách bảo mật</a>
+            <a href="#">Điều khoản sử dụng</a>
+            <a href="#">Giới thiệu</a>
+            <a href="#">Liên hệ</a>
         </div>
-    </div>
+        <p class="footer-desc">
+            AnimeStore – Thế giới mô hình Anime: từ Naruto, One Piece, Dragon Ball đến Demon Slayer, Attack on Titan và nhiều bộ sưu tập hot khác.
+            Sản phẩm chất lượng cao, chi tiết sắc nét, phục vụ fan anime khắp Việt Nam.
+        </p>
+        <p class="footer-copy">&copy; 2025 AnimeStore | Liên hệ: support@animestore.vn</p>
+    </footer>
 
-    <div class="footer-links">
-        <a href="#">Hỏi-Đáp</a>
-        <a href="#">Chính sách bảo mật</a>
-        <a href="#">Điều khoản sử dụng</a>
-        <a href="#">Giới thiệu</a>
-        <a href="#">Liên hệ</a>
-    </div>
-
-    <p class="footer-desc">
-        AnimeStore – Thế giới mô hình Anime: từ Naruto, One Piece, Dragon Ball đến Demon Slayer, Attack on Titan và nhiều bộ sưu tập hot khác. 
-        Sản phẩm chất lượng cao, chi tiết sắc nét, phục vụ fan anime khắp Việt Nam.
-    </p>
-
-    <p class="footer-copy">&copy; 2025 AnimeStore | Liên hệ: support@animestore.vn</p>
-</footer>
-
+    <!-- Login Redirect -->
     <script>
-    document.querySelector('.member-btn').addEventListener('click', function() {
-        window.location.href = "login.html"; // Điều hướng sang trang đăng nhập
-    });
+        document.querySelector('.member-btn').addEventListener('click', function() {
+            window.location.href = "login.html";
+        });
     </script>
 
+    <!-- User Info -->
     <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-        const userInfo = document.getElementById("userInfo");
-        const loginBtn = document.getElementById("loginBtn");
+        document.addEventListener("DOMContentLoaded", function () {
+            const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+            const userInfo = document.getElementById("userInfo");
+            const loginBtn = document.getElementById("loginBtn");
 
-        if (currentUser) {
-            // Ẩn nút Thành Viên
-            loginBtn.style.display = "none";
+            if (currentUser) {
+                loginBtn.style.display = "none";
+                const greeting = document.createElement("span");
+                greeting.textContent = `Xin chào! ${currentUser.fullname}`;
+                greeting.style.marginRight = "10px";
 
-            // Hiển thị tên và nút đăng xuất
-            const greeting = document.createElement("span");
-            greeting.textContent = `Xin chào! ${currentUser.fullname}`;
-            greeting.style.marginRight = "10px";
+                const logoutBtn = document.createElement("button");
+                logoutBtn.textContent = "Đăng xuất";
+                logoutBtn.style.marginLeft = "10px";
+                logoutBtn.addEventListener("click", function () {
+                    localStorage.removeItem("currentUser");
+                    window.location.reload();
+                });
 
-            const logoutBtn = document.createElement("button");
-            logoutBtn.textContent = "Đăng xuất";
-            logoutBtn.style.marginLeft = "10px";
+                userInfo.appendChild(greeting);
+                userInfo.appendChild(logoutBtn);
+            }
+        });
+    </script>
 
-            logoutBtn.addEventListener("click", function () {
-                localStorage.removeItem("currentUser");
-                window.location.reload(); // Reload lại trang để cập nhật giao diện
+    <!-- ✅ Tìm kiếm movie-card & rank-card -->
+    <script>
+        document.getElementById("searchButton").addEventListener("click", searchProducts);
+        document.getElementById("searchInput").addEventListener("keyup", function (e) {
+            if (e.key === "Enter") searchProducts();
+        });
+
+        function searchProducts() {
+            const keyword = document.getElementById("searchInput").value.toLowerCase().trim();
+            const movieCards = document.querySelectorAll(".movie-card");
+            const rankCards = document.querySelectorAll(".rank-card");
+            let hasResult = false;
+
+            movieCards.forEach(card => {
+                const title = card.getAttribute("data-title").toLowerCase();
+                if (title.includes(keyword)) {
+                    card.style.display = "block";
+                    hasResult = true;
+                } else {
+                    card.style.display = "none";
+                }
             });
 
-            userInfo.appendChild(greeting);
-            userInfo.appendChild(logoutBtn);
+            rankCards.forEach(card => {
+                const title = card.getAttribute("data-title").toLowerCase();
+                if (title.includes(keyword)) {
+                    card.style.display = "flex";
+                    hasResult = true;
+                } else {
+                    card.style.display = "none";
+                }
+            });
+
+            if (!hasResult) {
+                alert("Không tìm thấy sản phẩm nào.");
+            }
         }
-    });
+
+        // ====================== THÊM VÀO GIỎ HÀNG TỪ RANK CARD ======================
+document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+  button.addEventListener('click', function () {
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    if (!currentUser) {
+      alert("Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng.");
+      return;
+    }
+
+    const title = this.getAttribute('data-title');
+    const price = parseInt(this.getAttribute('data-price'));
+    const image = this.getAttribute('data-image');
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const existing = cart.find(item => item.title === title);
+
+    if (existing) {
+      existing.quantity += 1;
+    } else {
+      cart.push({ title, price, image, quantity: 1 });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCartCount();
+    alert("Đã thêm vào giỏ hàng!");
+  });
+});
+
+    // ====================== CẬP NHẬT SỐ LƯỢNG TRÊN HEADER ======================
+    function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const total = cart.reduce((sum, item) => sum + item.quantity, 0);
+    document.getElementById("cartCount").innerText = total;
+    }
+
+    // Khởi động khi load trang
+    document.addEventListener("DOMContentLoaded", updateCartCount);
+
+    // Toggle giỏ hàng
+function toggleCart(show) {
+  document.getElementById("cartPopup").style.display = show ? "block" : "none";
+  if (show) renderCart();
+}
+
+// Gắn nút mở giỏ hàng
+document.getElementById("openCartBtn").addEventListener("click", function () {
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  if (!currentUser) {
+    alert("Bạn cần đăng nhập để xem giỏ hàng.");
+    return;
+  }
+  toggleCart(true);
+});
+
+// In giỏ hàng ra giao diện
+function renderCart() {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const cartItems = document.getElementById("cartItems");
+  const cartTotal = document.getElementById("cartTotal");
+  cartItems.innerHTML = "";
+  let total = 0;
+
+  if (cart.length === 0) {
+    cartItems.innerHTML = "<p>Giỏ hàng trống.</p>";
+    cartTotal.innerHTML = "";
+    return;
+  }
+
+  cart.forEach((item, index) => {
+    total += item.price * item.quantity;
+    const div = document.createElement("div");
+    div.className = "cart-item";
+    div.innerHTML = `
+      <span>${item.title} (${item.price.toLocaleString()}₫)</span>
+      <div>
+        <button onclick="changeQty(${index}, -1)">-</button>
+        <span>${item.quantity}</span>
+        <button onclick="changeQty(${index}, 1)">+</button>
+        <button onclick="removeItem(${index})">X</button>
+      </div>`;
+    cartItems.appendChild(div);
+  });
+
+  cartTotal.innerHTML = `<h3>Tổng tiền: ${total.toLocaleString()}₫</h3>`;
+}
+
+function changeQty(index, delta) {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  cart[index].quantity += delta;
+  if (cart[index].quantity <= 0) cart.splice(index, 1);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  updateCartCount();
+  renderCart();
+}
+
+function removeItem(index) {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  cart.splice(index, 1);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  updateCartCount();
+  renderCart();
+}
+
+
+// Thêm vào giỏ hàng (gọi từ các nút button)
+function addToCart(title, price) {
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  if (!currentUser) {
+    alert("Bạn cần đăng nhập để thêm sản phẩm vào giỏ.");
+    return;
+  }
+
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const existing = cart.find(item => item.title === title);
+  if (existing) {
+    existing.quantity++;
+  } else {
+    cart.push({ title, price, quantity: 1 });
+  }
+  localStorage.setItem("cart", JSON.stringify(cart));
+  updateCartCount();
+  alert("Đã thêm vào giỏ hàng!");
+}
+
+// Hóa đơn
+function printInvoice() {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  if (cart.length === 0) {
+    alert("Giỏ hàng trống.");
+    return;
+  }
+
+  const tbody = document.getElementById("invoiceItems");
+  const totalEl = document.getElementById("invoiceTotal");
+  const timeEl = document.getElementById("invoiceTime");
+  const qrEl = document.getElementById("qrImage");
+
+  tbody.innerHTML = "";
+  let total = 0;
+
+  cart.forEach((item, index) => {
+    const itemTotal = item.price * item.quantity;
+    total += itemTotal;
+
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td style="border: 1px solid #ccc; padding: 8px; text-align: center;">${index + 1}</td>
+      <td style="border: 1px solid #ccc; padding: 8px;">${item.title}</td>
+      <td style="border: 1px solid #ccc; padding: 8px; text-align: right;">${item.price.toLocaleString()}₫</td>
+      <td style="border: 1px solid #ccc; padding: 8px; text-align: center;">${item.quantity}</td>
+      <td style="border: 1px solid #ccc; padding: 8px; text-align: right;">${itemTotal.toLocaleString()}₫</td>
+    `;
+    tbody.appendChild(row);
+  });
+
+  totalEl.innerText = `Tổng cộng: ${total.toLocaleString()}₫`;
+  timeEl.innerText = new Date().toLocaleString("vi-VN");
+
+  // Sinh mã QR từ VietQR
+const qrURL = `https://img.vietqr.io/image/BIDV-8813126063-compact2.png?amount=${total}&addInfo=AnimeStore%20Invoice`;
+qrEl.src = qrURL;
+
+
+  // Mở cửa sổ in
+  const printWindow = window.open("", "PRINT", "height=800,width=900");
+  printWindow.document.write(`
+    <html>
+    <head>
+      <title>Hóa Đơn AnimeStore</title>
+      <style>body { font-family: Arial; text-align: center; }</style>
+    </head>
+    <body>
+      ${document.getElementById("invoiceContent").outerHTML}
+    </body>
+    </html>
+  `);
+  printWindow.document.close();
+  printWindow.focus();
+  printWindow.print();
+  printWindow.close();
+}
+
+
+
+
 </script>
 
+    
 
+    <!-- File script khác -->
     <script src="script.js"></script>
+
+<!-- 🛒 POPUP GIỎ HÀNG -->
+<div id="cartPopup" class="cart-popup">
+  <div class="cart-content">
+    <span class="close-cart" onclick="toggleCart(false)">&times;</span>
+    <h2>🛒 Giỏ Hàng Của Bạn</h2>
+    <div id="cartItems"></div>
+    <div id="cartTotal"></div>
+    <button class="btn-buy" onclick="printInvoice()">In Hóa Đơn</button>
+  </div>
+</div>
+
+<!-- 🧾 HÓA ĐƠN BÁN HÀNG -->
+<div id="invoicePopup" style="display: none;">
+  <div id="invoiceContent" style="width: 700px; margin: 0 auto; font-family: Arial; padding: 20px; text-align: center;">
+    <h2 style="margin-bottom: 5px;">🧾 HÓA ĐƠN BÁN HÀNG</h2>
+    <p style="margin: 0;">Anime Store - Mô hình Anime cực chất</p>
+    <small>Hotline: 0909.888.999 | Email: support@animestore.vn</small>
+
+    <hr style="margin: 20px 0;">
+
+    <p><strong>Thời gian:</strong> <span id="invoiceTime"></span></p>
+
+    <table style="width: 100%; border-collapse: collapse; margin: 20px auto;">
+      <thead>
+        <tr style="background: #f2f2f2;">
+          <th style="border: 1px solid #ccc; padding: 8px;">STT</th>
+          <th style="border: 1px solid #ccc; padding: 8px;">Tên sản phẩm</th>
+          <th style="border: 1px solid #ccc; padding: 8px;">Đơn giá</th>
+          <th style="border: 1px solid #ccc; padding: 8px;">Số lượng</th>
+          <th style="border: 1px solid #ccc; padding: 8px;">Thành tiền</th>
+        </tr>
+      </thead>
+      <tbody id="invoiceItems"></tbody>
+    </table>
+
+    <h3 style="margin-top: 20px;" id="invoiceTotal"></h3>
+
+    <div style="margin-top: 30px;">
+      <p><strong>💳 Quét mã QR để thanh toán:</strong></p>
+      <img id="qrImage" src="${qrURL}" alt="QR BIDV" style="width:220px; margin:10px auto;" />
+      <p><small>BIDV - Dương Quang Luận - STK: 8813126063</small></p>
+    </div>
+
+    <p style="font-size: 13px; margin-top: 30px;">Cảm ơn bạn đã mua hàng tại <strong>Anime Store</strong>!</p>
+  </div>
+</div>
+
+
+
+
+
 </body>
 </html>
