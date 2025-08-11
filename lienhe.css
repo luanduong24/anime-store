@@ -1,0 +1,280 @@
+/* =========================================================
+   LIÊN HỆ – CSS (đồng bộ với style.css - index)
+   Mobile-first • Glass UI • Spacing chuẩn • Animation nhẹ
+   ========================================================= */
+
+/* --- nhịp khoảng cách dùng chung --- */
+:root{
+  --space-1: 8px;
+  --space-2: 12px;
+  --space-3: 16px;
+  --space-4: 20px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 40px;
+
+  --radius-md: 12px;
+  --radius-lg: 18px;
+
+  --glass-b: 1px solid rgba(255,255,255,.08);
+  --glass-bg: rgba(255,255,255,.03);
+}
+
+/* ---------- khối chính ---------- */
+.contact-main{
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding: var(--space-6) var(--gutter) calc(var(--space-7) + 32px); /* tách rõ footer */
+  line-height: 1.65;
+}
+
+/* ---------- HERO ---------- */
+.contact-hero{
+  position: relative;
+  overflow: hidden;
+  border: var(--glass-b);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6) var(--space-4);
+  margin-bottom: var(--space-6);
+  background:
+    radial-gradient(900px 280px at 50% -120px, rgba(124,92,255,.12), transparent 60%),
+    linear-gradient(180deg,#0e1324,#0b0f1e);
+  box-shadow: var(--shadow);
+  text-align: center;
+  isolation: isolate;
+}
+.contact-hero::after{
+  content:"";
+  position:absolute; inset:0;
+  background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,.12) 35%, transparent 70%);
+  transform: translateX(-120%);
+  animation: sweep 6s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes sweep{
+  0%,20%{ transform: translateX(-120%) }
+  45%,55%{ transform: translateX(120%) }
+  100%{ transform: translateX(120%) }
+}
+.contact-hero h1{
+  margin:0 0 6px;
+  font-size:1.6rem; font-weight:900;
+  background: linear-gradient(90deg,#fbbf24,#f59e0b);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.contact-hero p{ margin:0; color:rgba(255,255,255,.78) }
+
+/* ---------- lưới trái/phải ---------- */
+.contact-grid{
+  display:grid;
+  row-gap: var(--space-6);
+  column-gap: var(--space-6);
+}
+@media (min-width:768px){
+  .contact-grid{ grid-template-columns:1fr 1fr }
+}
+@media (min-width:1024px){
+  .contact-grid{ grid-template-columns:1.05fr 1.25fr }
+}
+
+/* ---------- card chung ---------- */
+.contact-card,
+.map-card{
+  background:#0f1426;
+  border: var(--glass-b);
+  border-radius: var(--radius-lg);
+  padding: calc(var(--space-5) + 2px);
+  box-shadow: var(--shadow);
+  transform: translateY(0);
+  transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+  animation: fadeUp .55s ease both;
+}
+.contact-left > * + *,
+.contact-right > * + *{ margin-top: var(--space-6) }
+
+.contact-card:hover,
+.map-card:hover{
+  transform: translateY(-4px);
+  border-color: rgba(255,255,255,.16);
+  box-shadow: 0 18px 36px rgba(0,0,0,.42);
+}
+@keyframes fadeUp{
+  from{ opacity:0; transform:translateY(12px) }
+  to{ opacity:1; transform:translateY(0) }
+}
+
+.contact-card h2,
+.map-card h3{
+  margin:0 0 var(--space-4);
+  font-size:1.1rem; font-weight:800; letter-spacing:.2px;
+}
+
+/* ---------- thông tin cửa hàng (ICON SÁT CHỮ) ---------- */
+.info-list{
+  list-style:none; margin:0; padding:0;
+  display:grid; gap: var(--space-4);
+}
+
+/* dùng flex + gap nhỏ để icon sát chữ, gọn mắt */
+.info-list li{
+  display:flex;
+  align-items:center;
+  gap: 10px;                       /* icon sát text */
+  padding: 14px 16px;               /* gọn chiều cao item */
+  border-radius: var(--radius-md);
+  background: var(--glass-bg);
+  border: 1px solid rgba(255,255,255,.06);
+}
+
+/* icon gọn gàng, đồng nhất chiều ngang để chữ thẳng hàng */
+.info-list i{
+  width: 28px; height: 28px;
+  display:grid; place-items:center;
+  border-radius: 8px;
+  background:#121833;
+  border: 1px solid rgba(255,255,255,.10);
+  color: var(--primary-2);
+  font-size: 14px;
+  flex: 0 0 28px;                  /* không co giãn */
+}
+
+/* nhãn & giá trị */
+.info-list span{ color:#b9c2d9; margin-right: 12px } /* nhãn hơi cách giá trị */
+.info-list a{ color:var(--text); text-decoration: underline dotted rgba(255,255,255,.35) }
+.info-list strong{ color:var(--text) }
+
+/* ---------- nút & chip ---------- */
+.btn{
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--primary); color:#fff;
+  padding: calc(var(--space-3) + 2px) var(--space-4);
+  border-radius: var(--radius-md);
+  border:0;
+  transition: transform .08s ease, filter .18s ease;
+}
+.btn:hover{ filter: brightness(1.07) }
+.btn:active{ transform: translateY(1px) }
+.btn.ghost{
+  background:#15192a; color:#e9eef9;
+  border:1px solid rgba(255,255,255,.12);
+}
+.contact-actions{
+  margin-top: var(--space-4);
+  display:flex; gap: var(--space-3); flex-wrap:wrap;
+}
+
+.map-actions{ display:flex; flex-wrap:wrap; gap: var(--space-2) }
+.chip{
+  display:inline-flex; align-items:center; gap:8px;
+  padding: var(--space-2) var(--space-3);
+  border-radius:999px;
+  background:#121833; color:#eaf0ff;
+  border: 1px solid rgba(255,255,255,.08);
+  transition: transform .12s ease, filter .18s ease;
+}
+.chip.primary{
+  background: linear-gradient(135deg,#ef4444,#f59e0b);
+  color:#1b1120; font-weight:800; border:none;
+}
+.chip:hover{ transform: translateY(-1px); filter:brightness(1.05) }
+
+/* ---------- bản đồ ---------- */
+.map-card .map-header{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:10px; flex-wrap:wrap;
+  margin-bottom: var(--space-4);
+}
+.map-card .map-embed{
+  border-radius:14px; overflow:hidden;
+  border:1px solid rgba(255,255,255,.06);
+  background: rgba(255,255,255,.02);
+}
+#gmapFrame{ width:100%; height:320px; border:0 }
+@media (min-width:768px){ #gmapFrame{ height:380px } }
+@media (min-width:1024px){ #gmapFrame{ height:440px } }
+.map-note{ margin-top: var(--space-4); color:#9facc7; font-size:.92rem }
+
+/* ---------- form ---------- */
+.contact-right form{ margin-top:4px }
+.form-row{ display:grid; gap: var(--space-4); grid-template-columns:1fr }
+@media (min-width:768px){ .form-row{ grid-template-columns:1fr 1fr } }
+
+.form-field{ display:grid; gap: var(--space-3); margin-bottom: var(--space-4) }
+.form-field label{ font-size:.95rem; color:#dfe6f7; font-weight:600 }
+
+.form-field input,
+.form-field select,
+.form-field textarea{
+  background:#0e1017; color:var(--text);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius: var(--radius-md);
+  padding: 10px 12px; outline:0;
+  transition: border-color .18s ease, box-shadow .18s ease, transform .08s ease;
+}
+.form-field textarea{ resize:vertical }
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus{
+  border-color: rgba(124,92,255,.55);
+  box-shadow: 0 0 0 3px rgba(124,92,255,.18);
+}
+
+.err{ min-height:16px; color:var(--danger); font-size:.85rem }
+
+.form-actions{
+  display:flex; gap: var(--space-3); flex-wrap:wrap;
+  margin-top: var(--space-4);
+  padding-top: var(--space-3);
+}
+
+.form-status{
+  margin-top: var(--space-3);
+  font-size:.95rem;
+  padding:8px 10px; border-radius:10px;
+  background: var(--glass-bg);
+  border: 1px solid rgba(255,255,255,.06);
+}
+.form-status.ok{ color:var(--ok); border-color: rgba(34,197,94,.35) }
+.form-status.error{ color:var(--danger); border-color: rgba(255,90,95,.35) }
+
+/* ---------- FAQ (details) ---------- */
+details{
+  border: var(--glass-b);
+  border-radius: var(--radius-md);
+  background: var(--glass-bg);
+  padding: var(--space-4);
+  margin: var(--space-4) 0;
+  transition: border-color .2s ease, background .2s ease;
+}
+details:hover{ border-color: rgba(255,255,255,.14) }
+
+summary{
+  cursor:pointer; list-style:none;
+  font-weight:800; color:#e9eef9;
+  display:flex; align-items:center; gap:10px;
+  min-height:42px; padding-right:8px;
+}
+/* ẩn marker mặc định */
+summary::-webkit-details-marker{ display:none }
+summary::marker{ content:'' }
+/* mũi tên CSS (không phụ thuộc font glyph) */
+summary::before{
+  content:''; width:10px; height:10px;
+  border-right:2px solid #e9eef9;
+  border-bottom:2px solid #e9eef9;
+  transform: rotate(-45deg);
+  transition: transform .2s ease;
+  margin-right:10px;
+}
+details[open] summary::before{ transform: rotate(45deg) }
+details p{ color:#b9c2d9; margin: var(--space-3) 0 0 }
+
+/* ---------- footer spacing an toàn ---------- */
+.anime-footer{ margin-top: 40px }
+
+/* ---------- prefers-reduced-motion ---------- */
+@media (prefers-reduced-motion: reduce){
+  .contact-card,.map-card,.contact-hero::after{ animation:none !important }
+  .btn,.chip{ transition:none !important }
+}

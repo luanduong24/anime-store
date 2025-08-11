@@ -1,0 +1,202 @@
+/* ================================
+   Bộ sưu tập – CSS (rewrite)
+   Thẳng hàng card + header tag
+   ================================ */
+
+/* Theme */
+:root{
+  --bg:#0c0d10; --bg-soft:#12141a; --card:#171923; --border:#222433;
+  --text:#e7e9ee; --muted:#9aa3b2; --primary:#7c5cff; --primary-2:#a58cff;
+  --accent:#ff6b6b; --success:#37d67a; --shadow:0 10px 30px rgba(0,0,0,.35);
+  --radius:18px;
+}
+
+html,body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,"Noto Sans";
+}
+
+.container{max-width:1200px;margin:0 auto;padding:0 16px}
+
+/* ---------- Buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.8rem 1.1rem;border-radius:12px;
+  background:linear-gradient(180deg,var(--primary),var(--primary-2));
+  border:1px solid rgba(255,255,255,.08);color:#fff;cursor:pointer;
+  transition:transform .15s,box-shadow .2s,filter .2s;box-shadow:var(--shadow);
+}
+.btn:hover{transform:translateY(-1px);filter:brightness(1.05)}
+.btn.ghost{background:transparent;border:1px solid var(--border);box-shadow:none;color:var(--text)}
+
+.btn-mini{
+  padding:.55rem .7rem;border-radius:10px;border:1px solid var(--border);
+  background:#1a1d27;color:var(--text);display:inline-flex;align-items:center;
+  gap:.45rem;cursor:pointer
+}
+.btn-mini.outline{background:transparent}
+.btn-mini.is-on{border-color:var(--primary);box-shadow:inset 0 0 0 1px rgba(124,92,255,.35)}
+.btn-mini:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+
+/* ---------- Page header ---------- */
+.collection-header{text-align:center;padding:48px 0 24px}
+.collection-header h1{font-size:clamp(26px,3vw,40px);margin:0 0 .5rem}
+.collection-subtitle{color:var(--primary-2);margin:0 0 .5rem}
+.collection-intro{color:var(--muted);margin:0}
+
+/* ---------- Toolbar ---------- */
+.toolbar{
+  margin:24px auto 10px;display:flex;align-items:center;justify-content:space-between;
+  gap:12px;flex-wrap:wrap
+}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px}
+.chip{
+  border:1px solid var(--border);background:var(--bg-soft);color:var(--text);
+  padding:.55rem .9rem;border-radius:999px;cursor:pointer;white-space:nowrap;
+  transition:background .2s,border-color .2s,transform .12s
+}
+.chip:hover{transform:translateY(-1px)}
+.chip.is-active{
+  background:#1a1d27;border-color:var(--primary);
+  box-shadow:inset 0 0 0 1px rgba(124,92,255,.25),0 6px 20px rgba(124,92,255,.15)
+}
+.sort{display:inline-flex;align-items:center;gap:8px;color:var(--muted)}
+.sort select{
+  background:#10121a;border:1px solid var(--border);color:var(--text);
+  padding:.5rem .75rem;border-radius:10px
+}
+
+/* ---------- Series block ---------- */
+.series-block{
+  background:linear-gradient(180deg,#0e1016,#0b0d13);
+  border:1px solid var(--border); border-radius:var(--radius);
+  margin:20px auto 28px; box-shadow:var(--shadow); overflow:clip;
+}
+
+/* Header: title + tags cùng hàng, không đè nhau */
+.series-head{
+  display:flex; align-items:center; gap:12px; padding:18px 18px 10px;
+  border-bottom:1px solid var(--border); position:relative; z-index:2; flex-wrap:wrap;
+}
+.series-head h2{
+  display:flex; align-items:center; gap:10px; margin:0; font-size:22px; flex:0 0 auto;
+}
+.series-head h2 img{
+  width:36px;height:36px;object-fit:cover;border-radius:8px;border:1px solid var(--border);
+}
+.head-tags{
+  display:flex; align-items:center; gap:10px; flex-wrap:wrap; min-width:0; margin-left:12px;
+  isolation:isolate;
+}
+.tag{
+  display:inline-flex; align-items:center; justify-content:center; height:26px;
+  padding:0 .7rem; line-height:1; border-radius:999px; background:#1c2030;
+  border:1px solid var(--border); color:var(--muted); white-space:nowrap; flex:0 0 auto;
+  position:relative; z-index:1;
+}
+.tag.hot{
+  background:#2a1b27; color:#ff9bc8; border-color:#3a2132;
+  box-shadow:inset 0 0 0 1px rgba(255,155,200,.25),0 4px 14px rgba(255,155,200,.18);
+}
+
+/* Body */
+.series-body{padding:16px}
+
+/* Overview 2 cột (ảnh + info) */
+.series-overview{
+  display:grid; grid-template-columns:minmax(0,520px) 1fr; gap:18px;
+}
+.col-image,.col-info{
+  background:#0f121a;border:1px solid var(--border);border-radius:16px;padding:12px
+}
+.hero-frame{border-radius:14px;overflow:hidden;border:1px solid var(--border);aspect-ratio:16/10;background:#0a0c12}
+.hero{width:100%;height:100%;object-fit:cover;display:block}
+.thumbs{display:flex;gap:8px;margin-top:12px}
+.thumb{
+  border:1px solid var(--border);border-radius:10px;padding:4px;background:#10131b;
+  cursor:pointer;transition:transform .15s,border-color .2s
+}
+.thumb img{width:56px;height:56px;object-fit:cover;border-radius:8px;display:block}
+.thumb.is-active{border-color:var(--primary);transform:translateY(-1px)}
+
+.col-info .desc{margin-top:0}
+.meta{list-style:none;padding:0;margin:12px 0;display:grid;gap:8px;color:var(--muted)}
+.meta li{display:flex;gap:8px;align-items:center}
+.meta span{color:var(--text);margin-left:4px}
+.highlights h3{margin:14px 0 8px;font-size:16px}
+.highlights ul{margin:0;padding-left:18px;color:var(--muted)}
+.cta-row{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
+
+/* ---------- Products grid ---------- */
+.product-block{margin-top:16px}
+.block-title{font-size:18px;margin:0 0 12px;display:flex;align-items:center;gap:8px}
+
+.product-grid{
+  display:grid; gap:14px; grid-template-columns:repeat(4,minmax(0,1fr));
+  align-items:stretch; /* ép các item cùng chiều cao hàng */
+}
+
+/* Card = grid 5 hàng để phần giá & nút dính đáy */
+.p-card{
+  background:var(--card); border:1px solid var(--border); border-radius:16px; overflow:hidden;
+  transition:transform .15s,box-shadow .25s,border-color .2s;
+  display:grid;
+  grid-template-rows:
+    auto   /* .imgwrap     */
+    auto   /* h4           */
+    1fr    /* .spec        */
+    auto   /* .price-row   */
+    auto;  /* .card-actions*/
+  height:100%;
+}
+.p-card:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(0,0,0,.5);border-color:#30344a}
+
+.imgwrap{position:relative;aspect-ratio:4/3;background:#0a0c12;overflow:hidden}
+.imgwrap img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* Badge */
+.badge{
+  position:absolute;top:10px;left:10px;background:var(--success);color:#08110c;
+  font-weight:600;font-size:12px;padding:.25rem .45rem;border-radius:999px
+}
+.badge.alt{background:var(--accent);color:#2b0d0d}
+
+/* Title: chốt 2 dòng để đều chiều cao */
+.p-card h4{
+  font-size:16px;margin:10px 10px 6px; line-height:1.3;
+  min-height:2.6em; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+
+/* Spec chiếm phần co giãn */
+.spec{list-style:none;padding:0 10px;margin:0 0 8px;color:var(--muted);display:grid;gap:2px;min-height:0}
+
+/* Giá & rating */
+.price-row{
+  display:flex;align-items:center;justify-content:space-between;padding:0 10px 10px;gap:8px;
+  align-self:end; /* luôn ở cuối card */
+}
+.price{color:#e9ff9a;font-weight:700}
+.rating{color:#ffd46f}
+
+/* Nút hành động dính đáy */
+.card-actions{display:flex;gap:8px;padding:0 10px 12px;align-self:end}
+
+/* ---------- Reveal on scroll ---------- */
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1024px){
+  .series-overview{grid-template-columns:1fr}
+  .product-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (max-width:720px){
+  .toolbar{flex-direction:column;align-items:stretch;gap:10px}
+  .product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .series-head{flex-direction:column;align-items:flex-start;gap:6px}
+}
+@media (max-width:420px){
+  .product-grid{grid-template-columns:1fr}
+}

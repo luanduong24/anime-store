@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Liên Hệ | Anime Store</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- CSS chung site -->
+  <link rel="stylesheet" href="style.css" />
+  <!-- CSS riêng trang Liên Hệ -->
+  <link rel="stylesheet" href="lienhe.css" />
+  <script src="common-cart.js" defer></script>
+  <script src="common-auth.js"></script>
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+    <!-- ========== HEADER ========== -->
+  <header class="shop-header">
+  <div class="header-container">
+    <!-- Hàng 1: Logo -->
+    <div class="header-top">
+      <a href="index.html" class="logo" aria-label="Anime Store">
+        <span class="logo-title">Anime Store</span>
+        <small class="logo-tagline">Mô hình Anime cực chất</small>
+      </a>
+    </div>
+   <!-- Hàng 2: Toggle | Nav (wrap) | Actions -->
+  <div class="header-bottom">
+  <button class="nav-toggle" id="navToggle" aria-label="Mở menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+  <!-- Bọc nav trong .nav-wrap -->
+  <div class="nav-wrap">
+    <nav class="main-nav" aria-label="Điều hướng chính" id="mainNav">
+      <ul class="menu" id="mainMenu">
+        <li><a href="index.html">Trang Chủ</a></li>
+        <li class="dropdown">
+          <button class="drop-trigger">Danh Mục <i class="fa-solid fa-angle-down"></i></button>
+          <ul class="dropdown-menu">
+            <li><a href="danhmuc.html" onclick="localStorage.setItem('tab','naruto')">Naruto</a></li>
+            <li><a href="danhmuc.html" onclick="localStorage.setItem('tab','onepiece')">One Piece</a></li>
+            <li><a href="danhmuc.html" onclick="localStorage.setItem('tab','dragonball')">Dragon Ball</a></li>
+            <li><a href="danhmuc.html" onclick="localStorage.setItem('tab','khac')">Khác</a></li>
+          </ul>
+        </li>
+        <li><a href="khuyenmai.html">Khuyến Mãi</a></li>
+        <li><a href="bosuutap.html">Bộ Sưu Tập</a></li>
+        <li><a href="lienhe.html">Liên Hệ</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="header-actions">
+    <div id="userInfo"></div>
+    <button class="cart-btn" id="openCartBtn" aria-haspopup="dialog" aria-controls="cartPopup">
+      <i class="fa-solid fa-cart-shopping"></i> Giỏ Hàng (<span id="cartCount">0</span>)
+    </button>
+    <button class="member-btn" id="loginBtn">
+      <i class="fa-solid fa-user"></i> Thành Viên
+    </button>
+  </div>
+  </div>
+  </div>
+</header>
+
+
+  <!-- MAIN -->
+  <main class="contact-main" aria-label="Liên hệ Anime Store">
+    <section class="contact-hero">
+      <h1>Liên hệ với Anime Store</h1>
+      <p>Hỗ trợ tư vấn, hợp tác kinh doanh, phản hồi dịch vụ — chúng tôi luôn sẵn sàng!</p>
+    </section>
+
+    <section class="contact-grid">
+      <!-- Cột trái: Thông tin & Map -->
+      <aside class="contact-left">
+        <div class="contact-card">
+          <h2>Thông tin cửa hàng</h2>
+          <ul class="info-list">
+            <li><i class="fa-solid fa-phone"></i> <span>Hotline:</span> <a href="tel:0939999888">0939 999 888</a></li>
+            <li><i class="fa-solid fa-envelope"></i> <span>Email:</span> <a href="mailto:support@animestore.vn">support@animestore.vn</a></li>
+            <li><i class="fa-solid fa-location-dot"></i> <span>Địa chỉ:</span> <strong id="storeAddress">123 Anime Street, Q.1, TP.HCM</strong></li>
+            <li><i class="fa-solid fa-clock"></i> <span>Giờ mở cửa:</span> 9:00 – 21:00 (T2–CN)</li>
+          </ul>
+
+          <div class="contact-actions">
+            <button id="btnCopyAddr" class="btn ghost"><i class="fa-regular fa-copy"></i> Sao chép địa chỉ</button>
+            <a id="btnDirections" class="btn" target="_blank" rel="noopener">
+              <i class="fa-solid fa-map"></i> Chỉ đường
+            </a>
+          </div>
+        </div>
+
+        <div class="map-card">
+          <div class="map-header">
+            <h3><i class="fa-solid fa-map-location-dot"></i> Bản đồ</h3>
+            <div class="map-actions">
+              <a id="btnOpenMap" class="chip" target="_blank" rel="noopener"><i class="fa-brands fa-google"></i> Mở Google Maps</a>
+              <a id="btnReview" class="chip primary" target="_blank" rel="noopener"><i class="fa-solid fa-star"></i> Đánh giá trên Google</a>
+            </div>
+          </div>
+
+          <!-- Map embed KHÔNG cần API key: dùng query địa chỉ -->
+          <div class="map-embed">
+            <iframe id="gmapFrame" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+          </div>
+
+          <p class="map-note">*Bạn có thể phóng to/thu nhỏ, xem hình ảnh vệ tinh, hoặc bật chỉ đường trong Google Maps.</p>
+        </div>
+      </aside>
+
+      <!-- Cột phải: Form -->
+      <section class="contact-right">
+        <div class="contact-card">
+          <h2>Gửi liên hệ</h2>
+          <form id="contactForm" novalidate>
+            <div class="form-row">
+              <div class="form-field">
+                <label for="name">Họ tên *</label>
+                <input type="text" id="name" required placeholder="Nguyễn Văn A" />
+                <small class="err" data-for="name"></small>
+              </div>
+              <div class="form-field">
+                <label for="email">Email *</label>
+                <input type="email" id="email" required placeholder="you@email.com" />
+                <small class="err" data-for="email"></small>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-field">
+                <label for="phone">Số điện thoại</label>
+                <input type="tel" id="phone" placeholder="09xx xxx xxx" />
+              </div>
+              <div class="form-field">
+                <label for="topic">Chủ đề *</label>
+                <select id="topic" required>
+                  <option value="">-- Chọn --</option>
+                  <option value="tuvan">Tư vấn sản phẩm</option>
+                  <option value="donhang">Vấn đề đơn hàng</option>
+                  <option value="hopTac">Hợp tác kinh doanh</option>
+                  <option value="khac">Khác</option>
+                </select>
+                <small class="err" data-for="topic"></small>
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label for="message">Nội dung *</label>
+              <textarea id="message" required rows="6" placeholder="Mô tả chi tiết nhu cầu/vấn đề của bạn..."></textarea>
+              <small class="err" data-for="message"></small>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn"><i class="fa-solid fa-paper-plane"></i> Gửi liên hệ</button>
+              <button type="reset" class="btn ghost"><i class="fa-solid fa-rotate-left"></i> Làm mới</button>
+            </div>
+
+            <p id="formStatus" class="form-status" aria-live="polite"></p>
+          </form>
+        </div>
+
+        <div class="contact-card">
+          <h2>Câu hỏi thường gặp</h2>
+          <details>
+            <summary>Shop có hỗ trợ giao hàng COD không?</summary>
+            <p>Có. Chúng tôi hỗ trợ COD toàn quốc cho đơn ≤ 2.000.000₫.</p>
+          </details>
+          <details>
+            <summary>Thời gian giao hàng dự kiến?</summary>
+            <p>2–5 ngày làm việc tùy khu vực.</p>
+          </details>
+          <details>
+            <summary>Chính sách đổi trả thế nào?</summary>
+            <p>Đổi trả trong 7 ngày nếu sản phẩm lỗi do nhà sản xuất (giữ nguyên hộp & phụ kiện).</p>
+          </details>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <!-- FOOTER giữ nguyên -->
+  <footer class="anime-footer">
+    <div class="footer-top">
+      <div class="logo">AnimeStore <span>Mô hình Anime cực chất</span></div>
+      <div class="social-icons">
+        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+        <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#"><i class="fa-brands fa-discord"></i></a>
+      </div>
+    </div>
+    <div class="footer-links">
+      <a href="#">Hỏi-Đáp</a>
+      <a href="#">Chính sách bảo mật</a>
+      <a href="#">Điều khoản sử dụng</a>
+      <a href="#">Giới thiệu</a>
+      <a href="#">Liên hệ</a>
+    </div>
+    <p class="footer-desc">
+      AnimeStore – Thế giới mô hình Anime: từ Naruto, One Piece, Dragon Ball đến Demon Slayer, Attack on Titan và nhiều bộ sưu tập hot khác.
+    </p>
+    <p class="footer-copy">&copy; 2025 AnimeStore | Liên hệ: support@animestore.vn</p>
+  </footer>
+
+  <!-- JS nhỏ gọn cho trang Liên Hệ -->
+  <script>
+  // ===== Cấu hình địa chỉ & Place ID =====
+  const STORE_ADDR = document.getElementById('storeAddress')?.textContent?.trim()
+                    || "123 Anime Street, Q.1, TP.HCM";
+  const PLACE_ID = "THAY_PLACE_ID_CUA_BAN_O_DAY"; // <-- điền Place ID thật vào đây
+  const MAP_QUERY = encodeURIComponent(STORE_ADDR);
+
+  // ===== Google Maps iframe (không cần API key) =====
+  const gmapFrame = document.getElementById('gmapFrame');
+  if (gmapFrame) {
+    gmapFrame.src = `https://www.google.com/maps?q=${MAP_QUERY}&output=embed`;
+  }
+
+  // ===== Link mở Google Maps / Chỉ đường =====
+  const btnOpenMap = document.getElementById('btnOpenMap');
+  if (btnOpenMap) btnOpenMap.href = `https://www.google.com/maps/search/?api=1&query=${MAP_QUERY}`;
+
+  const btnDirections = document.getElementById('btnDirections');
+  if (btnDirections) btnDirections.href = `https://www.google.com/maps/dir/?api=1&destination=${MAP_QUERY}`;
+
+  // ===== Nút "Đánh giá trên Google" (mở form review) =====
+  const btnReview = document.getElementById('btnReview');
+  if (btnReview) {
+    // Link chính chủ để mở hộp thoại "Viết đánh giá"
+    const reviewUrlByPlaceId = (pid) =>
+      `https://search.google.com/local/writereview?placeid=${encodeURIComponent(pid)}`;
+
+    if (PLACE_ID && PLACE_ID !== "THAY_PLACE_ID_CUA_BAN_O_DAY") {
+      btnReview.href = reviewUrlByPlaceId(PLACE_ID);
+      btnReview.title = "Mở form Viết đánh giá cho địa điểm của bạn trên Google";
+    } else {
+      // Fallback: mở trang địa điểm theo địa chỉ để khách tự bấm "Viết bài đánh giá"
+      btnReview.href = `https://www.google.com/maps/search/?api=1&query=${MAP_QUERY}`;
+      btnReview.title = "Thiếu Place ID: mở trang Maps để khách tự viết đánh giá";
+      // Gợi ý admin (không ảnh hưởng khách)
+      console.warn("Bạn chưa điền PLACE_ID. Điền PLACE_ID để mở trực tiếp form review.");
+    }
+  }
+
+  // ===== Sao chép địa chỉ =====
+  const btnCopyAddr = document.getElementById('btnCopyAddr');
+  btnCopyAddr?.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(STORE_ADDR);
+      btnCopyAddr.innerHTML = '<i class="fa-solid fa-check"></i> Đã sao chép';
+      setTimeout(() => btnCopyAddr.innerHTML = '<i class="fa-regular fa-copy"></i> Sao chép địa chỉ', 1200);
+    } catch (e) {
+      btnCopyAddr.innerHTML = 'Không sao chép được';
+      setTimeout(() => btnCopyAddr.innerHTML = '<i class="fa-regular fa-copy"></i> Sao chép địa chỉ', 1200);
+    }
+  });
+
+  // ===== Form: validate + demo submit (mailto) =====
+  const form = document.getElementById('contactForm');
+  const status = document.getElementById('formStatus');
+
+  function setErr(id, msg) {
+    const el = document.querySelector(`.err[data-for="${id}"]`);
+    if (el) el.textContent = msg || "";
+  }
+  function clearErrs() {
+    ['name','email','topic','message'].forEach(id => setErr(id, ''));
+    status.textContent = "";
+    status.className = "form-status";
+  }
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    clearErrs();
+
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const topic = document.getElementById('topic').value;
+    const message = document.getElementById('message').value.trim();
+
+    let ok = true;
+    if (!name) { setErr('name', 'Vui lòng nhập họ tên'); ok = false; }
+    if (!email || !/^\S+@\S+\.\S+$/.test(email)) { setErr('email', 'Email không hợp lệ'); ok = false; }
+    if (!topic) { setErr('topic', 'Vui lòng chọn chủ đề'); ok = false; }
+    if (!message) { setErr('message', 'Vui lòng nhập nội dung'); ok = false; }
+
+    if (!ok) {
+      status.textContent = "Vui lòng kiểm tra lại các trường bắt buộc.";
+      status.classList.add('error');
+      return;
+    }
+
+    const subject = encodeURIComponent(`[Liên hệ] ${topic} - ${name}`);
+    const body = encodeURIComponent(`Họ tên: ${name}\nEmail: ${email}\nChủ đề: ${topic}\n\nNội dung:\n${message}`);
+    window.location.href = `mailto:support@animestore.vn?subject=${subject}&body=${body}`;
+
+    status.textContent = "Đã mở ứng dụng mail của bạn. Nếu không thấy, vui lòng gửi mail thủ công tới support@animestore.vn";
+    status.classList.add('ok');
+    form.reset();
+  });
+</script>
+</body>
+</html>

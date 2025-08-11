@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Khuyến Mãi | Anime Store</title>
+
+  <!-- CSS chung của site -->
+  <link rel="stylesheet" href="style.css" />
+  <!-- CSS riêng cho trang KM -->
+  <link rel="stylesheet" href="khuyenmai.css" />
+  <script src="common-cart.js" defer></script>
+  <script src="common-auth.js" defer></script>
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+   <!-- ========== HEADER ========== -->
+  <header class="shop-header">
+  <div class="header-container">
+    <!-- Hàng 1: Logo -->
+    <div class="header-top">
+      <a href="index.html" class="logo" aria-label="Anime Store">
+        <span class="logo-title">Anime Store</span>
+        <small class="logo-tagline">Mô hình Anime cực chất</small>
+      </a>
+    </div>
+   <!-- Hàng 2: Toggle | Nav (wrap) | Actions -->
+  <div class="header-bottom">
+  <button class="nav-toggle" id="navToggle" aria-label="Mở menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+  <!-- Bọc nav trong .nav-wrap -->
+  <div class="nav-wrap">
+    <nav class="main-nav" aria-label="Điều hướng chính" id="mainNav">
+      <ul class="menu" id="mainMenu">
+        <li><a href="index.html">Trang Chủ</a></li>
+        <li class="dropdown">
+          <button class="drop-trigger">Danh Mục <i class="fa-solid fa-angle-down"></i></button>
+          <ul class="dropdown-menu">
+            <li><a href="danhmuc.html" onclick="localStorage.setItem('tab','naruto')">Naruto</a></li>
+            <li><a href="danhmuc.html" onclick="localStorage.setItem('tab','onepiece')">One Piece</a></li>
+            <li><a href="danhmuc.html" onclick="localStorage.setItem('tab','dragonball')">Dragon Ball</a></li>
+            <li><a href="danhmuc.html" onclick="localStorage.setItem('tab','khac')">Khác</a></li>
+          </ul>
+        </li>
+        <li><a href="khuyenmai.html">Khuyến Mãi</a></li>
+        <li><a href="bosuutap.html">Bộ Sưu Tập</a></li>
+        <li><a href="lienhe.html">Liên Hệ</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="header-actions">
+    <div id="userInfo"></div>
+    <button class="cart-btn" id="openCartBtn" aria-haspopup="dialog" aria-controls="cartPopup">
+      <i class="fa-solid fa-cart-shopping"></i> Giỏ Hàng (<span id="cartCount">0</span>)
+    </button>
+    <button class="member-btn" id="loginBtn">
+      <i class="fa-solid fa-user"></i> Thành Viên
+    </button>
+  </div>
+  </div>
+  </div>
+</header>
+
+  <!-- ===== Product Detail Modal ===== -->
+  <dialog id="productModal" class="pmodal" aria-labelledby="pm-title">
+    <div class="pmodal__backdrop" data-close></div>
+    <div class="pmodal__panel" role="document">
+      <button class="pmodal__close" aria-label="Đóng" data-close>
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="pmodal__grid">
+        <!-- Left: Gallery -->
+        <div class="pmodal__media">
+          <div class="pmodal__hero">
+            <img id="pm-hero" alt="Ảnh sản phẩm">
+          </div>
+          <div id="pm-thumbs" class="pmodal__thumbs" aria-label="Ảnh khác"></div>
+        </div>
+
+        <!-- Right: Content -->
+        <div class="pmodal__content">
+          <h2 id="pm-title" class="pm-title"></h2>
+          <div class="pm-meta">
+            <span id="pm-series" class="pm-chip"></span>
+            <span id="pm-stock" class="pm-stock"></span>
+          </div>
+
+          <div class="pm-price">
+            <span id="pm-final" class="final"></span>
+            <span id="pm-original" class="original"></span>
+            <span id="pm-off" class="off"></span>
+          </div>
+
+          <div class="pm-coupon">
+            <input id="pm-coupon-input" type="text" class="coupon-input" placeholder="Mã giảm (vd: ANIME10)">
+            <button id="pm-apply" class="btn small">Áp dụng</button>
+            <small id="pm-msg" class="muted"></small>
+          </div>
+
+          <div class="pm-section">
+            <h3>Thông tin phim</h3>
+            <ul class="pm-kv">
+              <li><strong>Thể loại:</strong> <span id="pm-genre">—</span></li>
+              <li><strong>Năm phát sóng:</strong> <span id="pm-year">—</span></li>
+            </ul>
+            <p id="pm-synopsis" class="pm-text"></p>
+          </div>
+
+          <div id="pm-product-section" class="pm-section" hidden>
+            <h3>Mô tả sản phẩm</h3>
+            <p id="pm-desc" class="pm-text"></p>
+            <ul class="pm-kv">
+              <li id="pm-material-li" hidden><strong>Chất liệu:</strong> <span id="pm-material"></span></li>
+              <li id="pm-size-li" hidden><strong>Kích thước:</strong> <span id="pm-size"></span></li>
+              <li id="pm-sku-li" hidden><strong>SKU:</strong> <span id="pm-sku"></span></li>
+            </ul>
+          </div>
+
+          <div class="pm-actions">
+            <button id="pm-add" class="btn">Thêm vào giỏ</button>
+            <button class="btn outline" data-close>Đóng</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ===== Main ===== -->
+  <main class="promo-main" aria-label="Khuyến mãi anime">
+    <!-- Hero -->
+    <section class="promo-hero pro">
+      <div class="hero-bg" aria-hidden="true"></div>
+
+      <div class="hero-badges">
+        <span class="pill pill-hot">HOT SALE</span>
+        <span class="pill pill-flash"><i class="fa-solid fa-bolt"></i> Flash</span>
+        <span class="pill pill-new">New Deals</span>
+      </div>
+
+      <h1 class="hero-title">
+        <span class="grad-text">🎉 Ưu Đãi Đặc Biệt</span>
+        <span class="sub">Hot Sale Tháng Này</span>
+      </h1>
+
+      <p class="hero-desc">
+        Deal ngon mỗi ngày cho fan anime. Giá hiển thị đã tính giảm —
+        dùng mã <code class="coupon">ANIME10</code> để giảm thêm 10% (tối đa 100.000₫, áp dụng khi giá ≥ 500.000₫).
+      </p>
+
+      <div class="hero-actions">
+        <button id="copyCoupon" class="btn primary">
+          Sao chép mã <strong>ANIME10</strong>
+        </button>
+        <a href="#promoGrid" class="btn ghost">
+          Xem sản phẩm đang sale <i class="fa-solid fa-arrow-down"></i>
+        </a>
+      </div>
+
+      <ul class="hero-stats">
+        <li><strong>≈50%</strong><span>Giảm tối đa</span></li>
+        <li><strong>800k+</strong><span>Miễn phí ship</span></li>
+        <li><strong>2–5 ngày</strong><span>Giao nhanh</span></li>
+      </ul>
+    </section>
+
+    <!-- Bộ lọc & sắp xếp -->
+    <section class="promo-controls">
+      <div class="filters">
+        <button class="chip is-active" data-series="all">Tất cả</button>
+        <button class="chip" data-series="Naruto">Naruto</button>
+        <button class="chip" data-series="One Piece">One Piece</button>
+        <button class="chip" data-series="Dragon Ball">Dragon Ball</button>
+        <button class="chip" data-series="Khác">Khác</button>
+      </div>
+      <div class="sort">
+        <label for="sortSelect">Sắp xếp:</label>
+        <select id="sortSelect">
+          <option value="popular">Phổ biến</option>
+          <option value="priceAsc">Giá tăng dần</option>
+          <option value="priceDesc">Giá giảm dần</option>
+          <option value="discountDesc">% giảm mạnh</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- Grid sản phẩm -->
+    <section class="promo-grid" id="promoGrid" aria-live="polite"></section>
+
+    <!-- Extra info -->
+    <section class="promo-extra">
+      <div class="shipping">
+        <h3><i class="fa-solid fa-truck-fast"></i> Miễn phí vận chuyển</h3>
+        <p>Đơn từ 800.000₫ toàn quốc. Giao nhanh 2–5 ngày.</p>
+      </div>
+      <div class="note">
+        <h3><i class="fa-solid fa-circle-info"></i> Lưu ý</h3>
+        <p>Giảm thêm bằng mã áp dụng <strong>trên từng sản phẩm</strong> khi bạn nhập trong ô “Mã giảm” của card.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Footer (giữ nguyên) ===== -->
+  <footer class="anime-footer">
+    <div class="footer-top">
+      <div class="logo">AnimeStore <span>Mô hình Anime cực chất</span></div>
+      <div class="social-icons">
+        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+        <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#"><i class="fa-brands fa-discord"></i></a>
+      </div>
+    </div>
+    <div class="footer-links">
+      <a href="#">Hỏi-Đáp</a>
+      <a href="#">Chính sách bảo mật</a>
+      <a href="#">Điều khoản sử dụng</a>
+      <a href="#">Giới thiệu</a>
+      <a href="#">Liên hệ</a>
+    </div>
+    <p class="footer-desc">
+      AnimeStore – Cửa hàng chuyên mô hình anime: từ Naruto, One Piece, Dragon Ball đến nhiều tựa anime hot khác. Mô hình chất lượng cao, giá tốt, giao hàng toàn quốc.
+    </p>
+    <p class="footer-copy">&copy; 2025 AnimeStore | Liên hệ: support@animestore.vn</p>
+  </footer>
+
+  <!-- ===== Script: render + coupon per-card + modal ===== -->
+  <script>
+  (function() {
+    // ---------- DATA ----------
+    const PRODUCTS = [
+      // ONE PIECE
+      { id:"op-g5", name:"Luffy Gear 5", series:"One Piece", price:1290000, sale:{type:"percent", value:20}, img:"luffy-g5.jpg", images:["luffy-g5.jpg","luffy-g5-2.jpg"], desc:"Mô hình Luffy Gear 5 tạo dáng sống động, sơn bóng highlight.", material:"PVC/ABS", size:"~18cm", sku:"OP-G5-1A", hot:true, flash:true, stock:12 },
+      { id:"op-zoro", name:"Zoro Tam Kiếm", series:"One Piece", price:1090000, sale:{type:"fixed", value:150000}, img:"zoro.jpg", desc:"Zoro pose Santoryu, chi tiết gân cơ sắc nét.", material:"PVC", size:"~17cm", sku:"OP-ZR-2B", hot:true, stock:8 },
+      { id:"op-sanji", name:"Sanji Diable Jambe", series:"One Piece", price:890000, sale:{type:"percent", value:15}, img:"sanji.jpg", stock:15 },
+      { id:"op-nami", name:"Nami Clima-Tact", series:"One Piece", price:780000, sale:{type:"percent", value:18}, img:"nami.jpg", stock:14 },
+      { id:"op-robin", name:"Nico Robin", series:"One Piece", price:820000, sale:{type:"fixed", value:100000}, img:"robin.jpg", stock:11 },
+      { id:"op-franky", name:"Franky Shogun", series:"One Piece", price:1450000, sale:{type:"percent", value:22}, img:"franky.jpg", flash:true, stock:6 },
+      { id:"op-brook", name:"Brook Soul King", series:"One Piece", price:760000, sale:{type:"percent", value:12}, img:"brook.jpg", stock:20 },
+      // NARUTO
+      { id:"nr-naruto", name:"Naruto Sage Mode", series:"Naruto", price:990000, sale:{type:"percent", value:18}, img:"naruto.jpg", material:"PVC", size:"~18cm", sku:"NR-NT-1S", hot:true, stock:10 },
+      { id:"nr-itachi", name:"Itachi Akatsuki", series:"Naruto", price:1190000, sale:{type:"fixed", value:200000}, img:"itachi.jpg", stock:5 },
+      { id:"nr-sasuke", name:"Sasuke Rinnegan", series:"Naruto", price:1080000, sale:{type:"percent", value:20}, img:"sasuke.jpg", flash:true, stock:9 },
+      { id:"nr-kakashi", name:"Kakashi Hatake", series:"Naruto", price:950000, sale:{type:"fixed", value:120000}, img:"kakashi.jpg", stock:7 },
+      { id:"nr-madara", name:"Madara Uchiha", series:"Naruto", price:1380000, sale:{type:"percent", value:25}, img:"marada.jpg", hot:true, stock:4 },
+      { id:"nr-gaara", name:"Gaara Kazekage", series:"Naruto", price:880000, sale:{type:"percent", value:14}, img:"gaara.jpg", stock:12 },
+      { id:"nr-lee", name:"Rock Lee", series:"Naruto", price:770000, sale:{type:"fixed", value:90000}, img:"rock.jpg", stock:16 },
+      // DRAGON BALL
+      { id:"db-goku", name:"Goku SSJ Blue", series:"Dragon Ball", price:950000, sale:{type:"percent", value:22}, img:"gokussj.jpg", images:["goku.jpg","goku-2.jpg","goku-3.jpg"], flash:true, stock:20 },
+      { id:"db-vegeta", name:"Vegeta SSJ", series:"Dragon Ball", price:920000, sale:{type:"percent", value:12}, img:"vegeta.jpg", stock:7 },
+      { id:"db-gohan", name:"Gohan Beast", series:"Dragon Ball", price:990000, sale:{type:"fixed", value:150000}, img:"gohan.jpg", stock:10 },
+      { id:"db-trunks", name:"Future Trunks", series:"Dragon Ball", price:870000, sale:{type:"percent", value:18}, img:"future.jpg", stock:9 },
+      { id:"db-broly", name:"Broly Legendary", series:"Dragon Ball", price:1450000, sale:{type:"percent", value:28}, img:"broly.jpg", hot:true, stock:5 },
+      { id:"db-frieza", name:"Frieza Final Form", series:"Dragon Ball", price:840000, sale:{type:"fixed", value:110000}, img:"frieza.jpg", stock:14 },
+      { id:"db-cell", name:"Perfect Cell", series:"Dragon Ball", price:880000, sale:{type:"percent", value:16}, img:"perfect.jpg", stock:13 },
+      // KHÁC
+      { id:"mix-gojo", name:"Gojo Satoru", series:"Khác", price:1150000, sale:{type:"fixed", value:250000}, img:"gojo.jpg", hot:true, stock:9 },
+      { id:"mix-itadori", name:"Itadori Yuji", series:"Khác", price:870000, sale:{type:"percent", value:18}, img:"yuuji.jpg", stock:12 },
+      { id:"mix-nezuko", name:"Kamado Nezuko", series:"Khác", price:960000, sale:{type:"fixed", value:130000}, img:"nezuko.jpg", stock:10 },
+      { id:"mix-tanjiro", name:"Kamado Tanjiro", series:"Khác", price:970000, sale:{type:"percent", value:15}, img:"kamado.jpg", stock:11 },
+      { id:"mix-eren", name:"Eren Yeager", series:"Khác", price:1080000, sale:{type:"percent", value:19}, img:"eren.jpg", flash:true, stock:8 },
+      { id:"mix-levi", name:"Levi Ackerman", series:"Khác", price:1050000, sale:{type:"fixed", value:150000}, img:"levi.jpg", hot:true, stock:6 },
+      { id:"mix-mikasa", name:"Mikasa Ackerman", series:"Khác", price:980000, sale:{type:"percent", value:17}, img:"mikasa.jpg", stock:9 }
+    ];
+    // Cho modal dùng:
+    window.PRODUCTS = PRODUCTS;
+
+    // ---------- UTIL ----------
+    const fmtVND = n => n.toLocaleString("vi-VN") + "₫";
+    const calcSaleFinal = (price, sale) => {
+      let discount = 0;
+      if (sale?.type === "percent") discount = Math.round(price * sale.value / 100);
+      if (sale?.type === "fixed")   discount = sale.value;
+      const final = Math.max(0, price - discount);
+      const percent = Math.round((discount / price) * 100);
+      return { final, discount, percent };
+    };
+    const applyCoupon = (price, code) => {
+      if (!code) return price;
+      const c = code.trim().toUpperCase();
+      if (c !== "ANIME10") return price;
+      if (price < 500000) return price; // điều kiện tối thiểu
+      const cut = Math.min(Math.round(price * 0.10), 100000);
+      return Math.max(0, price - cut);
+    };
+
+    // ---------- STATE ----------
+    let state = { series: "all", sort: "popular" };
+
+    // ---------- RENDER ----------
+    const $grid = document.getElementById("promoGrid");
+
+    function render() {
+      const list = PRODUCTS
+        .filter(p => state.series === "all" ? true : p.series === state.series)
+        .map(p => {
+          const s = calcSaleFinal(p.price, p.sale);
+          return { ...p, ...s };
+        })
+        .sort((a,b) => {
+          switch (state.sort) {
+            case "priceAsc":     return a.final - b.final;
+            case "priceDesc":    return b.final - a.final;
+            case "discountDesc": return b.percent - a.percent;
+            default:             return (b.hot===true) - (a.hot===true);
+          }
+        });
+
+      $grid.innerHTML = list.map(cardHTML).join("");
+      attachCardEvents();
+    }
+
+    function cardHTML(p) {
+      return `
+      <article class="card" data-id="${p.id}">
+        <div class="card-img">
+          <img loading="lazy" src="${p.img}" alt="${p.name}">
+          ${p.hot ? `<span class="badge hot">HOT</span>` : ``}
+          ${p.flash ? `<span class="badge flash">FLASH</span>` : ``}
+        </div>
+        <div class="card-body">
+          <div class="card-title">${p.name}</div>
+          <div class="card-meta">${p.series} • ${p.stock>0?`<span class="stock">Còn ${p.stock}</span>`:`<span class="muted">Hết hàng</span>`}</div>
+
+          <div class="price">
+            <span class="final" data-final>${fmtVND(p.final)}</span>
+            <span class="original">${fmtVND(p.price)}</span>
+            <span class="off">-${p.percent}%</span>
+          </div>
+
+          <div class="coupon-row">
+            <input class="coupon-input" type="text" placeholder="Mã giảm (ví dụ: ANIME10)" inputmode="text" />
+            <button class="btn small apply-coupon">Áp dụng</button>
+            <small class="apply-msg muted" style="grid-column: 1 / -1;"></small>
+          </div>
+
+          <div class="card-actions">
+            <button class="btn add-to-cart" ${p.stock?``:`disabled`}>Thêm vào giỏ</button>
+            <button class="btn outline view-detail">Xem chi tiết</button>
+          </div>
+        </div>
+      </article>`;
+    }
+
+    function attachCardEvents() {
+      document.querySelectorAll(".card").forEach(card => {
+        const id = card.dataset.id;
+        const item = PRODUCTS.find(x => x.id === id);
+        if (!item) return;
+
+        const finalEl = card.querySelector("[data-final]");
+        const input = card.querySelector(".coupon-input");
+        const btnApply = card.querySelector(".apply-coupon");
+        const msg = card.querySelector(".apply-msg");
+
+        const { final: saleFinal } = calcSaleFinal(item.price, item.sale);
+        let applied = false;
+
+        btnApply.addEventListener("click", () => {
+          const code = input.value.trim();
+          if (!applied) {
+            const after = applyCoupon(saleFinal, code);
+            finalEl.textContent = fmtVND(after);
+
+            if (!code) {
+              msg.textContent = "Nhập mã nếu có (vd: ANIME10)";
+              msg.className = "apply-msg muted";
+              return;
+            }
+            if (code.toUpperCase() === "ANIME10") {
+              if (saleFinal < 500000) {
+                msg.textContent = "Mã áp dụng cho giá ≥ 500.000₫";
+                msg.className = "apply-msg apply-err";
+                return;
+              } else {
+                msg.textContent = "Đã áp dụng mã ANIME10 (-10%, tối đa 100.000₫)";
+                msg.className = "apply-msg apply-ok";
+                btnApply.classList.add("applied");
+                btnApply.textContent = "Hủy mã";
+                applied = true;
+              }
+            } else {
+              msg.textContent = "Mã không hợp lệ";
+              msg.className = "apply-msg apply-err";
+            }
+          } else {
+            // Hủy
+            finalEl.textContent = fmtVND(saleFinal);
+            msg.textContent = "";
+            btnApply.classList.remove("applied");
+            btnApply.textContent = "Áp dụng";
+            applied = false;
+          }
+        });
+
+        // Add to cart (tích hợp giỏ hàng thật)
+        const addBtn = card.querySelector(".add-to-cart");
+        addBtn?.addEventListener("click", () => {
+          const code = applied ? (input.value.trim() || "") : "";
+          const price = applyCoupon(saleFinal, code);
+          if (window.addToCart) {
+            window.addToCart({ title: item.name, price: price, image: item.img, quantity: 1 });
+          } else {
+            alert(`Đã thêm: ${item.name} – Giá: ${fmtVND(price)}`);
+          }
+        });
+
+        // View detail -> modal
+        const viewBtn = card.querySelector(".view-detail");
+        viewBtn?.addEventListener("click", () => {
+          if (window.openProductDetail) window.openProductDetail(id);
+        });
+      });
+
+      // Copy coupon ở hero
+      const copyBtn = document.getElementById("copyCoupon");
+      copyBtn?.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText("ANIME10");
+          copyBtn.innerHTML = "Đã sao chép ✅";
+          setTimeout(() => copyBtn.innerHTML = "Sao chép mã <strong>ANIME10</strong>", 1400);
+          document.querySelectorAll(".coupon-input").forEach(inp=>{
+            if(!inp.value) inp.value = "ANIME10";
+          });
+        } catch (e) {
+          copyBtn.innerHTML = "Không sao chép được 😢";
+          setTimeout(() => copyBtn.innerHTML = "Sao chép mã <strong>ANIME10</strong>", 1400);
+        }
+      });
+    }
+
+    // Filters & sort
+    document.querySelectorAll(".chip").forEach(ch=>{
+      ch.addEventListener("click", ()=>{
+        document.querySelectorAll(".chip").forEach(c=>c.classList.remove("is-active"));
+        ch.classList.add("is-active");
+        state.series = ch.dataset.series;
+        render();
+      });
+    });
+    document.getElementById("sortSelect").addEventListener("change", e=>{
+      state.sort = e.target.value;
+      render();
+    });
+
+    // Init
+    render();
+  })();
+  </script>
+
+  <!-- ===== Script: modal detail (dùng window.PRODUCTS) ===== -->
+  <script>
+  (function(){
+    // ===== Thông tin phim theo series =====
+    const ANIME_INFO = {
+      "One Piece": {
+        genre: "Phiêu lưu, Hành động, Hài hước",
+        year: 1999,
+        synopsis: "Luffy và băng Mũ Rơm ra khơi chinh phục Tân Thế Giới để tìm kho báu One Piece – câu chuyện về tự do, tình bạn và ước mơ hải tặc."
+      },
+      "Naruto": {
+        genre: "Hành động, Phiêu lưu, Ninja",
+        year: 2002,
+        synopsis: "Uzumaki Naruto mang ước mơ trở thành Hokage, vượt qua định kiến và hiểm nguy với sức mạnh của tình bạn và ý chí."
+      },
+      "Dragon Ball": {
+        genre: "Hành động, Viễn tưởng",
+        year: 1986,
+        synopsis: "Son Goku cùng đồng đội bảo vệ Trái Đất trước những kẻ thù hùng mạnh, với các màn biến hình Saiyan kinh điển."
+      },
+      "Khác": {
+        genre: "Siêu nhiên / Hành động",
+        year: "—",
+        synopsis: "Các tựa anime hot khác: Jujutsu Kaisen, Demon Slayer, Attack on Titan… đa dạng phong cách và nhân vật."
+      }
+    };
+
+    // ===== Helper =====
+    const fmtVND = n => n.toLocaleString("vi-VN") + "₫";
+    const calcSaleFinal = (price, sale) => {
+      let discount = 0;
+      if (sale?.type === "percent") discount = Math.round(price * sale.value / 100);
+      if (sale?.type === "fixed")   discount = sale.value;
+      const final = Math.max(0, price - discount);
+      const percent = Math.round((discount / price) * 100);
+      return { final, discount, percent };
+    };
+    const applyCoupon = (price, code) => {
+      if (!code) return price;
+      const c = code.trim().toUpperCase();
+      if (c !== "ANIME10") return price;
+      if (price < 500000) return price;
+      const cut = Math.min(Math.round(price * 0.10), 100000);
+      return Math.max(0, price - cut);
+    };
+
+    // ===== DOM modal refs =====
+    const modal = document.getElementById("productModal");
+    const hero = document.getElementById("pm-hero");
+    const thumbs = document.getElementById("pm-thumbs");
+    const elTitle = document.getElementById("pm-title");
+    const elSeries = document.getElementById("pm-series");
+    const elStock = document.getElementById("pm-stock");
+    const elFinal = document.getElementById("pm-final");
+    const elOriginal = document.getElementById("pm-original");
+    const elOff = document.getElementById("pm-off");
+    const elGenre = document.getElementById("pm-genre");
+    const elYear = document.getElementById("pm-year");
+    const elSynopsis = document.getElementById("pm-synopsis");
+    const secProduct = document.getElementById("pm-product-section");
+    const elDesc = document.getElementById("pm-desc");
+    const liMaterial = document.getElementById("pm-material-li");
+    const liSize = document.getElementById("pm-size-li");
+    const liSku = document.getElementById("pm-sku-li");
+    const elMaterial = document.getElementById("pm-material");
+    const elSize = document.getElementById("pm-size");
+    const elSku = document.getElementById("pm-sku");
+    const inputCoupon = document.getElementById("pm-coupon-input");
+    const btnApply = document.getElementById("pm-apply");
+    const elMsg = document.getElementById("pm-msg");
+    const btnAdd = document.getElementById("pm-add");
+
+    let currentItem = null;
+    let saleFinalCache = 0;
+    let applied = false;
+
+    // ===== Open modal with product id (gán global) =====
+    window.openProductDetail = function(id){
+      const item = (window.PRODUCTS || []).find(x => x.id === id);
+      if(!item) return;
+      currentItem = item;
+
+      const { final, percent } = calcSaleFinal(item.price, item.sale);
+      saleFinalCache = final;
+
+      const imgs = Array.isArray(item.images) && item.images.length ? item.images : [item.img];
+      hero.src = imgs[0] || "";
+      hero.alt = item.name || "Ảnh sản phẩm";
+      thumbs.innerHTML = imgs.map((src, i)=>`
+        <button class="${i===0?'is-active':''}" data-src="${src}" aria-label="Ảnh ${i+1}">
+          <img src="${src}" alt="">
+        </button>
+      `).join("");
+
+      elTitle.textContent = item.name;
+      elSeries.textContent = item.series;
+      elStock.textContent = item.stock > 0 ? `Còn ${item.stock}` : "Hết hàng";
+      elStock.classList.toggle("is-out", !(item.stock > 0));
+      elFinal.textContent = fmtVND(final);
+      elOriginal.textContent = fmtVND(item.price);
+      elOff.textContent = `-${percent}%`;
+
+      const info = ANIME_INFO[item.series] || ANIME_INFO["Khác"];
+      elGenre.textContent = info.genre ?? "—";
+      elYear.textContent = info.year ?? "—";
+      elSynopsis.textContent = info.synopsis ?? "";
+
+      const hasDesc = !!item.desc;
+      const hasMat  = !!item.material;
+      const hasSize = !!item.size;
+      const hasSku  = !!item.sku;
+
+      secProduct.hidden = !(hasDesc || hasMat || hasSize || hasSku);
+      elDesc.textContent = item.desc || "";
+
+      liMaterial.hidden = !hasMat; if(hasMat) elMaterial.textContent = item.material;
+      liSize.hidden     = !hasSize; if(hasSize) elSize.textContent = item.size;
+      liSku.hidden      = !hasSku; if(hasSku) elSku.textContent = item.sku;
+
+      inputCoupon.value = "";
+      applied = false;
+      btnApply.classList.remove("applied");
+      btnApply.textContent = "Áp dụng";
+      elMsg.textContent = "";
+
+      thumbs.querySelectorAll("button").forEach(btn=>{
+        btn.addEventListener("click", ()=>{
+          thumbs.querySelectorAll("button").forEach(b=>b.classList.remove("is-active"));
+          btn.classList.add("is-active");
+          const src = btn.getAttribute("data-src");
+          if(src) hero.src = src;
+        });
+      });
+
+      modal.showModal();
+    };
+
+    // Close modal
+    modal.addEventListener("click", (e)=>{
+      if (e.target.matches("[data-close]")) modal.close();
+    });
+    document.addEventListener("keydown", (e)=>{
+      if(e.key === "Escape" && modal.open) modal.close();
+    });
+
+    // Coupon toggle inside modal
+    btnApply.addEventListener("click", ()=>{
+      const code = inputCoupon.value.trim();
+      if(!applied){
+        const after = applyCoupon(saleFinalCache, code);
+        document.getElementById("pm-final").textContent = fmtVND(after);
+
+        if(!code){
+          elMsg.textContent = "Nhập mã nếu có (vd: ANIME10)";
+          elMsg.className = "muted";
+          return;
+        }
+        if(code.toUpperCase() === "ANIME10"){
+          if(saleFinalCache < 500000){
+            elMsg.textContent = "Mã áp dụng cho giá ≥ 500.000₫";
+            elMsg.className = "apply-err";
+            return;
+          }
+          elMsg.textContent = "Đã áp dụng ANIME10 (-10%, tối đa 100.000₫)";
+          elMsg.className = "apply-ok";
+          btnApply.classList.add("applied");
+          btnApply.textContent = "Hủy mã";
+          applied = true;
+        } else {
+          elMsg.textContent = "Mã không hợp lệ";
+          elMsg.className = "apply-err";
+        }
+      } else {
+        document.getElementById("pm-final").textContent = fmtVND(saleFinalCache);
+        elMsg.textContent = "";
+        btnApply.classList.remove("applied");
+        btnApply.textContent = "Áp dụng";
+        applied = false;
+      }
+    });
+
+    // Add to cart demo
+    btnAdd.addEventListener("click", ()=>{
+      if(!currentItem) return;
+      const code = applied ? (inputCoupon.value.trim() || "") : "";
+      const cut = applyCoupon(saleFinalCache, code);
+      if (window.addToCart) {
+        window.addToCart({ title: currentItem.name, price: cut, image: currentItem.img, quantity: 1 });
+      } else {
+        alert(`Đã thêm: ${currentItem.name} – Giá: ${fmtVND(cut)}`);
+      }
+    });
+  })();
+  </script>
+
+  <!-- ======= GIỎ HÀNG như trang index ======= -->
+  <!-- 🛒 POPUP GIỎ HÀNG -->
+  <div id="cartPopup" class="cart-popup" style="display:none;">
+    <div class="cart-content">
+      <span class="close-cart" onclick="toggleCart(false)">&times;</span>
+      <h2 class="section-title cart-title">🛒 Giỏ Hàng Của Bạn</h2>
+      <div id="cartItems"></div>
+      <div id="cartTotal"></div>
+      <button class="btn-buy" onclick="printInvoice()">In Hóa Đơn</button>
+    </div>
+  </div>
+
+  <!-- 🧾 HÓA ĐƠN BÁN HÀNG -->
+  <div id="invoicePopup" style="display:none;">
+    <div id="invoiceContent" style="width:700px; margin:0 auto; font-family:Arial; padding:20px; text-align:center;">
+      <h2 class="section-title invoice-title" style="margin-bottom:5px;">🧾 HÓA ĐƠN BÁN HÀNG</h2>
+      <p style="margin:0;">Anime Store - Mô hình Anime cực chất</p>
+      <small>Hotline: 0909.888.999 | Email: support@animestore.vn</small>
+
+      <hr style="margin:20px 0;">
+
+      <p><strong>Thời gian:</strong> <span id="invoiceTime"></span></p>
+
+      <table style="width:100%; border-collapse:collapse; margin:20px auto;">
+        <thead>
+          <tr style="background:#f2f2f2;">
+            <th style="border:1px solid #ccc; padding:8px;">STT</th>
+            <th style="border:1px solid #ccc; padding:8px;">Tên sản phẩm</th>
+            <th style="border:1px solid #ccc; padding:8px;">Đơn giá</th>
+            <th style="border:1px solid #ccc; padding:8px;">Số lượng</th>
+            <th style="border:1px solid #ccc; padding:8px;">Thành tiền</th>
+          </tr>
+        </thead>
+        <tbody id="invoiceItems"></tbody>
+      </table>
+
+      <h3 style="margin-top:20px;" id="invoiceTotal"></h3>
+
+      <div style="margin-top:30px;">
+        <p><strong>💳 Quét mã QR để thanh toán:</strong></p>
+        <img id="qrImage" src="" alt="QR BIDV" style="width:220px; margin:10px auto;" />
+        <p><small>BIDV - Dương Quang Luận - STK: 8813126063</small></p>
+      </div>
+
+      <p style="font-size:13px; margin-top:30px;">Cảm ơn bạn đã mua hàng tại <strong>Anime Store</strong>!</p>
+    </div>
+  </div>
+
+  <!-- ===== Script: GIỎ HÀNG dùng chung (index) ===== -->
+  <script>
+  (function(){
+    // Utils
+    const getCart = () => JSON.parse(localStorage.getItem("cart") || "[]");
+    const setCart = (c) => localStorage.setItem("cart", JSON.stringify(c));
+
+    // Cập nhật số lượng trên header
+    window.updateCartCount = function(){
+      const total = getCart().reduce((s,it)=> s + (it.quantity||0), 0);
+      const el = document.getElementById("cartCount");
+      if (el) el.textContent = total;
+    };
+
+    // Thêm vào giỏ
+    window.addToCart = function({ title, price, image = "", quantity = 1 }){
+      const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+      if (!currentUser) {
+        alert("Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng.");
+        return;
+      }
+      const cart = getCart();
+      const found = cart.find(it => it.title === title);
+      if (found) {
+        found.quantity += quantity;
+      } else {
+        cart.push({ title, price, image, quantity });
+      }
+      setCart(cart);
+      updateCartCount();
+      try {
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.textContent = `Đã thêm "${title}" vào giỏ!`;
+        document.body.appendChild(toast);
+        setTimeout(()=> toast.remove(), 3000);
+      } catch(e) {
+        alert("Đã thêm vào giỏ hàng!");
+      }
+    };
+
+    // Mở/đóng popup giỏ hàng
+    window.toggleCart = function(show){
+      const popup = document.getElementById("cartPopup");
+      if (!popup) return;
+      popup.style.display = show ? "block" : "none";
+      if (show) renderCart();
+    };
+
+    // Render giỏ
+    window.renderCart = function(){
+      const cart = getCart();
+      const box = document.getElementById("cartItems");
+      const totalEl = document.getElementById("cartTotal");
+      if (!box || !totalEl) return;
+
+      box.innerHTML = "";
+      if (!cart.length) {
+        box.innerHTML = "<p>Giỏ hàng trống.</p>";
+        totalEl.innerHTML = "";
+        return;
+      }
+
+      let total = 0;
+      cart.forEach((it, idx) => {
+        const line = (it.price * it.quantity);
+        total += line;
+        const row = document.createElement("div");
+        row.className = "cart-item";
+        row.innerHTML = `
+          <span>${it.title} (${it.price.toLocaleString()}₫)</span>
+          <div>
+            <button onclick="changeQty(${idx}, -1)">-</button>
+            <span>${it.quantity}</span>
+            <button onclick="changeQty(${idx}, 1)">+</button>
+            <button onclick="removeItem(${idx})">X</button>
+          </div>
+        `;
+        box.appendChild(row);
+      });
+
+      totalEl.innerHTML = `<h3>Tổng tiền: ${total.toLocaleString()}₫</h3>`;
+    };
+
+    // Thay đổi số lượng
+    window.changeQty = function(index, delta){
+      const cart = getCart();
+      if (!cart[index]) return;
+      cart[index].quantity += delta;
+      if (cart[index].quantity <= 0) cart.splice(index, 1);
+      setCart(cart);
+      updateCartCount();
+      renderCart();
+    };
+
+    // Xóa sản phẩm
+    window.removeItem = function(index){
+      const cart = getCart();
+      cart.splice(index, 1);
+      setCart(cart);
+      updateCartCount();
+      renderCart();
+    };
+
+    // In hóa đơn
+    window.printInvoice = function(){
+      const cart = getCart();
+      if (!cart.length) { alert("Giỏ hàng trống."); return; }
+
+      const tbody = document.getElementById("invoiceItems");
+      const totalEl = document.getElementById("invoiceTotal");
+      const timeEl = document.getElementById("invoiceTime");
+      const qrEl = document.getElementById("qrImage");
+      if (!tbody || !totalEl || !timeEl || !qrEl) return;
+
+      tbody.innerHTML = "";
+      let total = 0;
+      cart.forEach((it, i) => {
+        const line = it.price * it.quantity;
+        total += line;
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td style="border:1px solid #ccc; padding:8px; text-align:center;">${i+1}</td>
+          <td style="border:1px solid #ccc; padding:8px;">${it.title}</td>
+          <td style="border:1px solid #ccc; padding:8px; text-align:right;">${it.price.toLocaleString()}₫</td>
+          <td style="border:1px solid #ccc; padding:8px; text-align:center;">${it.quantity}</td>
+          <td style="border:1px solid #ccc; padding:8px; text-align:right;">${line.toLocaleString()}₫</td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      totalEl.textContent = `Tổng cộng: ${total.toLocaleString()}₫`;
+      timeEl.textContent = new Date().toLocaleString("vi-VN");
+
+      // QR thanh toán
+      const qrURL = `https://img.vietqr.io/image/BIDV-8813126063-compact2.png?amount=${total}&addInfo=AnimeStore%20Invoice`;
+      qrEl.src = qrURL;
+
+      // In
+      const printWindow = window.open("", "PRINT", "height=800,width=900");
+      printWindow.document.write(`
+        <html>
+          <head><title>Hóa Đơn AnimeStore</title>
+          <style>body { font-family: Arial; text-align: center; }</style></head>
+          <body>${document.getElementById("invoiceContent").outerHTML}</body>
+        </html>
+      `);
+      printWindow.document.close();
+      printWindow.focus();
+      printWindow.print();
+      printWindow.close();
+    };
+
+    // Gắn nút mở giỏ hàng ở header
+    document.getElementById("openCartBtn")?.addEventListener("click", () => {
+      const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+      if (!currentUser) { alert("Bạn cần đăng nhập để xem giỏ hàng."); return; }
+      toggleCart(true);
+    });
+
+    // Cập nhật số lượng khi vào trang
+    document.addEventListener("DOMContentLoaded", updateCartCount);
+  })();
+  </script>
+</body>
+</html>

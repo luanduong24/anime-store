@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Ký - Anime Store</title>
+    <link rel="stylesheet" href="register.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <div class="register-container">
+        <div class="register-box">
+            <h2><i class="fa-solid fa-user-plus"></i> Đăng Ký</h2>
+            
+            <form id="registerForm" novalidate>
+                <div class="input-group">
+                    <label for="fullname"><i class="fa-solid fa-id-card"></i> Họ và Tên</label>
+                    <input type="text" id="fullname" name="fullname" placeholder="Nhập họ tên" required>
+                    <small class="error"></small>
+                </div>
+
+                <div class="input-group">
+                    <label for="email"><i class="fa-solid fa-envelope"></i> Email</label>
+                    <input type="email" id="email" name="email" placeholder="Nhập email" required>
+                    <small class="error"></small>
+                </div>
+
+                <div class="input-group">
+                    <label for="password"><i class="fa-solid fa-lock"></i> Mật khẩu</label>
+                    <input type="password" id="password" name="password" placeholder="Ít nhất 6 ký tự" required>
+                    <small class="error"></small>
+                </div>
+
+                <div class="input-group">
+                    <label for="confirmPassword"><i class="fa-solid fa-lock"></i> Xác nhận mật khẩu</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Nhập lại mật khẩu" required>
+                    <small class="error"></small>
+                </div>
+
+                <button type="submit" class="register-btn">Đăng Ký</button>
+
+                <div class="extra-links">
+                    <a href="login.html">Đã có tài khoản? Đăng nhập</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        const form = document.getElementById('registerForm');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            let isValid = true;
+            document.querySelectorAll('.error').forEach(el => el.textContent = "");
+
+            const fullname = document.getElementById('fullname').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const confirmPassword = document.getElementById('confirmPassword').value.trim();
+
+            if(fullname === "") {
+                showError('fullname', 'Vui lòng nhập họ tên');
+                isValid = false;
+            }
+
+            const emailRegex = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+            if(email === "") {
+                showError('email', 'Vui lòng nhập email');
+                isValid = false;
+            } else if(!emailRegex.test(email)) {
+                showError('email', 'Email không hợp lệ');
+                isValid = false;
+            }
+
+            if(password.length < 6) {
+                showError('password', 'Mật khẩu phải có ít nhất 6 ký tự');
+                isValid = false;
+            }
+
+            if(confirmPassword !== password) {
+                showError('confirmPassword', 'Mật khẩu không khớp');
+                isValid = false;
+            }
+
+            let users = JSON.parse(localStorage.getItem("users") || "[]");
+            if (users.some(u => u.email === email)) {
+                showError('email', 'Email đã tồn tại');
+                isValid = false;
+            }
+
+            if(isValid) {
+                users.push({ fullname, email, password });
+                localStorage.setItem("users", JSON.stringify(users));
+                alert("Đăng ký thành công!");
+                form.reset();
+                window.location.href = "login.html";
+            }
+        });
+
+        function showError(id, message) {
+            const input = document.getElementById(id);
+            const error = input.parentElement.querySelector('.error');
+            error.textContent = message;
+            error.style.color = "red";
+        }
+    </script>
+</body>
+</html>

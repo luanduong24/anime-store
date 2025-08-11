@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bộ Sưu Tập | Anime Store</title>
+
+  <!-- CSS chung -->
+  <link rel="stylesheet" href="style.css"/>
+  <!-- CSS riêng trang Bộ sưu tập -->
+  <link rel="stylesheet" href="bosuutap.css"/>
+  <script src="common-cart.js" defer></script>
+  <script src="common-auth.js"></script>
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+  <header class="shop-header">
+  <div class="header-container">
+    <!-- Hàng 1: Logo -->
+    <div class="header-top">
+      <a href="index.html" class="logo" aria-label="Anime Store">
+        <span class="logo-title">Anime Store</span>
+        <small class="logo-tagline">Mô hình Anime cực chất</small>
+      </a>
+    </div>
+
+    <!-- Hàng 2: Toggle | NAV (giữa) | Actions (phải) -->
+    <div class="header-bottom">
+      <button class="nav-toggle" id="navToggle" aria-label="Mở menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <div class="nav-wrap">
+        <nav class="main-nav" aria-label="Điều hướng chính" id="mainNav">
+          <ul class="menu" id="mainMenu">
+            <li><a href="index.html">Trang Chủ</a></li>
+            <li class="dropdown">
+              <a href="danhmuc.html">Danh Mục <i class="fa-solid fa-angle-down"></i></a>
+              <ul class="dropdown-menu">
+                <li><a href="danhmuc.html" onclick="localStorage.setItem('tab','naruto')">Naruto</a></li>
+                <li><a href="danhmuc.html" onclick="localStorage.setItem('tab','onepiece')">One Piece</a></li>
+                <li><a href="danhmuc.html" onclick="localStorage.setItem('tab','dragonball')">Dragon Ball</a></li>
+                <li><a href="danhmuc.html" onclick="localStorage.setItem('tab','khac')">Khác</a></li>
+              </ul>
+            </li>
+            <li><a href="khuyenmai.html">Khuyến Mãi</a></li>
+            <li><a class="active" href="bosuutap.html">Bộ Sưu Tập</a></li>
+            <li><a href="lienhe.html">Liên Hệ</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="header-actions">
+        <a class="member-btn" href="wishlist.html" title="Yêu thích">
+          <i class="fa-regular fa-heart"></i> <span class="hide-sm">Yêu thích</span>
+        </a>
+        <button class="cart-btn" id="openCartBtn">
+          <i class="fa-solid fa-cart-shopping"></i> Giỏ Hàng (<span id="cartCount">0</span>)
+        </button>
+        <button class="member-btn" id="loginBtn">
+          <i class="fa-solid fa-user"></i> <span class="hide-sm">Thành Viên</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+  <!-- ===== Main ===== -->
+  <main class="collection-main" aria-label="Bộ sưu tập anime">
+    <header class="collection-header container">
+      <h1>✨ Bộ Sưu Tập Anime Đặc Sắc ✨</h1>
+      <p class="collection-subtitle">Từ thế giới 2D đến mô hình 3D sống động.</p>
+      <p class="collection-intro">Chọn series bạn yêu thích để khám phá mô hình chất lượng cao, giá tốt và ưu đãi theo mùa.</p>
+    </header>
+
+    <!-- Filter / Sort -->
+    <section class="toolbar container" aria-label="Bộ lọc và sắp xếp">
+      <div class="chips" role="tablist" aria-label="Lọc theo series">
+        <button class="chip is-active" data-filter="all" role="tab" aria-selected="true">Tất cả</button>
+        <button class="chip" data-filter="naruto" role="tab" aria-selected="false">Naruto</button>
+        <button class="chip" data-filter="onepiece" role="tab" aria-selected="false">One Piece</button>
+        <button class="chip" data-filter="dragonball" role="tab" aria-selected="false">Dragon Ball</button>
+        <button class="chip" data-filter="aot" role="tab" aria-selected="false">Attack on Titan</button>
+        <button class="chip" data-filter="jjk" role="tab" aria-selected="false">Jujutsu Kaisen</button>
+        <button class="chip" data-filter="knys" role="tab" aria-selected="false">Kimetsu no Yaiba</button>
+      </div>
+
+      <div class="sort">
+        <label for="sortSelect">Sắp xếp:</label>
+        <select id="sortSelect" aria-label="Sắp xếp sản phẩm">
+          <option value="featured">Nổi bật</option>
+          <option value="price-asc">Giá tăng dần</option>
+          <option value="price-desc">Giá giảm dần</option>
+          <option value="rating-desc">Đánh giá cao</option>
+          <option value="newest">Mới nhất</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- ===== Naruto ===== -->
+    <section class="series-block reveal container" data-series="naruto" id="s-naruto">
+      <header class="series-head">
+        <h2><img src="naruto.jpg" alt="" aria-hidden="true"> Naruto Ultimate</h2>
+        <div class="head-tags"><span class="tag hot">HOT</span><span class="tag">Hành động</span><span class="tag">Ninja</span></div>
+      </header>
+
+      <div class="series-body">
+        <div class="series-overview">
+          <div class="col-image" data-series="Naruto">
+            <figure class="hero-frame">
+              <img class="hero" loading="lazy" src="b.naruto.jpg" alt="Naruto – ảnh mô hình chính"/>
+            </figure>
+            <div class="thumbs" role="tablist" aria-label="Thư viện Naruto">
+              <button class="thumb is-active" aria-selected="true" data-src="b.naruto.jpg"><img src="b.naruto.jpg" alt=""></button>
+              <button class="thumb" aria-selected="false" data-src="b.naruto1.jpg"><img src="b.naruto1.jpg" alt=""></button>
+              <button class="thumb" aria-selected="false" data-src="b.naruto2.jpg"><img src="b.naruto2.jpg" alt=""></button>
+            </div>
+          </div>
+
+          <div class="col-info">
+            <p class="desc">Uzumaki Naruto – hành trình trở thành Hokage truyền cảm hứng với nhiều collection độc quyền.</p>
+            <ul class="meta">
+              <li><i class="fa-solid fa-tags"></i><span>Thể loại:</span> Hành động, Phiêu lưu</li>
+              <li><i class="fa-solid fa-calendar"></i><span>Năm phát sóng:</span> 2002</li>
+              <li><i class="fa-solid fa-cube"></i><span>Chất liệu ưu tiên:</span> PVC/ABS, Resin</li>
+              <li><i class="fa-solid fa-ruler-vertical"></i><span>Tỷ lệ phổ biến:</span> 1/8 – 1/6</li>
+            </ul>
+
+            <div class="highlights">
+              <h3>Vì sao nên chọn?</h3>
+              <ul>
+                <li>Pose iconic (Rasengan, Sage Mode), gương mặt sắc nét.</li>
+                <li>Phụ kiện: base hiệu ứng chakra, đầu thay thế.</li>
+                <li>Hộp sưu tầm cao cấp, thích hợp trưng bày/biếu tặng.</li>
+              </ul>
+            </div>
+
+            <div class="cta-row">
+              <a class="btn" href="danhmuc.html" onclick="localStorage.setItem('tab','naruto')"><i class="fa-solid fa-store"></i> Xem tất cả Naruto</a>
+              <button class="btn ghost" data-scroll="#grid-naruto"><i class="fa-solid fa-arrow-down"></i> Sản phẩm nổi bật</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-block">
+          <h3 class="block-title" id="grid-naruto"><i class="fa-solid fa-fire"></i> Sản phẩm nổi bật</h3>
+          <div class="product-grid" data-series="naruto">
+            <article class="p-card" data-price="420000" data-rating="4.8" data-newest="2025-07-01">
+              <div class="imgwrap">
+                <img loading="lazy" src="nrt1.jpg" alt="Naruto Sage Mode 28cm"/>
+                <span class="badge">New</span>
+              </div>
+              <h4>Naruto Sage Mode 28cm</h4>
+              <ul class="spec">
+                <li>Chất liệu: PVC</li><li>Cao: 28cm</li><li>Phụ kiện: Base + hiệu ứng</li>
+              </ul>
+              <div class="price-row"><span class="price">420.000₫</span><span class="rating" aria-label="4.8/5">★ 4.8</span></div>
+              <div class="card-actions">
+                <button class="btn-mini add" data-name="Naruto Sage Mode" data-price="420000" data-img="nrt1.jpg"><i class="fa-solid fa-cart-plus"></i> Thêm</button>
+                <button class="btn-mini outline"><i class="fa-regular fa-heart"></i> Yêu thích</button>
+              </div>
+            </article>
+
+            <article class="p-card" data-price="380000" data-rating="4.6" data-newest="2025-05-15">
+              <div class="imgwrap"><img loading="lazy" src="roclee.jpg" alt="Rock Lee 25cm"/></div>
+              <h4>Rock Lee 25cm</h4>
+              <ul class="spec"><li>Chất liệu: PVC</li><li>Tỷ lệ: ~1/7</li><li>Outfit chi tiết</li></ul>
+              <div class="price-row"><span class="price">380.000₫</span><span class="rating">★ 4.6</span></div>
+              <div class="card-actions">
+                <button class="btn-mini add" data-name="Rock Lee" data-price="380000" data-img="roclee.jpg"><i class="fa-solid fa-cart-plus"></i> Thêm</button>
+                <button class="btn-mini outline"><i class="fa-regular fa-heart"></i> Yêu thích</button>
+              </div>
+            </article>
+
+            <article class="p-card" data-price="430000" data-rating="4.7" data-newest="2025-06-10">
+              <div class="imgwrap"><img loading="lazy" src="kakashi.jpg" alt="Kakashi Sharingan 25cm"/><span class="badge alt">Hot</span></div>
+              <h4>Kakashi Sharingan 25cm</h4>
+              <ul class="spec"><li>Thay mặt nạ</li><li>Base sét lightning</li></ul>
+              <div class="price-row"><span class="price">430.000₫</span><span class="rating">★ 4.7</span></div>
+              <div class="card-actions">
+                <button class="btn-mini add" data-name="Kakashi" data-price="430000" data-img="kakashi.jpg"><i class="fa-solid fa-cart-plus"></i> Thêm</button>
+                <button class="btn-mini outline"><i class="fa-regular fa-heart"></i> Yêu thích</button>
+              </div>
+            </article>
+
+            <article class="p-card" data-price="450000" data-rating="4.9" data-newest="2025-03-22">
+              <div class="imgwrap"><img loading="lazy" src="madara.jpg" alt="Uchiha Madara 30cm"/></div>
+              <h4>Uchiha Madara 30cm</h4>
+              <ul class="spec"><li>Armor chi tiết</li><li>Pose Susanoo</li></ul>
+              <div class="price-row"><span class="price">450.000₫</span><span class="rating">★ 4.9</span></div>
+              <div class="card-actions">
+                <button class="btn-mini add" data-name="Madara" data-price="450000" data-img="madara.jpg"><i class="fa-solid fa-cart-plus"></i> Thêm</button>
+                <button class="btn-mini outline"><i class="fa-regular fa-heart"></i> Yêu thích</button>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== One Piece (rút gọn) ===== -->
+    <section class="series-block reveal container" data-series="onepiece" id="s-onepiece">
+      <header class="series-head">
+        <h2><img src="onepiece.jpg" alt="" aria-hidden="true"> One Piece</h2>
+        <div class="head-tags"><span class="tag">Phiêu lưu</span><span class="tag">Hải tặc</span></div>
+      </header>
+
+      <div class="series-body">
+        <div class="series-overview">
+          <div class="col-image">
+            <figure class="hero-frame">
+              <img class="hero" loading="lazy" src="sanji.jpg" alt="One Piece – ảnh mô hình chính"/>
+            </figure>
+            <div class="thumbs" role="tablist" aria-label="Thư viện One Piece">
+              <button class="thumb is-active" aria-selected="true" data-src="sanji.jpg"><img src="sanji.jpg" alt=""></button>
+              <button class="thumb" aria-selected="false" data-src="zoro.jpg"><img src="zoro.jpg" alt=""></button>
+              <button class="thumb" aria-selected="false" data-src="nami.jpg"><img src="nami.jpg" alt=""></button>
+            </div>
+          </div>
+
+          <div class="col-info">
+            <p class="desc">Băng Mũ Rơm với các pose chiến đấu cực “cháy”.</p>
+            <ul class="meta">
+              <li><i class="fa-solid fa-ruler-vertical"></i><span>Tỷ lệ:</span> 1/8, 1/6</li>
+              <li><i class="fa-solid fa-wind"></i><span>Phong cách:</span> Dynamic, hiệu ứng lửa/khói</li>
+            </ul>
+            <div class="highlights">
+              <h3>Điểm nhấn</h3>
+              <ul><li>Base sóng biển hoặc Haki effect</li><li>Đa dạng nhân vật (Luffy, Zoro, Sanji, Nami…)</li></ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-block">
+          <h3 class="block-title"><i class="fa-solid fa-fire"></i> Sản phẩm nổi bật</h3>
+          <div class="product-grid" data-series="onepiece">
+            <article class="p-card" data-price="420000" data-rating="4.8" data-newest="2025-07-15">
+              <div class="imgwrap"><img loading="lazy" src="mohinhonepie1.jpg" alt="Luffy Gear 4"/><span class="badge">New</span></div>
+              <h4>Luffy Gear 4</h4>
+              <ul class="spec"><li>28cm, hiệu ứng Haki</li></ul>
+              <div class="price-row"><span class="price">420.000₫</span><span class="rating">★ 4.8</span></div>
+              <div class="card-actions">
+                <button class="btn-mini add" data-name="Luffy Gear 4" data-price="420000" data-img="mohinhonepie1.jpg"><i class="fa-solid fa-cart-plus"></i> Thêm</button>
+                <button class="btn-mini outline"><i class="fa-regular fa-heart"></i> Yêu thích</button>
+              </div>
+            </article>
+
+            <article class="p-card" data-price="430000" data-rating="4.7" data-newest="2025-06-01">
+              <div class="imgwrap"><img loading="lazy" src="mohinhzoro1.jpg" alt="Zoro Tam Long"/><span class="badge alt">Hot</span></div>
+              <h4>Zoro Tam Long</h4>
+              <ul class="spec"><li>28cm, 3 kiếm</li></ul>
+              <div class="price-row"><span class="price">430.000₫</span><span class="rating">★ 4.7</span></div>
+              <div class="card-actions">
+                <button class="btn-mini add" data-name="Zoro Tam Long" data-price="430000" data-img="mohinhzoro1.jpg"><i class="fa-solid fa-cart-plus"></i> Thêm</button>
+                <button class="btn-mini outline"><i class="fa-regular fa-heart"></i> Yêu thích</button>
+              </div>
+            </article>
+
+            <article class="p-card" data-price="430000" data-rating="4.6" data-newest="2025-04-20">
+              <div class="imgwrap"><img loading="lazy" src="mohinhnami.jpg" alt="Nami 28cm"/></div>
+              <h4>Nami 28cm</h4>
+              <ul class="spec"><li>Base sóng biển</li></ul>
+              <div class="price-row"><span class="price">430.000₫</span><span class="rating">★ 4.6</span></div>
+              <div class="card-actions">
+                <button class="btn-mini add" data-name="Nami" data-price="430000" data-img="mohinhnami.jpg"><i class="fa-solid fa-cart-plus"></i> Thêm</button>
+                <button class="btn-mini outline"><i class="fa-regular fa-heart"></i> Yêu thích</button>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="anime-footer">
+    <div class="footer-top">
+      <div class="logo">AnimeStore <span>Mô hình Anime cực chất</span></div>
+      <div class="social-icons">
+        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+        <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#"><i class="fa-brands fa-discord"></i></a>
+      </div>
+    </div>
+    <div class="footer-links">
+      <a href="#">Hỏi-Đáp</a><a href="#">Chính sách bảo mật</a><a href="#">Điều khoản sử dụng</a><a href="#">Giới thiệu</a><a href="#">Liên hệ</a>
+    </div>
+    <p class="footer-desc">AnimeStore – Thế giới mô hình Anime…</p>
+    <p class="footer-copy">&copy; 2025 AnimeStore | Liên hệ: support@animestore.vn</p>
+  </footer>
+
+  <!-- JS riêng -->
+  <script src="bosuutap.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Giỏ hàng | Anime Store</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="cart.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+<header class="shop-header">
+  <div class="header-container">
+    <a href="index.html" class="logo"><span class="logo-title">Anime Store</span><small class="logo-tagline">Mô hình Anime cực chất</small></a>
+    <nav class="main-nav"><ul class="menu"><li><a href="bosuutap.html">Bộ Sưu Tập</a></li><li><a href="wishlist.html">Yêu thích</a></li></ul></nav>
+    <div class="header-actions">
+      <button class="cart-btn"><i class="fa-solid fa-cart-shopping"></i> Giỏ Hàng (<span id="cartCount">0</span>)</button>
+    </div>
+  </div>
+</header>
+
+<main class="container cart-wrap">
+  <h1>Giỏ hàng của bạn</h1>
+  <div class="cart-grid">
+    <section>
+      <ul id="cartList" class="cart-list"></ul>
+      <div class="cart-empty" id="cartEmpty" hidden>
+        <p>Giỏ của bạn đang trống.</p>
+        <a class="btn" href="bosuutap.html"><i class="fa-solid fa-store"></i> Tiếp tục mua sắm</a>
+      </div>
+    </section>
+
+    <aside class="cart-summary">
+      <h2>Tổng kết</h2>
+      <div class="sum-row"><span>Tạm tính</span><strong id="subTotal">0₫</strong></div>
+      <div class="sum-row"><span>Giảm giá</span><strong id="discount">0₫</strong></div>
+      <div class="sum-row total"><span>Tổng cộng</span><strong id="grandTotal">0₫</strong></div>
+      <button id="btnCheckout" class="btn" style="width:100%; margin-top:10px;"><i class="fa-solid fa-credit-card"></i> Thanh toán</button>
+      <button id="btnPrint" class="btn ghost" style="width:100%; margin-top:8px;"><i class="fa-solid fa-print"></i> In hóa đơn</button>
+      <button id="btnClear" class="btn ghost" style="width:100%; margin-top:8px;"><i class="fa-regular fa-trash-can"></i> Xóa giỏ</button>
+    </aside>
+  </div>
+</main>
+
+<footer class="anime-footer"><p class="footer-copy">&copy; 2025 AnimeStore</p></footer>
+<script src="cart.js" defer></script>
+</body>
+</html>

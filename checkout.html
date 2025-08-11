@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Anime Store | Thanh toán</title>
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <!-- jsPDF & QR (để common-cart.js tạo PDF + QR trong email) -->
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+
+  <!-- Auth trước, Cart sau -->
+  <script src="common-auth.js" defer></script>
+  <script src="common-cart.js" defer></script>
+
+  <style>
+    /* layout nhẹ cho trang thanh toán – dùng chung với style.css của bạn */
+    .checkout-wrap{max-width:1100px;margin:24px auto;padding:0 16px;display:grid;gap:24px;grid-template-columns:1.1fr .9fr}
+    @media (max-width: 960px){ .checkout-wrap{grid-template-columns:1fr} }
+    .panel{background:#0f1426;border:1px solid rgba(255,255,255,.08);border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.35);padding:18px;color:#dfe6f7}
+    .panel h2{margin:0 0 12px;font-size:20px}
+    .field{display:grid;gap:6px;margin:10px 0}
+    .field input, .field textarea{background:#10182f;border:1px solid rgba(255,255,255,.12);color:#fff;border-radius:10px;padding:10px 12px;outline:none}
+    .muted{color:#9fb1d6}
+    .ok{color:#66ffa6}
+    .error{color:#ff9aa2}
+    .order-items{display:grid;gap:12px;margin:12px 0}
+    .order-item{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;background:#0c1122;border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:10px}
+    .order-item img{width:56px;height:56px;object-fit:cover;border-radius:10px}
+    .sum{margin-top:12px;border-top:1px dashed rgba(255,255,255,.15);padding-top:12px}
+    .sum-row{display:flex;justify-content:space-between;margin:6px 0}
+    .sum-row.total{font-weight:700}
+    .btn-buy{display:inline-flex;align-items:center;gap:8px;background:#7c5cff;border:0;color:#fff;padding:10px 14px;border-radius:12px;cursor:pointer}
+    .btn-buy[disabled]{opacity:.6;cursor:not-allowed}
+    .btn-outline{background:transparent;border:1px solid rgba(255,255,255,.2);color:#dfe6f7;padding:10px 14px;border-radius:12px}
+    .paybox{display:flex;gap:14px;align-items:center;margin-top:8px;flex-wrap:wrap}
+    .hint{font-size:12px;color:#9fb1d6}
+  </style>
+</head>
+<body>
+  <!-- HEADER giống index để hiển thị giỏ & đăng nhập -->
+  <header class="shop-header">
+    <div class="header-container">
+      <div class="header-top">
+        <a href="index.html" class="logo" aria-label="Anime Store">
+          <span class="logo-title">Anime Store</span>
+          <small class="logo-tagline">Mô hình Anime cực chất</small>
+        </a>
+      </div>
+      <div class="header-bottom">
+        <button class="nav-toggle" id="navToggle" aria-label="Mở menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="nav-wrap">
+          <nav class="main-nav" aria-label="Điều hướng chính" id="mainNav">
+            <ul class="menu" id="mainMenu">
+              <li><a href="index.html">Trang Chủ</a></li>
+              <li><a href="danhmuc.html">Danh Mục</a></li>
+              <li><a href="khuyenmai.html">Khuyến Mãi</a></li>
+              <li><a href="bosuutap.html">Bộ Sưu Tập</a></li>
+              <li><a href="lienhe.html">Liên Hệ</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="header-actions">
+          <div id="userInfo"></div>
+          <button class="cart-btn" id="openCartBtn" aria-haspopup="dialog" aria-controls="cartPopup">
+            <i class="fa-solid fa-cart-shopping"></i> Giỏ Hàng (<span id="cartCount">0</span>)
+          </button>
+          <button class="member-btn" id="loginBtn">
+            <i class="fa-solid fa-user"></i> Thành Viên
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="checkout-wrap">
+    <!-- Thông tin khách hàng -->
+    <section class="panel">
+      <h2>Thông tin giao hàng</h2>
+      <div class="field">
+        <label for="coName">Họ và tên</label>
+        <input id="coName" type="text" placeholder="vd: Nguyễn Văn A" required>
+      </div>
+      <div class="field">
+        <label for="coEmail">Email</label>
+        <input id="coEmail" type="email" placeholder="vd: a@example.com" required>
+      </div>
+      <div class="field">
+        <label for="coPhone">Số điện thoại</label>
+        <input id="coPhone" type="tel" placeholder="vd: 0909 000 000">
+      </div>
+      <div class="field">
+        <label for="coAddr">Địa chỉ</label>
+        <textarea id="coAddr" rows="3" placeholder="Số nhà, đường, phường/xã, quận/huyện, tỉnh/thành" required></textarea>
+      </div>
+      <div class="field">
+        <label for="coNote">Ghi chú (tuỳ chọn)</label>
+        <textarea id="coNote" rows="3" placeholder="Yêu cầu giao hàng, xuất hóa đơn..."></textarea>
+      </div>
+
+      <h2 style="margin-top:14px;">Phương thức thanh toán</h2>
+      <div class="paybox">
+        <label><input type="radio" name="payMethod" value="COD" checked> Thanh toán khi nhận hàng (COD)</label>
+        <label><input type="radio" name="payMethod" value="BANK"> Chuyển khoản/QR</label>
+      </div>
+      <div class="field" id="qrBox" style="display:none;">
+        <label for="qrPayload">Nội dung QR/Chuyển khoản (tuỳ chọn)</label>
+        <input id="qrPayload" type="text" placeholder="Ví dụ: VietQR payload hoặc nội dung CK, STK, ngân hàng...">
+        <div class="hint">Nếu nhập, mã QR sẽ được chèn vào PDF hoá đơn gửi qua email.</div>
+      </div>
+
+      <div style="display:flex;gap:10px;margin-top:14px;">
+        <button class="btn-buy" id="confirmOrderBtn"><i class="fa-solid fa-paper-plane"></i> Xác nhận đặt hàng</button>
+        <a href="index.html" class="btn-outline">Tiếp tục mua</a>
+      </div>
+      <p id="checkoutStatus" class="muted" style="margin-top:10px;"></p>
+    </section>
+
+    <!-- Tóm tắt đơn hàng -->
+    <aside class="panel">
+      <h2>Đơn hàng của bạn</h2>
+      <div id="orderList" class="order-items"></div>
+
+      <div class="sum">
+        <div class="sum-row"><span>Tạm tính</span><strong id="ckSubtotal">0₫</strong></div>
+        <div class="sum-row"><span>Giảm giá</span><strong id="ckDiscount">0₫</strong></div>
+        <div class="sum-row"><span>Phí vận chuyển</span><strong id="ckShipping">0₫</strong></div>
+        <div class="sum-row total"><span>Tổng cộng</span><strong id="ckTotal">0₫</strong></div>
+      </div>
+      <p class="hint" style="margin-top:8px;">Tổng cộng chưa bao gồm VAT. VAT thể hiện rõ trong PDF hoá đơn (nếu bạn yêu cầu).</p>
+    </aside>
+  </main>
+
+  <script>
+    // Hiện/ẩn box QR theo phương thức thanh toán
+    document.addEventListener('change', (e)=>{
+      if (e.target.name === 'payMethod') {
+        document.getElementById('qrBox').style.display = (e.target.value === 'BANK') ? '' : 'none';
+      }
+    });
+
+    // Render tóm tắt đơn hàng từ CartAPI
+    document.addEventListener('DOMContentLoaded', ()=>{
+      const list   = document.getElementById('orderList');
+      const sSub   = document.getElementById('ckSubtotal');
+      const sDis   = document.getElementById('ckDiscount');
+      const sShip  = document.getElementById('ckShipping');
+      const sTot   = document.getElementById('ckTotal');
+      const btn    = document.getElementById('confirmOrderBtn');
+
+      const fmt = (n)=> window.CartAPI?.fmtVND ? window.CartAPI.fmtVND(n) : (Number(n||0)).toLocaleString('vi-VN',{style:'currency',currency:'VND'});
+      const items = (window.CartAPI?.readCart && window.CartAPI.readCart()) || [];
+
+      if (!items.length){
+        list.innerHTML = '<p class="muted">Giỏ hàng trống.</p>';
+        btn.disabled = true;
+        return;
+      }
+
+      list.innerHTML = items.map(it => `
+        <div class="order-item">
+          ${it.image ? `<img src="${it.image}" alt="${it.title}">` : `<div style="width:56px;height:56px;border-radius:10px;background:#1c2239"></div>`}
+          <div>
+            <div style="font-weight:600">${it.title}</div>
+            <div class="muted">${fmt(it.price)} × ${it.qty}</div>
+          </div>
+          <div><strong>${fmt(Number(it.price)*Number(it.qty))}</strong></div>
+        </div>
+      `).join('');
+
+      // Tính tổng giống common-cart.js
+      const subtotal = items.reduce((s,it)=> s + Number(it.price||0)*Number(it.qty||0), 0);
+      const discount = (window.CartAPI?.getDiscountVND && window.CartAPI.getDiscountVND()) || 0;
+      const shipping = subtotal > 1_000_000 ? 0 : 30_000;
+      const total    = Math.max(0, subtotal - discount + shipping);
+
+      sSub.textContent = fmt(subtotal);
+      sDis.textContent = `-${fmt(discount)}`;
+      sShip.textContent= fmt(shipping);
+      sTot.textContent = fmt(total);
+    });
+  </script>
+</body>
+</html>

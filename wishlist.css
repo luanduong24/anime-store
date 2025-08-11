@@ -1,0 +1,18 @@
+.wish-wrap{ padding: 24px 0 40px; }
+.wish-grid{
+  display:grid; gap:14px;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+}
+.w-card{
+  background:#171923; border:1px solid #222433; border-radius:16px; overflow:hidden;
+}
+.w-card .img{ aspect-ratio:4/3; background:#0a0c12; }
+.w-card img{ width:100%; height:100%; object-fit:cover; display:block; }
+.w-card h4{ margin:10px; font-size:16px; }
+.w-card .price{ margin:0 10px 10px; color:#e9ff9a; font-weight:700; }
+.w-card .actions{ display:flex; gap:8px; padding:0 10px 12px; }
+.wish-empty{ text-align:center; padding:26px; border:1px dashed #30344a; border-radius:14px; }
+
+@media (max-width: 1024px){ .wish-grid{ grid-template-columns: repeat(3,1fr);} }
+@media (max-width: 720px){ .wish-grid{ grid-template-columns: repeat(2,1fr);} }
+@media (max-width: 420px){ .wish-grid{ grid-template-columns: 1fr;} }

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Danh Mục | Anime Store</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- CSS chung của site -->
+  <link rel="stylesheet" href="style.css" />
+  <!-- CSS riêng trang Danh Mục -->
+  <link rel="stylesheet" href="danhmuc.css" />
+  <!-- JS chung -->
+  <script src="common-cart.js" defer></script>
+  <script src="common-auth.js" defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+  <!-- ========= HEADER ========= -->
+  <header class="shop-header">
+    <div class="header-container">
+      <div class="header-top">
+        <a href="index.html" class="logo" aria-label="Anime Store">
+          <span class="logo-title">Anime Store</span>
+          <small class="logo-tagline">Mô hình Anime cực chất</small>
+        </a>
+      </div>
+
+      <div class="header-bottom">
+        <button class="nav-toggle" id="navToggle" aria-label="Mở menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+
+        <div class="nav-wrap">
+          <nav class="main-nav" aria-label="Điều hướng chính" id="mainNav">
+            <ul class="menu" id="mainMenu">
+              <li><a href="index.html">Trang Chủ</a></li>
+              <li class="dropdown">
+                <button class="drop-trigger">Danh Mục <i class="fa-solid fa-angle-down"></i></button>
+                <ul class="dropdown-menu">
+                  <li><a href="danhmuc.html" onclick="localStorage.setItem('tab','naruto')">Naruto</a></li>
+                  <li><a href="danhmuc.html" onclick="localStorage.setItem('tab','onepiece')">One Piece</a></li>
+                  <li><a href="danhmuc.html" onclick="localStorage.setItem('tab','dragonball')">Dragon Ball</a></li>
+                  <li><a href="danhmuc.html" onclick="localStorage.setItem('tab','khac')">Khác</a></li>
+                </ul>
+              </li>
+              <li><a href="khuyenmai.html">Khuyến Mãi</a></li>
+              <li><a href="bosuutap.html">Bộ Sưu Tập</a></li>
+              <li><a href="lienhe.html">Liên Hệ</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <div class="header-actions">
+          <div id="userInfo"></div>
+          <button class="cart-btn" id="openCartBtn" aria-haspopup="dialog" aria-controls="cartPopup">
+            <i class="fa-solid fa-cart-shopping"></i> Giỏ Hàng (<span id="cartCount">0</span>)
+          </button>
+          <button class="member-btn" id="loginBtn">
+            <i class="fa-solid fa-user"></i> Thành Viên
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========= MAIN ========= -->
+  <main class="category-page">
+    <h1>Danh Mục + Trailer</h1>
+
+    <div class="tab-buttons" id="tabButtons">
+      <button data-tab="naruto">Naruto</button>
+      <button data-tab="onepiece">One Piece</button>
+      <button data-tab="dragonball">Dragon Ball</button>
+      <button data-tab="khac">Khác</button>
+    </div>
+
+    <!-- NARUTO -->
+    <section id="naruto" class="tab-content">
+      <div class="series-hero">
+        <div class="cover"><img src="naruto.jpg" alt="Naruto cover" /></div>
+        <div class="info">
+          <h2>Naruto</h2>
+          <p>Hành trình Uzumaki Naruto theo đuổi ước mơ trở thành Hokage, vượt qua định kiến với sức mạnh của tình bạn và ý chí.</p>
+          <div class="chips">
+            <span class="chip primary">Hành động</span>
+            <span class="chip">Phiêu lưu</span>
+            <span class="chip">Ninja</span>
+            <span class="chip">2002</span>
+          </div>
+          <div class="chars">
+            <span class="chip">Naruto</span><span class="chip">Sasuke</span><span class="chip">Sakura</span><span class="chip">Kakashi</span><span class="chip">Itachi</span>
+          </div>
+
+          <div class="trailer-grid">
+            <!-- Naruto Shippuden – Official Trailer (VIZ) -->
+            <article class="trailer-card" data-yt="22R0j8UKRzY" data-title="Naruto Shippuden – Official Trailer">
+              <div class="thumb"><img loading="lazy" src="https://img.youtube.com/vi/22R0j8UKRzY/hqdefault.jpg" alt="Naruto Shippuden trailer thumbnail"></div>
+              <div class="play-btn"><i class="fa-solid fa-play"></i> Xem trailer</div>
+              <div class="trailer-body">
+                <div class="trailer-title">Naruto Shippuden – Official Trailer</div>
+                <div class="trailer-meta">VIZ</div>
+              </div>
+            </article>
+
+            <!-- Naruto Shippuden Set 2 – Trailer (VIZ) -->
+            <article class="trailer-card" data-yt="XsJB9C30GCs" data-title="Naruto Shippuden Set 2 – Trailer">
+              <div class="thumb"><img loading="lazy" src="https://img.youtube.com/vi/XsJB9C30GCs/hqdefault.jpg" alt="Shippuden Set 2 trailer"></div>
+              <div class="play-btn"><i class="fa-solid fa-play"></i> Xem trailer</div>
+              <div class="trailer-body">
+                <div class="trailer-title">Shippuden Set 2 – Trailer</div>
+                <div class="trailer-meta">VIZ</div>
+              </div>
+            </article>
+
+            <!-- Boruto – Official Trailer (VIZ) -->
+            <article class="trailer-card" data-yt="OtrBiB2SB2s" data-title="Boruto: Naruto Next Generations – Trailer">
+              <div class="thumb"><img loading="lazy" src="https://img.youtube.com/vi/OtrBiB2SB2s/hqdefault.jpg" alt="Boruto trailer thumbnail"></div>
+              <div class="play-btn"><i class="fa-solid fa-play"></i> Xem trailer</div>
+              <div class="trailer-body">
+                <div class="trailer-title">Boruto: Naruto Next Generations – Trailer</div>
+                <div class="trailer-meta">VIZ</div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ONE PIECE -->
+    <section id="onepiece" class="tab-content">
+      <div class="series-hero">
+        <div class="cover"><img src="luffy-g5.jpg" alt="One Piece cover" /></div>
+        <div class="info">
+          <h2>One Piece</h2>
+          <p>Luffy và băng Mũ Rơm lên đường tìm kho báu One Piece. Câu chuyện về tự do, lý tưởng và tình đồng đội giữa đại hải trình.</p>
+
+          <div class="chips">
+            <span class="chip primary">Phiêu lưu</span>
+            <span class="chip">Hài hước</span>
+            <span class="chip">Hành động</span>
+            <span class="chip">1999</span>
+          </div>
+          <div class="chars">
+            <span class="chip">Luffy</span><span class="chip">Zoro</span><span class="chip">Sanji</span><span class="chip">Nami</span><span class="chip">Robin</span>
+          </div>
+
+          <div class="trailer-grid">
+            <!-- Egghead Saga – Official "Climax" Trailer (Toei) -->
+            <article class="trailer-card" data-yt="Z-k-7APkhVw" data-title="ONE PIECE – Egghead Saga Trailer">
+              <div class="thumb"><img loading="lazy" src="https://img.youtube.com/vi/Z-k-7APkhVw/hqdefault.jpg" alt="One Piece Egghead trailer"></div>
+              <div class="play-btn"><i class="fa-solid fa-play"></i> Xem trailer</div>
+              <div class="trailer-body">
+                <div class="trailer-title">ONE PIECE – Egghead Saga Trailer</div>
+                <div class="trailer-meta">Toei Animation</div>
+              </div>
+            </article>
+
+            <!-- Wano Arc – Official Preview (Crunchyroll) -->
+            <article class="trailer-card" data-yt="CmTeYj2FmRc" data-title="Wano Arc – Official Preview">
+              <div class="thumb"><img loading="lazy" src="https://img.youtube.com/vi/CmTeYj2FmRc/hqdefault.jpg" alt="Wano Arc preview"></div>
+              <div class="play-btn"><i class="fa-solid fa-play"></i> Xem trailer</div>
+              <div class="trailer-body">
+                <div class="trailer-title">Wano Arc – Official Preview</div>
+                <div class="trailer-meta">Crunchyroll</div>
+              </div>
+            </article>
+
+            <!-- Egghead Part-2 – New Trailer (Toei) -->
+            <article class="trailer-card" data-yt="u2aP-d1FGoQ" data-title="ONE PIECE – Egghead Part-2 Trailer">
+              <div class="thumb"><img loading="lazy" src="https://img.youtube.com/vi/u2aP-d1FGoQ/hqdefault.jpg" alt="Egghead Part-2 trailer"></div>
+              <div class="play-btn"><i class="fa-solid fa-play"></i> Xem trailer</div>
+              <div class="trailer-body">
+                <div class="trailer-title">ONE PIECE – Egghead Part-2</div>
+                <div class="trailer-meta">Toei Animation</div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DRAGON BALL -->
+    <section id="dragonball" class="tab-content">
+      <div class="series-hero">
+        <div class="cover"><img src="gokussj.jpg" alt="Dragon Ball cover" /></div>
+        <div class="info">
+          <h2>Dragon Ball</h2>
+          <p>Son Goku và bạn bè bảo vệ Trái Đất trước những kẻ thù hùng mạnh, với những màn biến hình Saiyan kinh điển.</p>
+
+          <div class="chips">
+            <span class="chip primary">Hành động</span>
+            <span class="chip">Viễn tưởng</span>
+            <span class="chip">1986</span>
+          </div>
+          <div class="chars">
+            <span class="chip">Goku</span><span class="chip">Vegeta</span><span class="chip">Gohan</span><span class="chip">Trunks</span><span class="chip">Frieza</span>
+          </div>
+
+          <div class="trailer-grid">
+            <!-- Dragon Ball Super: SUPER HERO – Official Trailer -->
+            <article class="trailer-card" data-yt="W9JHZwtObqs" data-title="Dragon Ball Super: SUPER HERO – Trailer">
+              <div class="thumb"><img loading="lazy" src="https://img.youtube.com/vi/W9JHZwtObqs/hqdefault.jpg" alt="DB Super Hero trailer"></div>
+              <div class="play-btn"><i class="fa-solid fa-play"></i> Xem trailer</div>
+              <div class="trailer-body">
+                <div class="trailer-title">Dragon Ball Super: SUPER HERO</div>
+                <div class="trailer-meta">Official</div>
+              </div>
+            </article>
+
+            <!-- Dragon Ball Super: Broly – Official Trailer -->
+            <article class="trailer-card" data-yt="P7z9oIeOZzo" data-title="Dragon Ball Super: Broly – Trailer">
+              <div class="thumb"><img loading="lazy" src="https://img.youtube.com/vi/P7z9oIeOZzo/hqdefault.jpg" alt="DB Broly trailer"></div>
+              <div class="play-btn"><i class="fa-solid fa-play"></i> Xem trailer</div>
+              <div class="trailer-body">
+                <div class="trailer-title">Dragon Ball Super: Broly</div>
+                <div class="trailer-meta">Toei / Official</div>
+              </div>
+            </article>
+
+            <!-- Ultra Instinct – Official Clip (Crunchyroll) -->
+            <article class="trailer-card" data-yt="6CF29TtxU2c" data-title="Goku Goes Ultra Instinct (Clip)">
+              <div class="thumb"><img loading="lazy" src="https://img.youtube.com/vi/6CF29TtxU2c/hqdefault.jpg" alt="Ultra Instinct clip"></div>
+              <div class="play-btn"><i class="fa-solid fa-play"></i> Xem trailer</div>
+              <div class="trailer-body">
+                <div class="trailer-title">Ultra Instinct – Official Clip</div>
+                <div class="trailer-meta">Crunchyroll</div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- KHÁC -->
+    <section id="khac" class="tab-content">
+      <div class="series-hero">
+        <div class="cover"><img src="gojo.jpg" alt="Jujutsu Kaisen / Demon Slayer cover" /></div>
+        <div class="info">
+          <h2>JJK / Demon Slayer & Khác</h2>
+          <p>Tổng hợp các series hot như Jujutsu Kaisen, Demon Slayer, Attack on Titan… đa dạng phong cách và nhân vật.</p>
+
+          <div class="chips">
+            <span class="chip primary">Siêu nhiên</span>
+            <span class="chip">Hành động</span>
+            <span class="chip">2019+</span>
+          </div>
+          <div class="chars">
+            <span class="chip">Gojo</span><span class="chip">Itadori</span><span class="chip">Tanjiro</span><span class="chip">Nezuko</span><span class="chip">Levi</span>
+          </div>
+
+          <div class="trailer-grid">
+            <!-- JUJUTSU KAISEN – Official Trailer (TOHO) -->
+            <article class="trailer-card" data-yt="coI3izX2RGA" data-title="JUJUTSU KAISEN – Official Trailer">
+              <div class="thumb"><img loading="lazy" src="https://img.youtube.com/vi/coI3izX2RGA/hqdefault.jpg" alt="JJK trailer"></div>
+              <div class="play-btn"><i class="fa-solid fa-play"></i> Xem trailer</div>
+              <div class="trailer-body">
+                <div class="trailer-title">JUJUTSU KAISEN – Trailer</div>
+                <div class="trailer-meta">TOHO animation</div>
+              </div>
+            </article>
+
+            <!-- Demon Slayer – Official Trailer (Aniplex US) -->
+            <article class="trailer-card" data-yt="VQGCKyvzIM4" data-title="Demon Slayer – Official Trailer">
+              <div class="thumb"><img loading="lazy" src="https://img.youtube.com/vi/VQGCKyvzIM4/hqdefault.jpg" alt="Demon Slayer trailer"></div>
+              <div class="play-btn"><i class="fa-solid fa-play"></i> Xem trailer</div>
+              <div class="trailer-body">
+                <div class="trailer-title">Demon Slayer – Trailer</div>
+                <div class="trailer-meta">Aniplex US</div>
+              </div>
+            </article>
+
+            <!-- Attack on Titan – The Final Season (Official Trailer) -->
+            <article class="trailer-card" data-yt="E7WytLM2KvY" data-title="Attack on Titan – The Final Season Trailer">
+              <div class="thumb"><img loading="lazy" src="https://img.youtube.com/vi/E7WytLM2KvY/hqdefault.jpg" alt="Attack on Titan Final trailer"></div>
+              <div class="play-btn"><i class="fa-solid fa-play"></i> Xem trailer</div>
+              <div class="trailer-body">
+                <div class="trailer-title">Attack on Titan – The Final Season</div>
+                <div class="trailer-meta">Official</div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal phát trailer YouTube -->
+  <dialog id="ytModal" class="trailer-modal">
+    <div class="tm-head">
+      <strong id="ytTitle">Trailer</strong>
+      <button class="btn ghost" data-close><i class="fa-solid fa-xmark"></i> Đóng</button>
+    </div>
+    <div class="tm-body">
+      <iframe id="ytFrame" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+    <div class="tm-foot">
+      <span class="muted">Ấn Esc để đóng</span>
+      <a id="ytOpen" class="btn" target="_blank" rel="noopener"><i class="fa-brands fa-youtube"></i> Mở trên YouTube</a>
+    </div>
+  </dialog>
+
+  <!-- FOOTER giữ nguyên -->
+  <footer class="anime-footer">
+    <div class="footer-top">
+      <div class="logo">AnimeStore <span>Mô hình Anime cực chất</span></div>
+      <div class="social-icons">
+        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+        <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#"><i class="fa-brands fa-discord"></i></a>
+      </div>
+    </div>
+    <div class="footer-links">
+      <a href="#">Hỏi-Đáp</a>
+      <a href="#">Chính sách bảo mật</a>
+      <a href="#">Điều khoản sử dụng</a>
+      <a href="#">Giới thiệu</a>
+      <a href="#">Liên hệ</a>
+    </div>
+    <p class="footer-desc">
+      AnimeStore – Thế giới mô hình Anime: từ Naruto, One Piece, Dragon Ball đến Demon Slayer, Attack on Titan và nhiều bộ sưu tập hot khác.
+      Sản phẩm chất lượng cao, chi tiết sắc nét, phục vụ fan anime khắp Việt Nam.
+    </p>
+    <p class="footer-copy">&copy; 2025 AnimeStore | Liên hệ: support@animestore.vn</p>
+  </footer>
+
+  <script>
+    // ===== Tabs =====
+    const tabButtons = document.getElementById('tabButtons').querySelectorAll('button');
+    const tabs = document.querySelectorAll('.tab-content');
+    function showTab(tabId){
+      tabs.forEach(t => t.style.display = t.id === tabId ? 'block' : 'none');
+      tabButtons.forEach(b => b.classList.toggle('active', b.dataset.tab === tabId));
+      localStorage.setItem('tab', tabId);
+    }
+    document.addEventListener('DOMContentLoaded', ()=>{
+      const saved = localStorage.getItem('tab') || 'naruto';
+      showTab(saved);
+    });
+    tabButtons.forEach(btn => btn.addEventListener('click', ()=> showTab(btn.dataset.tab)));
+
+    // ===== Trailer modal (YouTube embed) =====
+    const ytModal = document.getElementById('ytModal');
+    const ytFrame = document.getElementById('ytFrame');
+    const ytTitle = document.getElementById('ytTitle');
+    const ytOpen  = document.getElementById('ytOpen');
+
+    document.addEventListener('click', (e)=>{
+      const card = e.target.closest('.trailer-card');
+      if(!card) return;
+      const id = card.dataset.yt;
+      const title = card.dataset.title || 'Trailer';
+      ytTitle.textContent = title;
+      ytOpen.href = `https://www.youtube.com/watch?v=${id}`;
+      ytFrame.src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
+      ytModal.showModal();
+    });
+
+    function closeModal(){
+      ytFrame.src = '';
+      ytModal.close();
+    }
+    ytModal.addEventListener('click', (e)=>{ if(e.target.hasAttribute('data-close')) closeModal(); });
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && ytModal.open) closeModal(); });
+  </script>
+</body>
+</html>
